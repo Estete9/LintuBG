@@ -1,6 +1,6 @@
-package com.naughtsmt.lintu.domain.model
+package com.naughtsmt.lintu.data.data_source.dto
 
-data class ImagesXX(
+data class Images(
     val large: Any,
     val medium: Any,
     val original: Any,

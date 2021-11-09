@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.domain.model
+package com.naughtsmt.lintu.data.data_source.dto
 
 data class Game(
     val active: Boolean,
