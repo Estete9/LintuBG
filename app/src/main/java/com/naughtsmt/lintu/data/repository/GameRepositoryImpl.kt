@@ -12,7 +12,11 @@ class GameRepositoryImpl @Inject constructor(
     return api.getGameById(gameId)
     }
 
-    override suspend fun getGameList(): List<GameDto> {
-        return api.getGameList()
+    override suspend fun getTopGameList(): List<GameDto> {
+        return api.getTopGamesList()
+    }
+
+    override suspend fun getUserGameList(): List<GameDto> {
+        return api.getUserGameList()
     }
 }

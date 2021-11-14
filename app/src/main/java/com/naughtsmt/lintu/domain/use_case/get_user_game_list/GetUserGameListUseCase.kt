@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.domain.use_case.get_game
+package com.naughtsmt.lintu.domain.use_case.get_user_game_list
 
 import com.naughtsmt.lintu.common.Resource
 import com.naughtsmt.lintu.data.data_source.dto.toGame
@@ -10,7 +10,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetGameListUseCase @Inject constructor(
+class GetUserGameListUseCase @Inject constructor(
     private val repository: GameRepository
 ) {
     operator fun invoke(): Flow<Resource<List<Game>>> = flow {

@@ -8,8 +8,11 @@ interface BoardGameAtlasApi {
 
     //TODO for future this returns the registered user's game list
     @GET("/search")
-    suspend fun getGameList(): List<GameDto>
+    suspend fun getUserGameList(): List<GameDto>
 
     @GET("/search/{gameName}")
     suspend fun getGameById(@Path("gameName") gameId: String): GameDto
+
+    @GET("/search")
+    suspend fun getTopGamesList(): List<GameDto>
 }
