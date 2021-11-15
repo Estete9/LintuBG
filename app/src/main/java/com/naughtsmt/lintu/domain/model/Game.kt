@@ -25,7 +25,6 @@ data class Game(
     val primary_publisher: PrimaryPublisher,
     val rank: Int,
     val rules_url: String,
-    val sku: String,
     val tags: List<String>,
     val thumb_url: String,
     val type: String,

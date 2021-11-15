@@ -100,7 +100,6 @@ fun GameDto.toGame(): Game {
         primary_publisher = primary_publisher,
         rank = rank,
         rules_url = rules_url,
-        sku = sku,
         tags = tags,
         thumb_url = thumb_url,
         type = type,
