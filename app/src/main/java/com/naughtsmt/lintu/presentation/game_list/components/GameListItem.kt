@@ -27,6 +27,7 @@ fun GameListItem(
             .padding(20.dp),
         horizontalArrangement = Arrangement.Start
     ) {
+//        TODO implement image loading
         Image(
             painter = painterResource(R.drawable.lintu_logo),
             contentDescription = "GameListPreview"
