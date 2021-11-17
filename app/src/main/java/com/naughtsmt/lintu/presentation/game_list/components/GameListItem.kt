@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.naughtsmt.lintu.R
-import com.naughtsmt.lintu.domain.model.Game
+import com.naughtsmt.lintu.data.repository.model.Game
 import kotlin.math.nextUp
 
 @Composable

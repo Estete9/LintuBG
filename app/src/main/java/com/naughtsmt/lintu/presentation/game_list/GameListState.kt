@@ -1,6 +1,6 @@
 package com.naughtsmt.lintu.presentation.game_list
 
-import com.naughtsmt.lintu.domain.model.Game
+import com.naughtsmt.lintu.data.repository.model.Game
 
 data class GameListState(
     val isLoading: Boolean = false,

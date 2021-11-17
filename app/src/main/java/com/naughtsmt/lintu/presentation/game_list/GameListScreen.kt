@@ -1,6 +1,5 @@
 package com.naughtsmt.lintu.presentation.game_list
 
-import GameListViewModel
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth

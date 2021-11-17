@@ -18,7 +18,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.naughtsmt.lintu.common.Constants.DEFAULT_IMAGE
-import com.naughtsmt.lintu.domain.model.Game
+import com.naughtsmt.lintu.data.repository.model.Game
 import com.naughtsmt.lintu.presentation.loadPicture
 
 @Composable

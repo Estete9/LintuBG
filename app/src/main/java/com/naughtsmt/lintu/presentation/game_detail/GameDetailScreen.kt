@@ -1,6 +1,5 @@
 package com.naughtsmt.lintu.presentation.game_detail
 
-import GameDetailViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,7 +22,7 @@ import com.naughtsmt.lintu.presentation.game_detail.components.Tag
 import com.naughtsmt.lintu.presentation.loadPicture
 
 @Composable
-fun GameListScreen(
+fun GameDetailScreen(
     viewModel: GameDetailViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
@@ -118,7 +117,7 @@ fun GameListScreen(
                         crossAxisSpacing = 10.dp,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        game.categories.forEach { tag -> Tag(category = tag) }
+                        game.categories.forEach { tag -> Tag(tag = tag) }
                     }
                     Spacer(modifier = Modifier.height(15.dp))
                     Text(
@@ -131,7 +130,7 @@ fun GameListScreen(
                         crossAxisSpacing = 10.dp,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        game.mechanics.forEach { tag -> Tag(category = tag) }
+                        game.mechanics.forEach { tag -> Tag(tag = tag) }
                     }
                 }
             }

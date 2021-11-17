@@ -1,6 +1,6 @@
 package com.naughtsmt.lintu.data.data_source.dto
 
-import com.naughtsmt.lintu.domain.model.Game
+import com.naughtsmt.lintu.data.repository.model.Game
 
 data class GameDto(
     val active: Boolean,

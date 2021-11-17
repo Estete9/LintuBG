@@ -12,7 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Tag(category: String) {
+fun Tag(tag: String) {
     Box(
         modifier = Modifier
             .padding(20.dp)
@@ -23,7 +23,7 @@ fun Tag(category: String) {
             )
     ) {
         Text(
-            text = category,
+            text = tag,
             color = MaterialTheme.colors.primary,
             style = MaterialTheme.typography.body2,
             textAlign = TextAlign.Center

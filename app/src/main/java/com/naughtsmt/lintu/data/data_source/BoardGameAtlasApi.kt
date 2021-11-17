@@ -1,8 +1,10 @@
 package com.naughtsmt.lintu.data.data_source
 
+import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.data.data_source.dto.GameDto
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface BoardGameAtlasApi {
 
@@ -11,8 +13,15 @@ interface BoardGameAtlasApi {
     suspend fun getUserGameList(): List<GameDto>
 
     @GET("/search/{gameName}")
-    suspend fun getGameById(@Path("gameName") gameId: String): GameDto
+    suspend fun getGameById(
+        @Path("gameName") gameId: String,
+        @Query("client_id")
+        client_id: String = Constants.CLIENT_ID
+    ): GameDto
 
     @GET("/search")
-    suspend fun getTopGamesList(): List<GameDto>
+    suspend fun getTopGamesList(
+        @Query("client_id")
+        client_id: String = Constants.CLIENT_ID
+    ): List<GameDto>
 }
