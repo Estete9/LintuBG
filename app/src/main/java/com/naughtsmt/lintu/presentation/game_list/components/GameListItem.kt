@@ -6,13 +6,19 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment.Companion.Start
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.naughtsmt.lintu.R
 import com.naughtsmt.lintu.data.repository.model.Game
+import com.naughtsmt.lintu.presentation.loadPicture
 import kotlin.math.nextUp
 
 @Composable
@@ -20,55 +26,63 @@ fun GameListItem(
     game: Game,
     onItemClicked: (Game) -> Unit
 ) {
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onItemClicked(game) }
             .padding(20.dp),
-        horizontalArrangement = Arrangement.Start
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-//        TODO implement image loading
-        Image(
-            painter = painterResource(R.drawable.lintu_logo),
-            contentDescription = "GameListPreview"
-        )
-        Column(
+        game.image_url.let { url ->
+            val image = loadPicture(url = url/*, defaultImage = Constants.DEFAULT_IMAGE*/).value
+            image?.let { img ->
+                Image(
+                    bitmap = img.asImageBitmap(),
+                    contentDescription = game.image_url,
+                    contentScale = ContentScale.FillHeight,
+                    modifier = Modifier.align(CenterHorizontally)
+                )
+            }
+
+        }
+        Row(
             modifier = Modifier
                 .fillMaxHeight()
                 .clickable { onItemClicked(game) },
-            verticalArrangement = Arrangement.SpaceEvenly
+            verticalAlignment = Alignment.Top
+//            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(
-                text = game.name,
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.h3
-            )
-            Row(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onItemClicked(game) },
-                horizontalArrangement = Arrangement.SpaceEvenly
+                verticalArrangement = Arrangement.SpaceEvenly
             ) {
                 Text(
-                    text = "Dificultad: ${game.average_learning_complexity.nextUp()}",
+                    text = game.name,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.h3
+                )
+                Text(
+                    text = "Dificultad: ${game.average_learning_complexity.toInt()} / 5",
                     style = MaterialTheme.typography.h6
                 )
                 Text(
-                    text = "# Jugadores: ${game.max_players}",
+                    text = "Max. Jugadores: ${game.max_players}",
                     style = MaterialTheme.typography.h6
                 )
                 Text(
-                    text = "Duración: ${game.min_playtime}",
+                    text = "Duración: ${game.min_playtime.toInt()}",
                     style = MaterialTheme.typography.h6
                 )
 
+                Text(
+                    text = game.description_preview,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier.align(CenterHorizontally)
+                )
             }
-            Text(
-                text = game.description_preview,
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.body2,
-                modifier = Modifier.align(Start)
-            )
 
         }
 

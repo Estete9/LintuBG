@@ -15,17 +15,18 @@ import androidx.compose.ui.unit.dp
 fun Tag(tag: String) {
     Box(
         modifier = Modifier
-            .padding(20.dp)
             .border(
                 shape = RoundedCornerShape(100.dp),
                 width = 1.dp,
                 color = MaterialTheme.colors.primary
             )
+            .padding(20.dp)
+
     ) {
         Text(
             text = tag,
             color = MaterialTheme.colors.primary,
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.body1,
             textAlign = TextAlign.Center
         )
     }

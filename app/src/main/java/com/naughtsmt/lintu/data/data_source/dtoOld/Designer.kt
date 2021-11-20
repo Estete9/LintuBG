@@ -1,7 +1,7 @@
-package com.naughtsmt.lintu.data.data_source.dto
+package com.naughtsmt.lintu.data.data_source.dtoOld
 
 data class Designer(
-    val game: GameX,
+    val game: GameSource,
     val id: String,
     val images: Images,
     val num_games: Any,

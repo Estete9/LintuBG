@@ -32,7 +32,7 @@ class GameDetailViewModel @Inject constructor(
         getGameUseCase(gameId).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _state.value = GameDetailState(game = result.data)
+                    _state.value = GameDetailState(game = result.data?.get(0))
                 }
                 is Resource.Error -> {
                     _state.value =

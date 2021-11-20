@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.data.data_source.dto
+package com.naughtsmt.lintu.data.data_source.dtoOld
 
 import com.naughtsmt.lintu.data.repository.model.Game
 
@@ -75,35 +75,35 @@ data class GameDto(
     val year_published: Int
 )
 
-fun GameDto.toGame(): Game {
-    return Game(
-        average_learning_complexity = average_learning_complexity,
-        average_strategy_complexity = average_strategy_complexity,
-        average_user_rating = average_user_rating,
-//        TODO find a way to get the categories of each game and display them in their game list/game details
-        categories = categories.map { it.id },
-        description = description,
-        description_preview = description_preview,
-        id = id,
-        image_url = image_url,
-        images = images,
-        max_players = max_players,
-        max_playtime = max_playtime,
-//        TODO find a way to get the mechanics of each game and display them in their game list/game details
-        mechanics = mechanics.map { it.id },
-        min_age = min_age,
-        min_players = min_players,
-        min_playtime = min_playtime,
-        name = name,
-        official_url = official_url,
-        primary_designer = primary_designer,
-        primary_publisher = primary_publisher,
-        rank = rank,
-        rules_url = rules_url,
-        tags = tags,
-        thumb_url = thumb_url,
-        type = type,
-        url = url,
-        year_published = year_published
-    )
-}
+//fun GameDto.toGame(): Game {
+//    return Game(
+//        average_learning_complexity = average_learning_complexity,
+//        average_strategy_complexity = average_strategy_complexity,
+//        average_user_rating = average_user_rating,
+////        TODO find a way to get the categories of each game and display them in their game list/game details
+//        categories = categories.map { it.id },
+//        description = description,
+//        description_preview = description_preview,
+//        id = id,
+//        image_url = image_url,
+//        images = images,
+//        max_players = max_players,
+//        max_playtime = max_playtime,
+////        TODO find a way to get the mechanics of each game and display them in their game list/game details
+//        mechanics = mechanics.map { it.id },
+//        min_age = min_age,
+//        min_players = min_players,
+//        min_playtime = min_playtime,
+//        name = name,
+//        official_url = official_url,
+//        primary_designer = primary_designer,
+//        primary_publisher = primary_publisher,
+//        rank = rank,
+//        rules_url = rules_url,
+//        tags = tags,
+//        thumb_url = thumb_url,
+//        type = type,
+//        url = url,
+//        year_published = year_published
+//    )
+//}

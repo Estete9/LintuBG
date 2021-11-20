@@ -13,15 +13,15 @@ import javax.inject.Inject
 class GetGameUseCase @Inject constructor(
     private val repository: GameRepository
 ) {
-    operator fun invoke(gameId: String): Flow<Resource<Game>> = flow {
+    operator fun invoke(gameId: String): Flow<Resource<List<Game>>> = flow {
         try {
-            emit(Resource.Loading<Game>())
-            val game = repository.getGame(gameId)
-            emit(Resource.Success<Game>(game.toGame()))
+            emit(Resource.Loading<List<Game>>())
+            val gameList = repository.getGame(gameId).games.map { it.toGame() }
+            emit(Resource.Success<List<Game>>(gameList))
         } catch (e: HttpException) {
-            emit(Resource.Error<Game>(e.localizedMessage ?: "An Unexpected error occurred"))
+            emit(Resource.Error<List<Game>>(e.localizedMessage ?: "An Unexpected error occurred"))
         } catch (e: IOException) {
-            emit(Resource.Error<Game>("Couldn't reach server. Check your internet connection"))
+            emit(Resource.Error<List<Game>>("Couldn't reach server. Check your internet connection"))
         }
     }
 }

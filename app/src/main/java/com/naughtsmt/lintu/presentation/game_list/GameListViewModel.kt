@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.naughtsmt.lintu.common.Resource
 import com.naughtsmt.lintu.domain.use_case.get_game.GetGameListUseCase
-import com.naughtsmt.lintu.presentation.game_list.GameListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

@@ -27,12 +27,16 @@ fun GameListScreen(
     val state = viewModel.state.value
 
     Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            /*verticalArrangement = Arrangement.spacedBy(8.dp)*/
+        ) {
             items(state.games) { game ->
                 GameListItem(
                     game = game,
                     onItemClicked = {
-                        navController.navigate(Screen.GameDetailScreen.route + "/${game.id}")
+//                        TODO change this so it navigates to the correct game id
+                        navController.navigate(Screen.GameDetailScreen.route + "&${game.id}")
                     }
                 )
 

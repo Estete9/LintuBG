@@ -16,7 +16,7 @@ class GetUserGameListUseCase @Inject constructor(
     operator fun invoke(): Flow<Resource<List<Game>>> = flow {
         try {
             emit(Resource.Loading<List<Game>>())
-            val gameList = repository.getTopGameList().map { it.toGame() }
+            val gameList = repository.getTopGameList().games.map { it.toGame() }
             emit(Resource.Success<List<Game>>(gameList))
         } catch (e: HttpException) {
             emit(Resource.Error<List<Game>>(e.localizedMessage ?: "An Unexpected error occurred"))

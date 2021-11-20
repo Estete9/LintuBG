@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(
-                            route = Screen.GameDetailScreen.route + "/{gameId}"
+                            route = Screen.GameDetailScreen.route + "&{gameId}"
                         ) {
                             GameDetailScreen()
                         }

@@ -24,7 +24,6 @@ import com.naughtsmt.lintu.presentation.loadPicture
 @Composable
 fun GameCard(
     game: Game,
-    painter: Painter,
     contentDescription: String,
     title: String,
     modifier: Modifier
@@ -40,7 +39,7 @@ fun GameCard(
                 .height(200.dp)
         ) {
             game.image_url.let { url ->
-                val image = loadPicture(url = url, defaultImage = DEFAULT_IMAGE).value
+                val image = loadPicture(url = url/*, defaultImage = DEFAULT_IMAGE*/).value
                 image?.let { img ->
                     Image(
                         bitmap = img.asImageBitmap(),
