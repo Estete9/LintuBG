@@ -10,6 +10,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.naughtsmt.lintu.presentation.game_detail.GameDetailScreen
 import com.naughtsmt.lintu.presentation.game_list.GameListScreen
+//import com.naughtsmt.lintu.presentation.image_screen.ImageScreen
+import com.naughtsmt.lintu.presentation.splash_screen.SplashScreen
 import com.naughtsmt.lintu.presentation.ui.theme.LintuTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,8 +27,18 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.GameListScreen.route
+                        startDestination = Screen.SplashScreen.route
                     ) {
+                        composable(
+                            route = Screen.SplashScreen.route
+                        ) {
+                            SplashScreen(navController)
+                        }
+//                        composable(
+//                            route = Screen.ImageScreen.route
+//                        ) {
+//                            ImageScreen()
+//                        }
                         composable(
                             route = Screen.GameListScreen.route
                         ) {
@@ -36,7 +48,7 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Screen.GameDetailScreen.route + "&{gameId}"
                         ) {
-                            GameDetailScreen()
+                            GameDetailScreen(navController)
                         }
                     }
                 }

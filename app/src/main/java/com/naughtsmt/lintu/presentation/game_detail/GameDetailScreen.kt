@@ -1,6 +1,5 @@
 package com.naughtsmt.lintu.presentation.game_detail
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
@@ -10,19 +9,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.google.accompanist.flowlayout.FlowRow
+import com.naughtsmt.lintu.presentation.Screen
+import com.naughtsmt.lintu.presentation.game_detail.components.GameCard
 import com.naughtsmt.lintu.presentation.game_detail.components.Tag
-import com.naughtsmt.lintu.presentation.loadPicture
 
 @Composable
 fun GameDetailScreen(
+    navController: NavController,
     viewModel: GameDetailViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
@@ -43,19 +42,28 @@ fun GameDetailScreen(
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = CenterHorizontally
                     ) {
-                        game.image_url.let { url ->
-                            val image =
-                                loadPicture(url = url/*, defaultImage = DEFAULT_IMAGE*/).value
-//                            TODO add content description
-                            image?.let {
-                                Image(
-                                    bitmap = it.asImageBitmap(),
-                                    contentDescription = "TODO",
-                                    contentScale = ContentScale.FillHeight,
-                                    modifier = Modifier.align(CenterHorizontally)
-                                )
+                        GameCard(
+                            game = game,
+                            contentDescription = "${game.name} image",
+                            title = game.name,
+                            modifier = Modifier,
+                            onItemClicked = {
+                                navController.navigate(Screen.ImageScreen.route)
                             }
-                        }
+                        )
+//                        game.image_url.let { url ->
+//                            val image =
+//                                loadPicture(url = url, defaultImage = DEFAULT_IMAGE).value
+////                            TODO add content description
+//                            image?.let {
+//                                Image(
+//                                    bitmap = it.asImageBitmap(),
+//                                    contentDescription = "TODO",
+//                                    contentScale = ContentScale.FillHeight,
+//                                    modifier = Modifier.align(CenterHorizontally)
+//                                )
+//                            }
+//                        }
                         Spacer(modifier = Modifier.height(10.dp))
                         Row(
                             modifier = Modifier
@@ -63,16 +71,7 @@ fun GameDetailScreen(
                             horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
 
-                            Text(
-                                text = game.name,
-                                style = MaterialTheme.typography.h3,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier
-                                    .weight(8f),
-                                textAlign = TextAlign.Center
-
-                            )
-//                            Text(
+///                            Text(
 //                                text = game.rank.toString(),
 //                                textAlign = TextAlign.End,
 //                                style = MaterialTheme.typography.subtitle1,
@@ -88,7 +87,8 @@ fun GameDetailScreen(
                 item {
                     Row(
                         modifier = Modifier
-                            .fillMaxSize(),
+                            .fillMaxSize()
+                            .padding(horizontal = 8.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                     ) {
 
@@ -106,7 +106,8 @@ fun GameDetailScreen(
                     }
                     Text(
                         text = "Max. jugadores: ${game.max_players}",
-                        style = MaterialTheme.typography.subtitle1
+                        style = MaterialTheme.typography.subtitle1,
+                        fontStyle = FontStyle.Italic
                     )
                 }
                 item {
@@ -114,6 +115,7 @@ fun GameDetailScreen(
                     Text(
                         text = game.description_preview,
                         style = MaterialTheme.typography.body1,
+                        textAlign = TextAlign.Justify
                     )
                     Spacer(modifier = Modifier.height(15.dp))
                     Text(

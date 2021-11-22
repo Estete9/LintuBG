@@ -35,7 +35,6 @@ fun GameListScreen(
                 GameListItem(
                     game = game,
                     onItemClicked = {
-//                        TODO change this so it navigates to the correct game id
                         navController.navigate(Screen.GameDetailScreen.route + "&${game.id}")
                     }
                 )
