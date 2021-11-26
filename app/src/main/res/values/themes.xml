@@ -22,4 +22,9 @@
     <style name="Theme.Lintu.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Lintu.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="splashScreenTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_image</item>
+        <item name="android:statusBarColor">@color/lintu_main</item>
+    </style>
 </resources>

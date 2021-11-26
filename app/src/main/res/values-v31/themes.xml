@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="splashScreenTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowSplashScreenBackground">@color/lintu_main</item>
+        <item name="android:statusBarColor">@color/lintu_main</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/lintu_main</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_lintu_logo</item>
+    </style>
+</resources>

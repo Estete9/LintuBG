@@ -1,17 +1,22 @@
 package com.naughtsmt.lintu.presentation
 
+//import com.naughtsmt.lintu.presentation.image_screen.ImageScreen
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.naughtsmt.lintu.presentation.game_detail.GameDetailScreen
 import com.naughtsmt.lintu.presentation.game_list.GameListScreen
-//import com.naughtsmt.lintu.presentation.image_screen.ImageScreen
-import com.naughtsmt.lintu.presentation.splash_screen.SplashScreen
 import com.naughtsmt.lintu.presentation.ui.theme.LintuTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,13 +32,14 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.SplashScreen.route
+                        startDestination = Screen.GameListScreen.route
+//                        startDestination = Screen.SplashScreen.route
                     ) {
-                        composable(
-                            route = Screen.SplashScreen.route
-                        ) {
-                            SplashScreen(navController)
-                        }
+//                        composable(
+//                            route = Screen.SplashScreen.route
+//                        ) {
+//                            SplashScreen(navController)
+//                        }
 //                        composable(
 //                            route = Screen.ImageScreen.route
 //                        ) {
@@ -42,7 +48,7 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Screen.GameListScreen.route
                         ) {
-                            GameListScreen(navController)
+                            GameListScreen(navController/*, context = applicationContext*/)
                         }
 
                         composable(

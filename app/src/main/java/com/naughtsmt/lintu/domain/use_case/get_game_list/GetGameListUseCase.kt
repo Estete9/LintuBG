@@ -1,7 +1,7 @@
-package com.naughtsmt.lintu.domain.use_case.get_game
+package com.naughtsmt.lintu.domain.use_case.get_game_list
 
+import android.content.Context
 import com.naughtsmt.lintu.common.Resource
-import com.naughtsmt.lintu.data.data_source.dto.ResponseDto
 import com.naughtsmt.lintu.data.data_source.dto.toGame
 import com.naughtsmt.lintu.data.repository.model.Game
 import com.naughtsmt.lintu.domain.repository.GameRepository
