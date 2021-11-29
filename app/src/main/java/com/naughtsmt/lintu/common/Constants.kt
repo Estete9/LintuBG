@@ -8,4 +8,8 @@ object Constants {
     const val PARAM_GAME_IMAGE_URL = "gameImageUrl"
     const val DEFAULT_IMAGE = R.drawable.lintu_logo
     const val CLIENT_ID = "HuPj3g2QXa"
+    const val REDIRECT_URI = "naughtsmt://callback"
+    const val URL_TEXT=
+        "https://api.boardgameatlas.com/oauth/authorize?response_type=code&client_id=${Constants.CLIENT_ID}&redirect_uri=${Constants.REDIRECT_URI}"
+
 }
