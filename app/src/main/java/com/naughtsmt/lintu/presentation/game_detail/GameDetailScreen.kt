@@ -51,19 +51,6 @@ fun GameDetailScreen(
                                 navController.navigate(Screen.ImageScreen.route)
                             }
                         )
-//                        game.image_url.let { url ->
-//                            val image =
-//                                loadPicture(url = url, defaultImage = DEFAULT_IMAGE).value
-////                            TODO add content description
-//                            image?.let {
-//                                Image(
-//                                    bitmap = it.asImageBitmap(),
-//                                    contentDescription = "TODO",
-//                                    contentScale = ContentScale.FillHeight,
-//                                    modifier = Modifier.align(CenterHorizontally)
-//                                )
-//                            }
-//                        }
                         Spacer(modifier = Modifier.height(10.dp))
                         Row(
                             modifier = Modifier
@@ -71,15 +58,6 @@ fun GameDetailScreen(
                             horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
 
-///                            Text(
-//                                text = game.rank.toString(),
-//                                textAlign = TextAlign.End,
-//                                style = MaterialTheme.typography.subtitle1,
-//                                fontStyle = FontStyle.Italic,
-//                                modifier = Modifier
-//                                    .align(CenterVertically)
-//                                    .weight(2f)
-//                            )
                         }
 
                     }

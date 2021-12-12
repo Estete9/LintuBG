@@ -12,7 +12,7 @@ import javax.inject.Inject
 class GetListsUseCase @Inject constructor(
     private val repository: GameRepository
 ) {
-    operator fun invoke(/*here we need something*/): Flow<Resource<List<Lists>>> = flow {
+    operator fun invoke(): Flow<Resource<List<Lists>>> = flow {
         try {
             emit(Resource.Loading<List<Lists>>())
             val lists = repository.getLists().lists

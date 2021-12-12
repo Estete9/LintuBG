@@ -1,5 +1,8 @@
 package com.naughtsmt.lintu.domain.use_case.authPost
 
+import com.naughtsmt.lintu.common.Constants.CLIENT_ID
+import com.naughtsmt.lintu.common.Constants.CLIENT_SECRET
+import com.naughtsmt.lintu.common.Constants.REDIRECT_URI
 import com.naughtsmt.lintu.common.Resource
 import com.naughtsmt.lintu.data.data_source.dto_access_token.AccessTokenDto
 import com.naughtsmt.lintu.domain.repository.GameRepository
@@ -15,13 +18,16 @@ class AuthPostUseCase @Inject constructor(
     operator fun invoke(code: String): Flow<Resource<AccessTokenDto>> = flow {
         try {
             emit(Resource.Loading<AccessTokenDto>())
-//            val params = HashMap<String, String>()
-//            params["client_id"] = CLIENT_ID
-//            params["client_secret"] = CLIENT_SECRET
-//            params["redirect_uri"] = REDIRECT_URI
-//            params["grant_type"] = "authorization_code"
-//            params["code"] = code
-            val accessToken = repository.getAccessToken(code = code)
+
+            val params = HashMap<String, String>()
+            params["client_id"] = CLIENT_ID
+            params["client_secret"] = CLIENT_SECRET
+            params["redirect_uri"] = REDIRECT_URI
+            params["grant_type"] = "authorization_code"
+            params["code"] = code
+
+            val accessToken = repository.getAccessToken(params)
+
             emit(Resource.Success<AccessTokenDto>(accessToken))
         } catch (e: HttpException) {
             emit(

@@ -12,6 +12,24 @@ import com.naughtsmt.lintu.presentation.login.LoginScreen
 import com.naughtsmt.lintu.presentation.single_list.SingleListScreen
 import com.naughtsmt.lintu.presentation.web_view.WebViewScreen
 
+var boolean = true
+/*   if want to use a bouncy splash screen (with animations)
+
+                        startDestination = Screen.SplashScreen.route
+                        composable(
+                            route = Screen.SplashScreen.route
+                        ) {
+                            SplashScreen(navController)
+                        }
+                        composable(
+                            route = Screen.ImageScreen.route
+                        ) {
+                            ImageScreen()
+                        }
+
+                        */
+
+
 @Composable
 fun NavigationHost(
 ) {
@@ -19,39 +37,28 @@ fun NavigationHost(
     NavHost(
         navController = navController,
         startDestination = Screen.LoginScreen.route
-//                        startDestination = Screen.SplashScreen.route
     ) {
-//                        composable(
-//                            route = Screen.SplashScreen.route
-//                        ) {
-//                            SplashScreen(navController)
-//                        }
-//                        composable(
-//                            route = Screen.ImageScreen.route
-//                        ) {
-//                            ImageScreen()
-//                        }
+
         composable(
             route = Screen.LoginScreen.route
         ) {
-//            LoginActivity()
-            LoginScreen(navController = navController/*context = context, lifecycleOwner = lifeCycleOwner */)
+            LoginScreen(navController = navController)
         }
         composable(
-            route = Screen.WebViewScreen.route /*+ "/${Constants.URL_TEXT}"*/
+            route = Screen.WebViewScreen.route
 
         ) {
-            WebViewScreen(navController = navController/*, authTokenViewModel = viewModel*/)
+            WebViewScreen(navController = navController)
         }
         composable(
             route = Screen.ListsScreen.route + "&{code}"
         ) {
-            ListsScreen(navController = navController /*authTokenViewModel = viewModel*/)
+            ListsScreen(navController = navController)
         }
         composable(
             route = Screen.GameListScreen.route
         ) {
-            GameListScreen(navController/*, context = applicationContext*/)
+            GameListScreen(navController)
         }
 
         composable(

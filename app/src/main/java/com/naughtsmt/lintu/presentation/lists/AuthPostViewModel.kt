@@ -22,8 +22,7 @@ class AuthPostViewModel @Inject constructor(
 
     private val _state = mutableStateOf(AuthPostState())
     val state: State<AuthPostState> = _state
-    val tag = "AUTH_POST_VIEW_MODEL"
-//    val code = mutableStateOf("")
+    private val tag = "AUTH_POST_VIEW_MODEL"
 
     init {
         savedStateHandle.get<String>(Constants.PARAM_CODE)?.let { code ->

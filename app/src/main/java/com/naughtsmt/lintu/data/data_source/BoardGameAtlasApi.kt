@@ -1,11 +1,9 @@
 package com.naughtsmt.lintu.data.data_source
 
-import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.common.Constants.CLIENT_ID
 import com.naughtsmt.lintu.data.data_source.dto.ResponseDto
 import com.naughtsmt.lintu.data.data_source.dto_access_token.AccessTokenDto
 import com.naughtsmt.lintu.data.data_source.lists_dto.ListsDto
-import com.naughtsmt.lintu.data.repository.model.Post
 import retrofit2.http.*
 
 interface BoardGameAtlasApi {
@@ -17,9 +15,9 @@ interface BoardGameAtlasApi {
 
     @GET("api/search")
     suspend fun getGameById(
-        @Query("api/ids")
+        @Query("ids")
         ids: String,
-        @Query("api/client_id")
+        @Query("client_id")
         client_id: String = CLIENT_ID
     ): ResponseDto
 
@@ -30,21 +28,19 @@ interface BoardGameAtlasApi {
     ): ResponseDto
 
     @FormUrlEncoded
-//    @Headers("content-type: application/x-www-form-urlencoded")
     @POST("oauth/token")
     suspend fun getAccessToken(
-//        @Body post: Post
-        @Field("client_id") client_id: String = CLIENT_ID,
-        @Field("client_secret") client_secret: String = Constants.CLIENT_SECRET,
-        @Field("code") code: String,
-        @Field("redirect_uri") redirect_uri: String = Constants.REDIRECT_URI,
-        @Field("grant_type") grant_type: String = "authorization_code",
+//        @Field("client_id") client_id: String = CLIENT_ID,
+//        @Field("client_secret") client_secret: String = Constants.CLIENT_SECRET,
+//        @Field("code") code: String,
+//        @Field("redirect_uri") redirect_uri: String = Constants.REDIRECT_URI,
+//        @Field("grant_type") grant_type: String = "authorization_code",
+        @FieldMap params: HashMap<String, String>
     ): AccessTokenDto
 //    @FormUrlEncoded
 ////    @Headers("content-type: application/x-www-form-urlencoded")
 //    @POST("oauth/token")
 //    suspend fun getAccessToken(
-//        @FieldMap params: HashMap<String, String>
 //    ): AccessTokenDto
 
     @GET("api/lists")

@@ -21,7 +21,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.naughtsmt.lintu.common.Constants.DEFAULT_IMAGE
 import com.naughtsmt.lintu.data.repository.model.Game
-import com.naughtsmt.lintu.presentation.loadPicture
+import com.naughtsmt.lintu.presentation.util.loadPicture
 
 @Composable
 fun GameListItem(

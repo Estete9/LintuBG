@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.common.Resource
 import com.naughtsmt.lintu.domain.use_case.get_game.GetGameUseCase
-import com.naughtsmt.lintu.presentation.game_detail.GameDetailState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

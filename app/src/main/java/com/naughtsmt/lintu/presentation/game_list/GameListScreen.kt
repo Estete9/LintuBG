@@ -40,7 +40,6 @@ fun GameListScreen(
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            /*verticalArrangement = Arrangement.spacedBy(8.dp)*/
         ) {
             item {
                 Box(

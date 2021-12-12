@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.presentation
+package com.naughtsmt.lintu.presentation.util
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
