@@ -19,7 +19,6 @@ var code = ""
 @Composable
 fun WebViewScreen(
     navController: NavController,
-//    authTokenViewModel: AuthPostViewModel,
 
 ) {
 

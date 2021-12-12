@@ -5,6 +5,9 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
 android {
     compileSdk 31
 
@@ -14,6 +17,9 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "CLIENT_SECRET",localProperties['CLIENT_SECRET']
+        buildConfigField "String", "CLIENT_ID",localProperties['CLIENT_ID']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
