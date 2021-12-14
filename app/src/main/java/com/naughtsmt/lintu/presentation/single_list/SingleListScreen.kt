@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.R
-import com.naughtsmt.lintu.presentation.Screen
+import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_list.GameListViewModel
 import com.naughtsmt.lintu.presentation.game_list.components.GameListItem
 
@@ -30,6 +30,7 @@ import com.naughtsmt.lintu.presentation.game_list.components.GameListItem
 fun SingleListScreen(
     navController: NavController,
     viewModel: GameListViewModel = hiltViewModel(),
+    modifier: Modifier
 ) {
     val state = viewModel.state.value
 
@@ -80,7 +81,7 @@ fun SingleListScreen(
                 GameListItem(
                     game = game,
                     onItemClicked = {
-                        navController.navigate(Screen.GameDetailScreen.route + "&${game.id}")
+                        navController.navigate(Screens.GameDetailScreen.route + "&${game.id}")
                     }
                 )
 

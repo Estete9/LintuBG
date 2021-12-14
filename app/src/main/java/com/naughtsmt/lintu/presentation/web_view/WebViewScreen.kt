@@ -12,17 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.common.Constants.URL_TEXT
-import com.naughtsmt.lintu.presentation.Screen
+import com.naughtsmt.lintu.presentation.Screens
 
 var code = ""
 
 @Composable
 fun WebViewScreen(
     navController: NavController,
-
+    modifier: Modifier
 ) {
 
-val tag: String = "WEB_VIEW_SCREEN"
+    val tag: String = "WEB_VIEW_SCREEN"
 
     Column(Modifier.fillMaxSize()) {
         AndroidView(
@@ -42,7 +42,9 @@ val tag: String = "WEB_VIEW_SCREEN"
                                 code =
                                     uri.getQueryParameter("code").toString()
                                 Log.d(tag, "the code is: $code")
-                                navController.navigate(Screen.ListsScreen.route + "&$code")
+                                navController.navigate(Screens.ListsScreen.route + "&$code") {
+                                    navController.popBackStack()
+                                }
                                 return false
                             }
 

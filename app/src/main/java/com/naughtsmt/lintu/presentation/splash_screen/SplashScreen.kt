@@ -15,7 +15,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.R
-import com.naughtsmt.lintu.presentation.Screen
+import com.naughtsmt.lintu.presentation.Screens
 import kotlinx.coroutines.delay
 
 @Composable
@@ -36,7 +36,7 @@ fun SplashScreen(navController: NavController) {
                 })
         )
         delay(2000L)
-        navController.navigate(Screen.GameListScreen.route)
+        navController.navigate(Screens.GameListScreen.route)
     }
 
     Box(
@@ -50,3 +50,10 @@ fun SplashScreen(navController: NavController) {
         )
     }
 }
+
+//@Preview(showSystemUi = true)
+//@Composable
+//fun SplashScreenPreview() {
+//    val navController = rememberNavController()
+//    SplashScreen(navController = navController)
+//}

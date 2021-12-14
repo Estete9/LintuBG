@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.naughtsmt.lintu.presentation.Screen
+import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.lists.components.ListItemRow
 
 const val tag = "tokenAndCode"
@@ -24,6 +24,7 @@ fun ListsScreen(
     navController: NavController,
     listsViewModel: ListsViewModel = hiltViewModel(),
     authTokenViewModel: AuthPostViewModel = hiltViewModel(),
+    modifier: Modifier
 ) {
 
     val listsState = listsViewModel.state.value
@@ -49,7 +50,7 @@ fun ListsScreen(
                     ListItemRow(
                         list = list,
                         onItemClicked = {
-                            navController.navigate(Screen.SingleListScreen.route + "&${list.id}")
+                            navController.navigate(Screens.SingleListScreen.route + "&${list.id}")
                         }
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
@@ -58,7 +59,7 @@ fun ListsScreen(
             item {
                 Button(
                     onClick =
-                    { navController.navigate(Screen.GameListScreen.route) }
+                    { navController.navigate(Screens.GameListScreen.route) }
                 ) {
                     Text(text = "go to top game list")
                 }

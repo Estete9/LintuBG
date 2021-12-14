@@ -15,14 +15,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.flowlayout.FlowRow
-import com.naughtsmt.lintu.presentation.Screen
+import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_detail.components.GameCard
 import com.naughtsmt.lintu.presentation.game_detail.components.Tag
 
 @Composable
 fun GameDetailScreen(
     navController: NavController,
-    viewModel: GameDetailViewModel = hiltViewModel()
+    viewModel: GameDetailViewModel = hiltViewModel(),
+    modifier: Modifier
 ) {
     val state = viewModel.state.value
 
@@ -48,7 +49,7 @@ fun GameDetailScreen(
                             title = game.name,
                             modifier = Modifier,
                             onItemClicked = {
-                                navController.navigate(Screen.ImageScreen.route)
+                                navController.navigate(Screens.ImageScreen.route)
                             }
                         )
                         Spacer(modifier = Modifier.height(10.dp))
