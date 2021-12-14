@@ -23,17 +23,19 @@ import androidx.navigation.NavController
 import com.naughtsmt.lintu.R
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_list.components.GameListItem
+import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 
 @Composable
 fun GameListScreen(
     navController: NavController,
     viewModel: GameListViewModel = hiltViewModel(),
+//    mainViewModel: MainViewModel,
     modifier: Modifier
 ) {
     val state = viewModel.state.value
 
-
+//mainViewModel.setCurrentScreen(Screens.GameListScreen)
     Box(
         modifier = Modifier
             .fillMaxSize()

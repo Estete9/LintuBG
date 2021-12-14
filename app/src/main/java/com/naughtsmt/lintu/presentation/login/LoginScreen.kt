@@ -13,13 +13,17 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.R
 import com.naughtsmt.lintu.presentation.Screens
+import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 
 @Composable
 fun LoginScreen(
     navController: NavController,
-    modifier: Modifier
+    modifier: Modifier,
+//    mainViewModel: MainViewModel
 ) {
+//    mainViewModel.setCurrentScreen(Screens.LoginScreen)
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

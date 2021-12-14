@@ -5,9 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.ui.Modifier
-import androidx.navigation.compose.rememberNavController
-import com.naughtsmt.lintu.navigation.nav_graph.SetupNavGraph
 import com.naughtsmt.lintu.presentation.scaffold.AppScaffold
 import com.naughtsmt.lintu.presentation.ui.theme.LintuTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +15,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         setContent {
             LintuTheme {

@@ -18,14 +18,17 @@ import com.google.accompanist.flowlayout.FlowRow
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_detail.components.GameCard
 import com.naughtsmt.lintu.presentation.game_detail.components.Tag
+import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 @Composable
 fun GameDetailScreen(
     navController: NavController,
     viewModel: GameDetailViewModel = hiltViewModel(),
+//    mainViewModel: MainViewModel,
     modifier: Modifier
 ) {
     val state = viewModel.state.value
+//    mainViewModel.setCurrentScreen(Screens.GameDetailScreen)
 
     Box(modifier = Modifier.fillMaxSize()) {
 

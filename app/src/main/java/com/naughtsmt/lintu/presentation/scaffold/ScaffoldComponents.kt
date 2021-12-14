@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -19,7 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.naughtsmt.lintu.presentation.Screens
 
 @Composable
-fun BottomBar(navController: NavController, screens: List<Screens.HomeScreens>) {
+fun BottomBar(navController: NavController, screens: List<Screens.NavBarScreens>) {
     BottomAppBar {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
@@ -45,7 +46,7 @@ fun BottomBar(navController: NavController, screens: List<Screens.HomeScreens>) 
 }
 
 @Composable
-fun TopBar(navController: NavController) {
+fun TopBar(navController: NavController, currentScreenRoute: String) {
     TopAppBar(backgroundColor = Color.Transparent) {
         Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             Row(
@@ -54,21 +55,43 @@ fun TopBar(navController: NavController) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "Tus juegos",
-                    Modifier.clickable { navController.navigate(Screens.GameListScreen.route) })
+
+                Text(text = "Tus juegos",
+                    color = MaterialTheme.colors.primary,
+                    fontWeight = if (currentScreenRoute == Screens.ListsScreen.route) {
+                        FontWeight.Bold
+                    } else {
+                        FontWeight.Normal
+                    },
+                    modifier = Modifier.clickable {
+                        navController.navigate(Screens.ListsScreen.route) {
+                            launchSingleTop = true
+                        }
+                    })
+
                 Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+
                 Divider(
-                    color = MaterialTheme.colors.primaryVariant,
+                    color = MaterialTheme.colors.secondary,
                     modifier = Modifier
                         .height(15.dp)
                         .width(1.dp)
                 )
+
                 Spacer(modifier = Modifier.padding(horizontal = 4.dp))
-                Text(
-                    text = "Top Ranking",
-                    Modifier.clickable { navController.navigate(Screens.GameListScreen.route) })
+
+                Text(text = "Top Ranking",
+                    color = MaterialTheme.colors.primary,
+                    fontWeight = if (currentScreenRoute == Screens.GameListScreen.route) {
+                        FontWeight.Bold
+                    } else {
+                        FontWeight.Normal
+                    },
+                    modifier = Modifier.clickable {
+                        navController.navigate(Screens.GameListScreen.route)
+                    })
             }
+
             Row(
                 Modifier
                     .fillMaxWidth()
@@ -76,11 +99,15 @@ fun TopBar(navController: NavController) {
                 horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(imageVector = Icons.Filled.Search, contentDescription = "Search Icon")
+                Icon(
+                    imageVector = Icons.Filled.Search,
+                    tint = MaterialTheme.colors.secondary,
+                    contentDescription = "Search Icon"
+                )
             }
-
         }
     }
+
 }
 
 //@Composable
@@ -104,5 +131,6 @@ fun TopBar(navController: NavController) {
 @Composable
 fun TopBarPreview() {
     val navController = rememberNavController()
-    TopBar(navController = navController)
+    val previewCurrentScreen = Screens.ListsScreen
+    TopBar(navController = navController, currentScreenRoute = previewCurrentScreen.route)
 }

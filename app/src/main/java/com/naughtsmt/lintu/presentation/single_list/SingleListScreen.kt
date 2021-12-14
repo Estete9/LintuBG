@@ -24,16 +24,18 @@ import com.naughtsmt.lintu.R
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_list.GameListViewModel
 import com.naughtsmt.lintu.presentation.game_list.components.GameListItem
+import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 
 @Composable
 fun SingleListScreen(
     navController: NavController,
     viewModel: GameListViewModel = hiltViewModel(),
+//    mainViewModel: MainViewModel,
     modifier: Modifier
 ) {
     val state = viewModel.state.value
-
+//    mainViewModel.setCurrentScreen(Screens.SingleListScreen)
 
     Box(
         modifier = Modifier

@@ -13,16 +13,19 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.common.Constants.URL_TEXT
 import com.naughtsmt.lintu.presentation.Screens
+import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 var code = ""
 
 @Composable
 fun WebViewScreen(
     navController: NavController,
-    modifier: Modifier
+    modifier: Modifier,
+//    mainViewModel: MainViewModel
 ) {
 
     val tag: String = "WEB_VIEW_SCREEN"
+//    mainViewModel.setCurrentScreen(Screens.WebViewScreen)
 
     Column(Modifier.fillMaxSize()) {
         AndroidView(

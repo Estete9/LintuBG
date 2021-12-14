@@ -16,6 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.lists.components.ListItemRow
+import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 const val tag = "tokenAndCode"
 
@@ -23,10 +24,13 @@ const val tag = "tokenAndCode"
 fun ListsScreen(
     navController: NavController,
     listsViewModel: ListsViewModel = hiltViewModel(),
+//    mainViewModel: MainViewModel,
     authTokenViewModel: AuthPostViewModel = hiltViewModel(),
     modifier: Modifier
 ) {
 
+//    mainViewModel.setCurrentScreen(Screens.ListsScreen)
+// For testing
     val listsState = listsViewModel.state.value
     val authTokenState = authTokenViewModel.state.value
     if (authTokenState.isLoading) {
@@ -37,7 +41,7 @@ fun ListsScreen(
 
         Log.d(tag, "this is the auth token: ${authTokenState.accessToken}")
     }
-
+//
     Column(modifier = Modifier.fillMaxSize()) {
         LazyColumn {
 

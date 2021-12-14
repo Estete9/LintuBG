@@ -6,7 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(
+//    mainViewModel: MainViewModel
+) {
+
+//    mainViewModel.setCurrentScreen(Screens.NavBarScreens.ProfileScreen)
+
     Box(contentAlignment = Alignment.Center) {
         Text(text = "Profile Screen")
     }

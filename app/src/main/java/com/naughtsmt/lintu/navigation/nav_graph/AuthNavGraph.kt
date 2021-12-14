@@ -9,9 +9,10 @@ import androidx.navigation.navigation
 import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.login.LoginScreen
+import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 import com.naughtsmt.lintu.presentation.web_view.WebViewScreen
 
-fun NavGraphBuilder.authNavGraph(navController: NavHostController, modifier: Modifier) {
+fun NavGraphBuilder.authNavGraph(navController: NavHostController, modifier: Modifier/*, mainViewModel: MainViewModel*/) {
 
     navigation(
         startDestination = Screens.LoginScreen.route,
@@ -21,12 +22,12 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController, modifier: Mod
         composable(
             route = Screens.LoginScreen.route
         ) {
-            LoginScreen(navController = navController, modifier = modifier)
+            LoginScreen(navController = navController, modifier = modifier/*, mainViewModel = mainViewModel*/)
         }
         composable(
             route = Screens.WebViewScreen.route
         ) {
-            WebViewScreen(navController = navController, modifier = modifier)
+            WebViewScreen(navController = navController, modifier = modifier/*, mainViewModel = mainViewModel*/)
         }
     }
 }
