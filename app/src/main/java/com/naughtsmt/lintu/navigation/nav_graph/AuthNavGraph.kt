@@ -8,8 +8,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.presentation.Screens
+import com.naughtsmt.lintu.presentation.authLoading.AuthProcessingScreen
 import com.naughtsmt.lintu.presentation.login.LoginScreen
-import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 import com.naughtsmt.lintu.presentation.web_view.WebViewScreen
 
 fun NavGraphBuilder.authNavGraph(navController: NavHostController, modifier: Modifier/*, mainViewModel: MainViewModel*/) {
@@ -28,6 +28,16 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController, modifier: Mod
             route = Screens.WebViewScreen.route
         ) {
             WebViewScreen(navController = navController, modifier = modifier/*, mainViewModel = mainViewModel*/)
+        }
+
+        composable(
+            route = Screens.AuthScreen.route + "/{code}"
+        ) {
+            AuthProcessingScreen(
+                navController = navController,
+                modifier = modifier,
+//                mainViewModel = mainViewModel
+            )
         }
     }
 }

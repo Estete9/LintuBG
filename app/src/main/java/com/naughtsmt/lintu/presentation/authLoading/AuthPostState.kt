@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.presentation.lists
+package com.naughtsmt.lintu.presentation.authLoading
 
 import com.naughtsmt.lintu.data.data_source.dto_access_token.AccessTokenDto
 

@@ -1,9 +1,12 @@
 package com.naughtsmt.lintu.data.data_source
 
 import com.naughtsmt.lintu.common.Constants.CLIENT_ID
+import com.naughtsmt.lintu.common.Constants.USERNAME
 import com.naughtsmt.lintu.data.data_source.dto.ResponseDto
 import com.naughtsmt.lintu.data.data_source.dto_access_token.AccessTokenDto
+import com.naughtsmt.lintu.data.data_source.lists_dto.SuccessDto
 import com.naughtsmt.lintu.data.data_source.lists_dto.ListsDto
+import com.naughtsmt.lintu.data.data_source.new_list_dto.NewListDto
 import retrofit2.http.*
 
 interface BoardGameAtlasApi {
@@ -27,6 +30,22 @@ interface BoardGameAtlasApi {
         client_id: String = CLIENT_ID
     ): ResponseDto
 
+    @GET("api/lists")
+    suspend fun getLists(
+        @Query("username")
+        username: String = USERNAME,
+        @Query("client_id")
+        client_id: String = CLIENT_ID
+    ): ListsDto
+
+    @GET("api/search")
+    suspend fun getSingleList(
+        @Query("list_id")
+        list_id: String,
+        @Query("client_id")
+        client_id: String = CLIENT_ID
+    ): ResponseDto
+
     @FormUrlEncoded
     @POST("oauth/token")
     suspend fun getAccessToken(
@@ -37,24 +56,35 @@ interface BoardGameAtlasApi {
 //        @Field("grant_type") grant_type: String = "authorization_code",
         @FieldMap params: HashMap<String, String>
     ): AccessTokenDto
-//    @FormUrlEncoded
-////    @Headers("content-type: application/x-www-form-urlencoded")
-//    @POST("oauth/token")
-//    suspend fun getAccessToken(
-//    ): AccessTokenDto
 
-    @GET("api/lists")
-    suspend fun getLists(
-        @Query("username")
-        username: String = "naughtSMT",
+    @FormUrlEncoded
+    @POST("api/lists")
+    suspend fun createList(
+        @Header("Authorization") auth_token: String,
+        @Field("name") name: String,
         @Query("client_id")
         client_id: String = CLIENT_ID
-    ): ListsDto
+    ): NewListDto
 
-    @GET("api/search")
-    suspend fun getSingleList(
-        @Query("list_id")
+        @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "api/lists", hasBody = true)
+    suspend fun deleteList(
+        @Header("Authorization") auth_token: String,
+        @Field("list_id")
         list_id: String,
+        @Query("client_id")
         client_id: String = CLIENT_ID
-    ): ResponseDto
+        ): SuccessDto
+
+
+    @FormUrlEncoded
+    @POST("api/lists/add")
+    suspend fun addGameToList(
+        @Header("Authorization") auth_token: String,
+        @Field("list_id") list_id: String,
+        @Field("game_id") game_id: String,
+        @Query("client_id")
+        client_id: String = CLIENT_ID
+
+    ): SuccessDto
 }

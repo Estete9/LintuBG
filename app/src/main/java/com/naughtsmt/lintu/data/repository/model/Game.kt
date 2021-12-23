@@ -1,9 +1,14 @@
 package com.naughtsmt.lintu.data.repository.model
 
-import com.naughtsmt.lintu.data.data_source.dto.*
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.naughtsmt.lintu.data.data_source.dto.ImagesX
+import com.naughtsmt.lintu.data.data_source.dto.PrimaryDesigner
+import com.naughtsmt.lintu.data.data_source.dto.PrimaryPublisher
 
+//TODO create a data converter
 data class Game(
-
+//    val ownership: Boolean,
     val average_learning_complexity: Double,
     val average_strategy_complexity: Double,
     val average_user_rating: Double,

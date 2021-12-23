@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.R
 import com.naughtsmt.lintu.presentation.Screens
-import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 
 @Composable
@@ -43,7 +42,9 @@ fun LoginScreen(
                 .height(30.dp)
         )
         Button(onClick = {
-            navController.navigate(Screens.WebViewScreen.route)
+            navController.navigate(Screens.WebViewScreen.route) {
+                navController.popBackStack()
+            }
         }) {
             Text(text = "Conectar con Board Game Atlas")
         }

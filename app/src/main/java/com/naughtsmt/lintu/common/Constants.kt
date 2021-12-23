@@ -14,6 +14,8 @@ object Constants {
     const val DEFAULT_IMAGE = R.drawable.lintu_logo
     const val CLIENT_ID = BuildConfig.CLIENT_ID
     const val CLIENT_SECRET = BuildConfig.CLIENT_SECRET
+    const val USERNAME = "naughtSMT"
+    const val ALL_GAMES_LIST_ID = "pirfl49i9A"
     const val REDIRECT_URI = "naughtsmt://callback"
     const val URL_TEXT =
         "https://api.boardgameatlas.com/oauth/authorize?state=true&response_type=code&client_id=$CLIENT_ID&redirect_uri=$REDIRECT_URI"

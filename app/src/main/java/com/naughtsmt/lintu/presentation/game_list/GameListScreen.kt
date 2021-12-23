@@ -9,6 +9,8 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,23 +20,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.R
+import com.naughtsmt.lintu.common.Constants.ALL_GAMES_LIST_ID
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_list.components.GameListItem
-import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 
 @Composable
 fun GameListScreen(
+    modifier: Modifier,
     navController: NavController,
-    viewModel: GameListViewModel = hiltViewModel(),
+    viewModel: GameListViewModel,
 //    mainViewModel: MainViewModel,
-    modifier: Modifier
 ) {
     val state = viewModel.state.value
+    val rememberedState = rememberUpdatedState(newValue = state)
 
+    LaunchedEffect(key1 = rememberedState) {
+        viewModel.getGamesFromMainList(ALL_GAMES_LIST_ID)
+    }
 //mainViewModel.setCurrentScreen(Screens.GameListScreen)
     Box(
         modifier = Modifier
@@ -59,16 +64,16 @@ fun GameListScreen(
                     )
                     Box(
                         modifier = Modifier
-                            .align(Alignment.Center)
+                            .align(Alignment.TopCenter)
                     ) {
                         Text(
                             text = "¿Qué vamos a jugar hoy?",
-                            modifier = Modifier.align(Alignment.BottomCenter),
+                            modifier = Modifier.align(Alignment.TopCenter),
                             color = Color.White,
                             textAlign = TextAlign.Center,
                             style = MaterialTheme.typography.h3,
                             fontWeight = FontWeight.Bold,
-                            fontSize = 40.sp
+                            fontSize = 30.sp
                         )
                     }
                 }

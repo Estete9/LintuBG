@@ -12,6 +12,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -24,7 +25,12 @@ class AppModule {
 
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
+        val client = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .writeTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .build()
 
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -33,6 +39,7 @@ class AppModule {
             .build()
             .create(BoardGameAtlasApi::class.java)
     }
+
 
     @Provides
     @Singleton

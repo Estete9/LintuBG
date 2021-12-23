@@ -8,8 +8,9 @@ import androidx.compose.ui.Alignment
 @Composable
 fun ProfileScreen(
 //    mainViewModel: MainViewModel
+//viewModel: ListsViewModel = hiltViewModel()
 ) {
-
+//val state = viewModel.state.value
 //    mainViewModel.setCurrentScreen(Screens.NavBarScreens.ProfileScreen)
 
     Box(contentAlignment = Alignment.Center) {

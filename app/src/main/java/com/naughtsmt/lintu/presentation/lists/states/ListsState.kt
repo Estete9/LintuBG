@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.presentation.lists
+package com.naughtsmt.lintu.presentation.lists.states
 
 import com.naughtsmt.lintu.data.data_source.lists_dto.Lists
 

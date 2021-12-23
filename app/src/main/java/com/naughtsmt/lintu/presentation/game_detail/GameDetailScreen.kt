@@ -24,22 +24,22 @@ import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 fun GameDetailScreen(
     navController: NavController,
     viewModel: GameDetailViewModel = hiltViewModel(),
-//    mainViewModel: MainViewModel,
-    modifier: Modifier
+    modifier: Modifier,
+    mainViewModel: MainViewModel
 ) {
     val state = viewModel.state.value
 //    mainViewModel.setCurrentScreen(Screens.GameDetailScreen)
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
 
         state.game?.let { game ->
+            mainViewModel.currentGameId.value = game.id
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(20.dp)
             ) {
                 item {
-//TODO
                     Column(
                         modifier = Modifier
                             .fillMaxSize(),

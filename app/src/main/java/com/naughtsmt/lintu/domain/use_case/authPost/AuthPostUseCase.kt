@@ -1,5 +1,6 @@
 package com.naughtsmt.lintu.domain.use_case.authPost
 
+import android.util.Log
 import com.naughtsmt.lintu.common.Constants.CLIENT_ID
 import com.naughtsmt.lintu.common.Constants.CLIENT_SECRET
 import com.naughtsmt.lintu.common.Constants.REDIRECT_URI
@@ -11,6 +12,8 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
+
+val tag = "AuthUseCase"
 
 class AuthPostUseCase @Inject constructor(
     private val repository: GameRepository,
@@ -27,7 +30,7 @@ class AuthPostUseCase @Inject constructor(
             params["code"] = code
 
             val accessToken = repository.getAccessToken(params)
-
+            Log.d(tag, "access token success: $accessToken")
             emit(Resource.Success<AccessTokenDto>(accessToken))
         } catch (e: HttpException) {
             emit(

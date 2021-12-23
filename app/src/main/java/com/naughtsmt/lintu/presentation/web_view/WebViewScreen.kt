@@ -1,62 +1,75 @@
 package com.naughtsmt.lintu.presentation.web_view
 
 import android.net.Uri
-import android.util.Log
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.common.Constants.URL_TEXT
 import com.naughtsmt.lintu.presentation.Screens
-import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
-var code = ""
+val tag: String = "WEB_VIEW_SCREEN"
 
+//var code = ""
 @Composable
 fun WebViewScreen(
     navController: NavController,
     modifier: Modifier,
 //    mainViewModel: MainViewModel
 ) {
-
-    val tag: String = "WEB_VIEW_SCREEN"
+    val scope = rememberCoroutineScope()
 //    mainViewModel.setCurrentScreen(Screens.WebViewScreen)
 
     Column(Modifier.fillMaxSize()) {
-        AndroidView(
-            factory = {
-                WebView(it).apply {
-                    layoutParams = ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT
-                    )
-                    webViewClient = object : WebViewClient() {
-                        override fun shouldOverrideUrlLoading(
-                            view: WebView?,
-                            url: String?
-                        ): Boolean {
-                            if (url != null && url.contains("code")) {
-                                val uri = Uri.parse(url)
-                                code =
-                                    uri.getQueryParameter("code").toString()
-                                Log.d(tag, "the code is: $code")
-                                navController.navigate(Screens.ListsScreen.route + "&$code") {
-                                    navController.popBackStack()
-                                }
-                                return false
-                            }
-
-                            return true
-                        }
-                    }
-                    loadUrl(URL_TEXT)
-                }
-            },
-        )
+        val isLoading = remember {
+            mutableStateOf(true)
+        }
+        if (isLoading.value) {
+            CustomWebView(navController = navController, isLoading = isLoading)
+        }
     }
+}
+
+
+@Composable
+fun CustomWebView(navController: NavController, isLoading: MutableState<Boolean>) {
+    AndroidView(
+        factory = {
+            WebView(it).apply {
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+
+                webViewClient = object : WebViewClient() {
+
+
+                    override fun shouldOverrideUrlLoading(
+                        view: WebView?,
+                        url: String?
+                    ): Boolean {
+                        isLoading.value = false
+                        if (url != null && url.startsWith("naught")) {
+                            val uri = Uri.parse(url)
+                            val code =
+                                uri.getQueryParameter("code").toString()
+                            navController.navigate(Screens.AuthScreen.route + "/$code") {
+                                navController.popBackStack()
+                            }
+                            return false
+                        }
+
+                        return true
+                    }
+                }
+                loadUrl(URL_TEXT)
+            }
+        },
+    )
+
 }

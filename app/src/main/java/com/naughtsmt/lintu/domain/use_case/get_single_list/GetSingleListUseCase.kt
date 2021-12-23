@@ -16,7 +16,7 @@ class GetSingleListUseCase @Inject constructor(
     operator fun invoke(listId: String): Flow<Resource<List<Game>>> = flow {
         try {
             emit(Resource.Loading<List<Game>>())
-            val singleList = repository.getSingleList(listId).games.map { it.toGame() }
+            val singleList = repository.getSingleListFromApi(listId).games.map { it.toGame() }
             emit(Resource.Success<List<Game>>(singleList))
         } catch (e: HttpException) {
             emit(Resource.Error<List<Game>>(e.localizedMessage ?: "An Unexpected error occurred"))

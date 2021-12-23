@@ -108,6 +108,7 @@ fun com.naughtsmt.lintu.data.data_source.dto.Game.toGame(): Game {
         thumb_url = thumb_url,
         type = type,
         url = url,
-        year_published = year_published
+        year_published = year_published,
+//        ownership = false
     )
 }

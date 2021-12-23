@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.presentation.lists
+package com.naughtsmt.lintu.presentation.authLoading
 
 import android.util.Log
 import androidx.compose.runtime.State
@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.naughtsmt.lintu.common.AuthData
 import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.common.Resource
 import com.naughtsmt.lintu.domain.use_case.authPost.AuthPostUseCase
@@ -31,19 +32,20 @@ class AuthPostViewModel @Inject constructor(
         }
     }
 
-    private fun getAuthToken(code: String) {
+    fun getAuthToken(code: String) {
         authPostUseCase(code = code).onEach { result ->
             when (result) {
                 is Resource.Success -> {
                     _state.value = AuthPostState(accessToken = result.data)
+                    AuthData.authToken.value = state.value.accessToken
                 }
                 is Resource.Loading -> {
-                    _state.value =
-                        AuthPostState(error = result.message ?: "An unexpected error occurred")
+                    _state.value = AuthPostState(isLoading = true)
                 }
 
                 is Resource.Error -> {
-                    _state.value = AuthPostState(isLoading = true)
+                    _state.value =
+                        AuthPostState(error = result.message ?: "An unexpected error occurred")
                 }
             }
         }.launchIn(viewModelScope)

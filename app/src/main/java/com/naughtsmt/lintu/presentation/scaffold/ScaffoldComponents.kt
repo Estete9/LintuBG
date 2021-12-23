@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,17 +12,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import com.naughtsmt.lintu.common.Constants.ALL_GAMES_LIST_ID
 import com.naughtsmt.lintu.presentation.Screens
 
 @Composable
+fun Fab(showDropDownMenu: () -> Unit) {
+    FloatingActionButton(onClick = { showDropDownMenu() }) {
+        Icon(imageVector = Icons.Filled.Add, contentDescription = "add game floating button")
+    }
+}
+
+@Composable
 fun BottomBar(navController: NavController, screens: List<Screens.NavBarScreens>) {
-    BottomAppBar {
+    BottomAppBar(
+//        cutoutShape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50))
+    ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
 
@@ -38,7 +47,7 @@ fun BottomBar(navController: NavController, screens: List<Screens.NavBarScreens>
                 onClick = {
                     navController.navigate(screen.route) {
                         popUpTo(navController.graph.findStartDestination().id)
-                        launchSingleTop = true
+//                        launchSingleTop = true
                     }
                 })
         }
@@ -46,7 +55,12 @@ fun BottomBar(navController: NavController, screens: List<Screens.NavBarScreens>
 }
 
 @Composable
-fun TopBar(navController: NavController, currentScreenRoute: String) {
+fun TopBar(
+    navController: NavController,
+    currentScreenRoute: String,
+    toTopGames: () -> Unit,
+    toAllGames: () -> Unit
+) {
     TopAppBar(backgroundColor = Color.Transparent) {
         Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             Row(
@@ -58,15 +72,16 @@ fun TopBar(navController: NavController, currentScreenRoute: String) {
 
                 Text(text = "Tus juegos",
                     color = MaterialTheme.colors.primary,
-                    fontWeight = if (currentScreenRoute == Screens.ListsScreen.route) {
+                    fontWeight = if (currentScreenRoute == Screens.GameListScreen.route + "?&listId=$ALL_GAMES_LIST_ID") {
                         FontWeight.Bold
                     } else {
                         FontWeight.Normal
                     },
                     modifier = Modifier.clickable {
-                        navController.navigate(Screens.ListsScreen.route) {
+                        toAllGames()
+                        navController.navigate(Screens.GameListScreen.route) /*{
                             launchSingleTop = true
-                        }
+                        }*/
                     })
 
                 Spacer(modifier = Modifier.padding(horizontal = 4.dp))
@@ -88,6 +103,7 @@ fun TopBar(navController: NavController, currentScreenRoute: String) {
                         FontWeight.Normal
                     },
                     modifier = Modifier.clickable {
+                        toTopGames()
                         navController.navigate(Screens.GameListScreen.route)
                     })
             }
@@ -100,6 +116,7 @@ fun TopBar(navController: NavController, currentScreenRoute: String) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
+                    modifier = Modifier.clickable { },
                     imageVector = Icons.Filled.Search,
                     tint = MaterialTheme.colors.secondary,
                     contentDescription = "Search Icon"
@@ -127,10 +144,10 @@ fun TopBar(navController: NavController, currentScreenRoute: String) {
 //    )
 //}
 
-@Preview(showBackground = true)
-@Composable
-fun TopBarPreview() {
-    val navController = rememberNavController()
-    val previewCurrentScreen = Screens.ListsScreen
-    TopBar(navController = navController, currentScreenRoute = previewCurrentScreen.route)
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun TopBarPreview() {
+//    val navController = rememberNavController()
+//    val previewCurrentScreen = Screens.GameListScreen
+//    TopBar(navController = navController, currentScreenRoute = previewCurrentScreen.route)
+//}

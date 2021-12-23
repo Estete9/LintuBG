@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.common.Resource
+import com.naughtsmt.lintu.domain.use_case.add_game_to_list.AddGameToListUseCase
 import com.naughtsmt.lintu.domain.use_case.get_game.GetGameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -16,10 +17,13 @@ import javax.inject.Inject
 @HiltViewModel
 class GameDetailViewModel @Inject constructor(
     private val getGameUseCase: GetGameUseCase,
+
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _state = mutableStateOf(GameDetailState())
     val state: State<GameDetailState> = _state
+
+
 
     init {
         savedStateHandle.get<String>(Constants.PARAM_GAME_ID)?.let { gameId ->
@@ -45,4 +49,5 @@ class GameDetailViewModel @Inject constructor(
 
         }.launchIn(viewModelScope)
     }
+
 }
