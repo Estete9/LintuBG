@@ -1,5 +1,6 @@
 package com.naughtsmt.lintu.presentation.scaffold
 
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -7,6 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -29,9 +32,8 @@ fun AppScaffold(
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    val isDropDownMenuShowed = remember {
-        mutableStateOf(false)
-    }
+    val isDropDownMenuShowed = remember { mutableStateOf(false) }
+    val isFocusedCleared = remember { mutableStateOf(true) }
 
     val floatingActionButton: @Composable () -> Unit = {
         Fab(
@@ -46,7 +48,9 @@ fun AppScaffold(
                 navController = navController,
                 currentScreenRoute = it,
                 toTopGames = { viewModel.getTopGamesList() },
-                toAllGames = { viewModel.getGamesFromMainList(ALL_GAMES_LIST_ID) }
+                toAllGames = { viewModel.getGamesFromMainList(ALL_GAMES_LIST_ID) },
+                viewModel = mainViewModel,
+                focusCleared = isFocusedCleared
             )
         }
     }
@@ -55,6 +59,7 @@ fun AppScaffold(
     val isInWebView = currentDestination?.route == Screens.WebViewScreen.route
     val isInAuth = currentDestination?.route == Screens.AuthScreen.route + "/{code}"
     val isInGameDetail = currentDestination?.route == Screens.GameDetailScreen.route + "&{gameId}"
+    val localFocusManager = LocalFocusManager.current
     Scaffold(
 
         bottomBar = {
@@ -86,7 +91,14 @@ fun AppScaffold(
     ) { innerPadding ->
         SetupNavGraph(
             navController = navController,
-            modifier = Modifier.padding(innerPadding),
+            modifier = Modifier
+                .padding(innerPadding)
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        localFocusManager.clearFocus()
+                        isFocusedCleared.value = true
+                    })
+                },
             viewModel = viewModel,
             listsViewModel = listsViewModel,
             mainViewModel = mainViewModel

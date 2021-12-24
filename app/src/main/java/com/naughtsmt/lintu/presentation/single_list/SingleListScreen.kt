@@ -43,7 +43,7 @@ fun SingleListScreen(
 //        viewModel.getGamesFromMainList(Constants.ALL_GAMES_LIST_ID)
 //    }
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colors.primaryVariant)
     ) {

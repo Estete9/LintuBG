@@ -19,7 +19,7 @@ class GameRepositoryImpl @Inject constructor(
         return api.getTopGamesList()
     }
 
-    override suspend fun getGame(gameId: String): ResponseDto {
+    override suspend fun getGameById(gameId: String): ResponseDto {
         return api.getGameById(gameId)
     }
 
@@ -53,6 +53,10 @@ class GameRepositoryImpl @Inject constructor(
         gameId: String
     ): SuccessDto {
         return api.addGameToList(authToken, listId, gameId)
+    }
+
+    override suspend fun getGameByName(name: String): ResponseDto {
+        return api.getGameByName(name)
     }
 
 //    override fun getListsFromDB(): Flow<List<Game>> {

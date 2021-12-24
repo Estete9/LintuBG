@@ -2,14 +2,14 @@ package com.naughtsmt.lintu.domain.repository
 
 import com.naughtsmt.lintu.data.data_source.dto.ResponseDto
 import com.naughtsmt.lintu.data.data_source.dto_access_token.AccessTokenDto
-import com.naughtsmt.lintu.data.data_source.lists_dto.SuccessDto
 import com.naughtsmt.lintu.data.data_source.lists_dto.ListsDto
+import com.naughtsmt.lintu.data.data_source.lists_dto.SuccessDto
 import com.naughtsmt.lintu.data.data_source.new_list_dto.NewListDto
 
 interface GameRepository {
     suspend fun getTopGameList(): ResponseDto
 
-    suspend fun getGame(gameId: String): ResponseDto
+    suspend fun getGameById(gameId: String): ResponseDto
 
     suspend fun getUserGameList(): ResponseDto
 
@@ -34,6 +34,10 @@ interface GameRepository {
         listId: String,
         gameId: String
     ): SuccessDto
+
+    suspend fun getGameByName(
+        name: String
+    ): ResponseDto
 //    fun getListsFromDB(): Flow<List<Game>>
 //
 //    suspend fun getGameByIdFromDB(idKey: Int): Game?

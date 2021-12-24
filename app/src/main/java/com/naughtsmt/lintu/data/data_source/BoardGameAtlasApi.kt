@@ -4,8 +4,8 @@ import com.naughtsmt.lintu.common.Constants.CLIENT_ID
 import com.naughtsmt.lintu.common.Constants.USERNAME
 import com.naughtsmt.lintu.data.data_source.dto.ResponseDto
 import com.naughtsmt.lintu.data.data_source.dto_access_token.AccessTokenDto
-import com.naughtsmt.lintu.data.data_source.lists_dto.SuccessDto
 import com.naughtsmt.lintu.data.data_source.lists_dto.ListsDto
+import com.naughtsmt.lintu.data.data_source.lists_dto.SuccessDto
 import com.naughtsmt.lintu.data.data_source.new_list_dto.NewListDto
 import retrofit2.http.*
 
@@ -46,6 +46,14 @@ interface BoardGameAtlasApi {
         client_id: String = CLIENT_ID
     ): ResponseDto
 
+    @GET("api/search")
+    suspend fun getGameByName(
+        @Query("name")
+        name: String,
+        @Query("client_id")
+        client_id: String = CLIENT_ID
+    ): ResponseDto
+
     @FormUrlEncoded
     @POST("oauth/token")
     suspend fun getAccessToken(
@@ -66,7 +74,7 @@ interface BoardGameAtlasApi {
         client_id: String = CLIENT_ID
     ): NewListDto
 
-        @FormUrlEncoded
+    @FormUrlEncoded
     @HTTP(method = "DELETE", path = "api/lists", hasBody = true)
     suspend fun deleteList(
         @Header("Authorization") auth_token: String,
@@ -74,7 +82,7 @@ interface BoardGameAtlasApi {
         list_id: String,
         @Query("client_id")
         client_id: String = CLIENT_ID
-        ): SuccessDto
+    ): SuccessDto
 
 
     @FormUrlEncoded

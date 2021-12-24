@@ -65,7 +65,7 @@ fun AuthProcessingScreen(
         textScale.animateTo(
             targetValue = 1f,
             animationSpec = tween(
-                durationMillis = 2000,
+                durationMillis = 1000,
                 easing = {
                     OvershootInterpolator(3f)
                         .getInterpolation(it)

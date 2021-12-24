@@ -7,8 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.common.Resource
-import com.naughtsmt.lintu.domain.use_case.add_game_to_list.AddGameToListUseCase
-import com.naughtsmt.lintu.domain.use_case.get_game.GetGameUseCase
+import com.naughtsmt.lintu.domain.use_case.get_game_by_id.GetGameByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -16,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GameDetailViewModel @Inject constructor(
-    private val getGameUseCase: GetGameUseCase,
+    private val getGameByIdUseCase: GetGameByIdUseCase,
 
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -32,7 +31,7 @@ class GameDetailViewModel @Inject constructor(
     }
 
     private fun getGameDetail(gameId: String) {
-        getGameUseCase(gameId).onEach { result ->
+        getGameByIdUseCase(gameId).onEach { result ->
             when (result) {
                 is Resource.Success -> {
                     _state.value = GameDetailState(game = result.data?.get(0))

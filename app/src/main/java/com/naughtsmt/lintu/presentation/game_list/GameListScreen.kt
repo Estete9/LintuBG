@@ -42,7 +42,7 @@ fun GameListScreen(
     }
 //mainViewModel.setCurrentScreen(Screens.GameListScreen)
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colors.primaryVariant)
     ) {

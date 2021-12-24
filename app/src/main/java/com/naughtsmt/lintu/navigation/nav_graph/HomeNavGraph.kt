@@ -67,7 +67,7 @@ fun NavGraphBuilder.homeNavGraph(
             GameDetailScreen(navController, modifier = modifier, mainViewModel = mainViewModel)
         }
         composable(route = Screens.NavBarScreens.ProfileScreen.route) {
-            ProfileScreen(/*mainViewModel = mainViewModel*/)
+            ProfileScreen(modifier = modifier/*mainViewModel = mainViewModel*/)
         }
     }
 
