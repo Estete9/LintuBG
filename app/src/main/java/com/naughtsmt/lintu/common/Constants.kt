@@ -10,6 +10,7 @@ object Constants {
     const val BASE_URL = "https://api.boardgameatlas.com/"
     const val PARAM_GAME_ID = "gameId"
     const val PARAM_SINGLE_LIST_ID = "singleListId"
+    const val PARAM_SEARCH_BY_NAME_LIST = "name"
     const val PARAM_CODE = "code"
     const val DEFAULT_IMAGE = R.drawable.lintu_logo
     const val CLIENT_ID = BuildConfig.CLIENT_ID

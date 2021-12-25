@@ -50,6 +50,8 @@ interface BoardGameAtlasApi {
     suspend fun getGameByName(
         @Query("name")
         name: String,
+        @Query("fuzzy_match")
+        fuzzy_match: Boolean = true,
         @Query("client_id")
         client_id: String = CLIENT_ID
     ): ResponseDto

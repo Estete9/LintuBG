@@ -66,9 +66,10 @@ fun TopBar(
     currentScreenRoute: String,
     toTopGames: () -> Unit,
     toAllGames: () -> Unit,
+//    getGameByName: () -> Unit,
     focusCleared: MutableState<Boolean>,
 //    localFocusManager: FocusManager,
-    viewModel: MainViewModel
+//    mainViewModel: MainViewModel
 ) {
     val searchBarShown = remember { mutableStateOf(false) }
     val searchGameText = remember { mutableStateOf("") }
@@ -192,6 +193,9 @@ fun TopBar(
                         focusCleared.value = !focusCleared.value
                         Log.d(tag, "5focus cleared is: ${focusCleared.value}")
                         Log.d(tag, "-------------------------")
+                        if (searchGameText.value.isNotBlank()) {
+                            navController.navigate(Screens.SingleListScreen.route + "?&name=${searchGameText.value}")
+                        }
                     },
                     contentDescription = "Search or Send Icon"
                 )

@@ -1,11 +1,8 @@
 package com.naughtsmt.lintu.navigation.nav_graph
 
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
+import androidx.navigation.*
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
-import androidx.navigation.navigation
 import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.common.Constants.ALL_GAMES_LIST_ID
 import com.naughtsmt.lintu.presentation.Screens
@@ -51,8 +48,17 @@ fun NavGraphBuilder.homeNavGraph(
             )
         }
         composable(
-            route = Screens.SingleListScreen.route + "?&singleListId={singleListId}",
-            arguments = listOf(navArgument("singleListId"){defaultValue = ALL_GAMES_LIST_ID})
+            route = Screens.SingleListScreen.route + "?&singleListId={singleListId}&name={name}",
+            arguments = listOf(navArgument("singleListId") {
+                nullable = true
+                defaultValue = null
+                type = NavType.StringType
+            },
+                navArgument("name") {
+                    nullable = true
+                    defaultValue = null
+                    type = NavType.StringType
+                })
         ) {
             SingleListScreen(
                 navController,

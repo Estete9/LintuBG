@@ -49,7 +49,8 @@ fun AppScaffold(
                 currentScreenRoute = it,
                 toTopGames = { viewModel.getTopGamesList() },
                 toAllGames = { viewModel.getGamesFromMainList(ALL_GAMES_LIST_ID) },
-                viewModel = mainViewModel,
+//                getGameByName = { mainViewModel.searchGameByName() },
+//                mainViewModel = mainViewModel,
                 focusCleared = isFocusedCleared
             )
         }
