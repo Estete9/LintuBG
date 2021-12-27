@@ -14,6 +14,8 @@ import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,6 +43,8 @@ fun ListsScreen(
     val scope = rememberCoroutineScope()
     val isEditTextShown = remember { mutableStateOf(false) }
     val newListName = remember { mutableStateOf("") }
+
+    val focusRequester = remember { FocusRequester() }
 
 //    val rememberedNewListState by rememberUpdatedState(newValue = newListState)
 //    val rememberedDeleteListState by rememberUpdatedState(newValue = deleteListState)
@@ -147,7 +151,12 @@ fun ListsScreen(
                             modifier = Modifier
                                 .fillMaxWidth(2 / 3f)
                                 .align(CenterVertically)
+                                .focusRequester(focusRequester)
                         )
+                        DisposableEffect(key1 = Unit) {
+                            focusRequester.requestFocus()
+                            onDispose { }
+                        }
                         Button(
                             onClick = {
                                 if (newListName.value.isNotEmpty()) {

@@ -10,6 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.R
 import com.naughtsmt.lintu.common.Constants.ALL_GAMES_LIST_ID
+import com.naughtsmt.lintu.common.Constants.TOP_BAR_JUEGOS
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_list.components.GameListItem
 
@@ -32,13 +34,16 @@ fun GameListScreen(
     modifier: Modifier,
     navController: NavController,
     viewModel: GameListViewModel,
+    currentScreen: MutableState<String>
 //    mainViewModel: MainViewModel,
 ) {
     val state = viewModel.state.value
-    val rememberedState = rememberUpdatedState(newValue = state)
+//    val rememberedState = rememberUpdatedState(newValue = state)
 
-    LaunchedEffect(key1 = rememberedState) {
-        viewModel.getGamesFromMainList(ALL_GAMES_LIST_ID)
+    LaunchedEffect(key1 = Unit) {
+        if (currentScreen.value == TOP_BAR_JUEGOS) {
+            viewModel.getGamesFromMainList(ALL_GAMES_LIST_ID)
+        }
     }
 //mainViewModel.setCurrentScreen(Screens.GameListScreen)
     Box(

@@ -5,6 +5,8 @@ import com.naughtsmt.lintu.R
 
 object Constants {
     const val AUTH_ROUTE = "auth_route"
+    const val TOP_BAR_JUEGOS = "Tus Juegos"
+    const val TOP_BAR_RANKING = "Top Ranking"
     const val HOME_ROUTE = "home_route"
     const val ROOT_ROUTE = "root_route"
     const val BASE_URL = "https://api.boardgameatlas.com/"

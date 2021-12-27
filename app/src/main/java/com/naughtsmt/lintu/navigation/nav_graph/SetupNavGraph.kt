@@ -1,6 +1,7 @@
 package com.naughtsmt.lintu.navigation.nav_graph
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -32,7 +33,8 @@ fun SetupNavGraph(
     modifier: Modifier,
     viewModel: GameListViewModel,
     listsViewModel: ListsViewModel,
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    currentScreen: MutableState<String>
 ) {
 
     NavHost(
@@ -49,7 +51,8 @@ fun SetupNavGraph(
             modifier = modifier,
             viewModel = viewModel,
             listsViewModel = listsViewModel,
-            mainViewModel = mainViewModel
+            mainViewModel = mainViewModel,
+            currentScreen= currentScreen
         )
     }
 }

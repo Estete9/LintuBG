@@ -14,6 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.naughtsmt.lintu.common.Constants.ALL_GAMES_LIST_ID
+import com.naughtsmt.lintu.common.Constants.TOP_BAR_JUEGOS
 import com.naughtsmt.lintu.navigation.nav_graph.SetupNavGraph
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_list.GameListViewModel
@@ -34,13 +35,18 @@ fun AppScaffold(
     val currentDestination = navBackStackEntry?.destination
     val isDropDownMenuShowed = remember { mutableStateOf(false) }
     val isFocusedCleared = remember { mutableStateOf(true) }
+    val currentScreen = remember { mutableStateOf(TOP_BAR_JUEGOS) }
 
     val floatingActionButton: @Composable () -> Unit = {
         Fab(
             showDropDownMenu = { isDropDownMenuShowed.value = !isDropDownMenuShowed.value })
     }
     val bottomBar: @Composable () -> Unit = {
-        BottomBar(navController = navController, screens = screensFromBottomNav)
+        BottomBar(
+            navController = navController,
+            screens = screensFromBottomNav,
+            isInTopBarScreen = currentScreen
+        )
     }
     val topBar: @Composable () -> Unit = {
         currentDestination?.route?.let {
@@ -51,7 +57,8 @@ fun AppScaffold(
                 toAllGames = { viewModel.getGamesFromMainList(ALL_GAMES_LIST_ID) },
 //                getGameByName = { mainViewModel.searchGameByName() },
 //                mainViewModel = mainViewModel,
-                focusCleared = isFocusedCleared
+                focusCleared = isFocusedCleared,
+                currentScreen = currentScreen
             )
         }
     }
@@ -102,9 +109,11 @@ fun AppScaffold(
                 },
             viewModel = viewModel,
             listsViewModel = listsViewModel,
-            mainViewModel = mainViewModel
+            mainViewModel = mainViewModel,
+            currentScreen = currentScreen
         )
         if (isDropDownMenuShowed.value) {
+
             DropDownMenu(
                 addGameToList = {
                     require(

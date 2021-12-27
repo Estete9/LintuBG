@@ -11,16 +11,19 @@ import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.Alignment.Companion.CenterStart
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.naughtsmt.lintu.common.Constants.ALL_GAMES_LIST_ID
+import com.naughtsmt.lintu.common.Constants.TOP_BAR_JUEGOS
+import com.naughtsmt.lintu.common.Constants.TOP_BAR_RANKING
 import com.naughtsmt.lintu.presentation.Screens
 
 val tag = "COMPONENT"
@@ -33,7 +36,11 @@ fun Fab(showDropDownMenu: () -> Unit) {
 }
 
 @Composable
-fun BottomBar(navController: NavController, screens: List<Screens.NavBarScreens>) {
+fun BottomBar(
+    navController: NavController,
+    screens: List<Screens.NavBarScreens>,
+    isInTopBarScreen: MutableState<String>
+) {
     BottomAppBar(
 //        cutoutShape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50))
     ) {
@@ -51,6 +58,7 @@ fun BottomBar(navController: NavController, screens: List<Screens.NavBarScreens>
                 label = { Text(text = screen.title) },
                 selected = currentDestination == screen,
                 onClick = {
+                    isInTopBarScreen.value = ""
                     navController.navigate(screen.route) {
                         popUpTo(navController.graph.findStartDestination().id)
 //                        launchSingleTop = true
@@ -68,6 +76,7 @@ fun TopBar(
     toAllGames: () -> Unit,
 //    getGameByName: () -> Unit,
     focusCleared: MutableState<Boolean>,
+    currentScreen: MutableState<String>
 //    localFocusManager: FocusManager,
 //    mainViewModel: MainViewModel
 ) {
@@ -93,7 +102,7 @@ fun TopBar(
             }
             if (searchBarShown.value) {
 //                if (!focusCleared) {
-                Box(modifier = Modifier.padding(2.dp)) {
+                Box {
 
                     TextField(
                         value = searchGameText.value,
@@ -103,8 +112,8 @@ fun TopBar(
                         onValueChange = { searchGameText.value = it },
                         modifier = Modifier
                             .fillMaxWidth(0.9f)
-                            .align(Center)
                             .focusRequester(focusRequester = focusRequester)
+                            .align(CenterStart)
                     )
                     DisposableEffect(key1 = Unit) {
                         focusRequester.requestFocus()
@@ -123,14 +132,20 @@ fun TopBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (!searchBarShown.value) {
-                    Text(text = "Tus juegos",
+                    Text(text = TOP_BAR_JUEGOS,
                         color = MaterialTheme.colors.primary,
-                        fontWeight = if (currentScreenRoute == Screens.GameListScreen.route + "?&listId=$ALL_GAMES_LIST_ID") {
+                        fontWeight = if (currentScreen.value == TOP_BAR_JUEGOS) {
                             FontWeight.Bold
                         } else {
                             FontWeight.Normal
                         },
+                        fontSize = if (currentScreen.value == TOP_BAR_JUEGOS) {
+                            18.sp
+                        } else {
+                            16.sp
+                        },
                         modifier = Modifier.clickable {
+                            currentScreen.value = TOP_BAR_JUEGOS
                             toAllGames()
                             navController.navigate(Screens.GameListScreen.route) /*{
                             launchSingleTop = true
@@ -148,14 +163,20 @@ fun TopBar(
 
                     Spacer(modifier = Modifier.padding(horizontal = 4.dp))
 
-                    Text(text = "Top Ranking",
+                    Text(text = TOP_BAR_RANKING,
                         color = MaterialTheme.colors.primary,
-                        fontWeight = if (currentScreenRoute == Screens.GameListScreen.route) {
+                        fontWeight = if (currentScreen.value == TOP_BAR_RANKING) {
                             FontWeight.Bold
                         } else {
                             FontWeight.Normal
                         },
+                        fontSize = if (currentScreen.value == TOP_BAR_RANKING) {
+                            18.sp
+                        } else {
+                            16.sp
+                        },
                         modifier = Modifier.clickable {
+                            currentScreen.value = TOP_BAR_RANKING
                             toTopGames()
                             navController.navigate(Screens.GameListScreen.route)
                         })
@@ -194,7 +215,10 @@ fun TopBar(
                         Log.d(tag, "5focus cleared is: ${focusCleared.value}")
                         Log.d(tag, "-------------------------")
                         if (searchGameText.value.isNotBlank()) {
-                            navController.navigate(Screens.SingleListScreen.route + "?&name=${searchGameText.value}")
+                            navController
+                                .navigate(Screens.SingleListScreen.route + "?&name=${searchGameText.value}")
+                            searchGameText.value = ""
+                            icon.value = Icons.Filled.Search
                         }
                     },
                     contentDescription = "Search or Send Icon"
