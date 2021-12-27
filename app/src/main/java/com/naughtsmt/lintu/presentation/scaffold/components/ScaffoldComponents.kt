@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.presentation.scaffold
+package com.naughtsmt.lintu.presentation.scaffold.components
 
 import android.util.Log
 import androidx.compose.foundation.clickable

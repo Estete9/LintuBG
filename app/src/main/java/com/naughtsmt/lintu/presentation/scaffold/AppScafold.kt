@@ -20,6 +20,9 @@ import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_list.GameListViewModel
 import com.naughtsmt.lintu.presentation.general_components.DropDownMenu
 import com.naughtsmt.lintu.presentation.lists.ListsViewModel
+import com.naughtsmt.lintu.presentation.scaffold.components.BottomBar
+import com.naughtsmt.lintu.presentation.scaffold.components.Fab
+import com.naughtsmt.lintu.presentation.scaffold.components.TopBar
 import com.naughtsmt.lintu.presentation.screensFromBottomNav
 
 //val tag = "APP_SCAFFOLD"

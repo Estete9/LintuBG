@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.Start
 import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
@@ -112,12 +113,19 @@ fun GameListItem(
                                 fontStyle = FontStyle.Italic
                             )
                             Text(
+                                modifier = Modifier.align(Start),
+                                text = "Descripción:",
+                                textAlign = TextAlign.Justify,
+                                style = MaterialTheme.typography.subtitle1
+                            )
+                            Text(
                                 modifier = Modifier.align(CenterHorizontally),
-                                text = "Descripción: ${game.description_preview}",
-                                maxLines = 3,
+                                text = game.description_preview,
+                                maxLines = 2,
                                 overflow = TextOverflow.Ellipsis,
                                 textAlign = TextAlign.Justify,
                                 style = MaterialTheme.typography.body2
+
                             )
 
                         }

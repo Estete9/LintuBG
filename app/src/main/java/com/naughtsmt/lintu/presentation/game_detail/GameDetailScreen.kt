@@ -18,6 +18,7 @@ import com.google.accompanist.flowlayout.FlowRow
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_detail.components.GameCard
 import com.naughtsmt.lintu.presentation.game_detail.components.Tag
+import com.naughtsmt.lintu.presentation.general_components.ExpandableText
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 @Composable
@@ -94,10 +95,12 @@ fun GameDetailScreen(
                 }
                 item {
                     Spacer(modifier = Modifier.height(20.dp))
-                    Text(
+                    ExpandableText(
                         text = game.description_preview,
-                        style = MaterialTheme.typography.body1,
-                        textAlign = TextAlign.Justify
+                        modifier = Modifier,
+                        minimizedMaxLines = 4
+//                        style = MaterialTheme.typography.body1,
+//                        textAlign = TextAlign.Justify
                     )
                     Spacer(modifier = Modifier.height(15.dp))
                     Text(
