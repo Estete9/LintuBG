@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Arrangement.Absolute.SpaceBetween
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -16,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -151,7 +154,15 @@ fun ListsScreen(
                             modifier = Modifier
                                 .fillMaxWidth(2 / 3f)
                                 .align(CenterVertically)
-                                .focusRequester(focusRequester)
+                                .focusRequester(focusRequester),
+                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                            keyboardActions = KeyboardActions(
+                                onDone = {
+                                    listsViewModel.makeNewList(newListName.value)
+                                    isEditTextShown.value = false
+                                    newListName.value = ""
+                                }
+                            )
                         )
                         DisposableEffect(key1 = Unit) {
                             focusRequester.requestFocus()
