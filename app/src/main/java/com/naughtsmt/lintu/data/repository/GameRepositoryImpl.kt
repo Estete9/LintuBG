@@ -43,11 +43,11 @@ class GameRepositoryImpl @Inject constructor(
         return api.createList(authToken, name)
     }
 
-    override suspend fun deleteListFromApi(authToken: String, list_id: String): SuccessDto {
-        return api.deleteList(authToken, list_id)
+    override suspend fun deleteListFromApi(authToken: String, listId: String): SuccessDto {
+        return api.deleteList(authToken, listId)
     }
 
-    override suspend fun addGameToList(
+    override suspend fun addGameToListInApi(
         authToken: String,
         listId: String,
         gameId: String
@@ -55,8 +55,16 @@ class GameRepositoryImpl @Inject constructor(
         return api.addGameToList(authToken, listId, gameId)
     }
 
-    override suspend fun getGameByName(name: String): ResponseDto {
+    override suspend fun getGameByNameFromApi(name: String): ResponseDto {
         return api.getGameByName(name)
+    }
+
+    override suspend fun deleteGameFromListApi(
+        authToken: String,
+        listId: String,
+        gameId: String
+    ): SuccessDto {
+        return api.deleteGameFromList(authToken, listId, gameId)
     }
 
 //    override fun getListsFromDB(): Flow<List<Game>> {

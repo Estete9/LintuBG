@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.R
+import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.presentation.Screens
-import kotlinx.coroutines.delay
 
 val tag = "AuthScreen"
 
@@ -54,7 +54,7 @@ fun AuthProcessingScreen(
                 })
         )
 //        delay(700L)
-        navController.navigate(Screens.GameListScreen.route) {
+        navController.navigate(Screens.SingleListScreen.route /*+ "?&singleListId=${Constants.ALL_GAMES_LIST_ID}"*/) {
             navController.popBackStack()
 //            launchSingleTop = true
         }

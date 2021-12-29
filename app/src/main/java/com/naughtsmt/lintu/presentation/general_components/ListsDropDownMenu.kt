@@ -21,7 +21,7 @@ import com.naughtsmt.lintu.presentation.lists.components.Lists.lists
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 @Composable
-fun DropDownMenu(
+fun ListsDropDownMenu(
     list: List<Lists> = lists.value,
     addGameToList: () -> Unit,
     mainViewModel: MainViewModel
@@ -80,7 +80,7 @@ fun DropDownMenu(
                             modifier = Modifier.width(with(LocalDensity.current) { textFieldSize.width.toDp() })
                         ) {
                             list.forEach { list ->
-                                mainViewModel.currentListId.value = list.id
+                                mainViewModel.currentSelectedListId.value = list.id
                                 DropdownMenuItem(onClick = {
                                     selectedItem = list.name
                                     expanded = false

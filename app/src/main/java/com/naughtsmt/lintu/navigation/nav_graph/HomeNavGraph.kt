@@ -5,21 +5,20 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.*
 import androidx.navigation.compose.composable
 import com.naughtsmt.lintu.common.Constants
-import com.naughtsmt.lintu.common.Constants.ALL_GAMES_LIST_ID
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_detail.GameDetailScreen
-import com.naughtsmt.lintu.presentation.game_list.GameListScreen
-import com.naughtsmt.lintu.presentation.game_list.GameListViewModel
+//import com.naughtsmt.lintu.presentation.game_list.GameListScreen
 import com.naughtsmt.lintu.presentation.lists.ListsScreen
 import com.naughtsmt.lintu.presentation.lists.ListsViewModel
 import com.naughtsmt.lintu.presentation.profile.ProfileScreen
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 import com.naughtsmt.lintu.presentation.single_list.SingleListScreen
+import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController,
     modifier: Modifier,
-    viewModel: GameListViewModel,
+    viewModel: SingleListViewModel,
     listsViewModel: ListsViewModel,
     mainViewModel: MainViewModel,
     currentScreen: MutableState<String>
@@ -39,17 +38,18 @@ fun NavGraphBuilder.homeNavGraph(
 //                mainViewModel = mainViewModel
             )
         }
-        composable(
-            route = Screens.GameListScreen.route + "?&listId={listId}",
-            arguments = listOf(navArgument("listId") { defaultValue = ALL_GAMES_LIST_ID })
-        ) { /*backStackEntry ->*/
-            GameListScreen(
-                navController = navController,
-                modifier = modifier,
-                currentScreen= currentScreen,
-                viewModel = viewModel/*, mainViewModel = mainViewModel*/
-            )
-        }
+//        composable(
+//            route = Screens.GameListScreen.route + "?&listId={listId}",
+//            arguments = listOf(navArgument("listId") { defaultValue = ALL_GAMES_LIST_ID })
+//        ) { /*backStackEntry ->*/
+//            GameListScreen(
+//                navController = navController,
+//                modifier = modifier,
+//                currentScreen = currentScreen,
+//                viewModel = viewModel,
+//                mainViewModel = mainViewModel
+//            )
+//        }
         composable(
             route = Screens.SingleListScreen.route + "?&singleListId={singleListId}&name={name}",
             arguments = listOf(navArgument("singleListId") {
@@ -66,7 +66,9 @@ fun NavGraphBuilder.homeNavGraph(
             SingleListScreen(
                 navController,
                 modifier = modifier,
-//                viewModel = viewModel/*, mainViewModel = mainViewModel*/
+                mainViewModel = mainViewModel,
+                currentScreen = currentScreen
+//                viewModel = viewModel/*, */
             )
         }
 

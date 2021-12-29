@@ -71,19 +71,14 @@ fun BottomBar(
 @Composable
 fun TopBar(
     navController: NavController,
-    currentScreenRoute: String,
     toTopGames: () -> Unit,
     toAllGames: () -> Unit,
-//    getGameByName: () -> Unit,
     focusCleared: MutableState<Boolean>,
     currentScreen: MutableState<String>
-//    localFocusManager: FocusManager,
-//    mainViewModel: MainViewModel
 ) {
     val searchBarShown = remember { mutableStateOf(false) }
     val searchGameText = remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
-//    val localFocusManager = LocalFocusManager.current
     val icon = remember { mutableStateOf(Icons.Filled.Search) }
     Log.d(tag, "1focus cleared is: ${focusCleared.value}")
     TopAppBar(backgroundColor = Color.Transparent) {
@@ -147,7 +142,7 @@ fun TopBar(
                         modifier = Modifier.clickable {
                             currentScreen.value = TOP_BAR_JUEGOS
                             toAllGames()
-                            navController.navigate(Screens.GameListScreen.route) /*{
+                            navController.navigate(Screens.SingleListScreen.route) /*{
                             launchSingleTop = true
                         }*/
                         })
@@ -178,7 +173,7 @@ fun TopBar(
                         modifier = Modifier.clickable {
                             currentScreen.value = TOP_BAR_RANKING
                             toTopGames()
-                            navController.navigate(Screens.GameListScreen.route)
+                            navController.navigate(Screens.SingleListScreen.route)
                         })
                 }
 

@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.Start
 import androidx.compose.ui.Alignment.Companion.TopCenter
+import androidx.compose.ui.Alignment.Companion.TopEnd
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
@@ -22,12 +23,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.naughtsmt.lintu.common.Constants.DEFAULT_IMAGE
 import com.naughtsmt.lintu.data.repository.model.Game
+import com.naughtsmt.lintu.presentation.lists.components.ItemDropDownMenu
 import com.naughtsmt.lintu.presentation.util.loadPicture
 
 @Composable
 fun GameListItem(
     game: Game,
-    onItemClicked: (Game) -> Unit
+    onItemClicked: (Game) -> Unit,
+    onDeleteClicked: (Game) -> Unit
 ) {
     Box(
         Modifier
@@ -48,8 +51,10 @@ fun GameListItem(
                 Modifier
                     .fillMaxSize()
             ) {
-                Column( modifier = Modifier.padding(8.dp),
-                    horizontalAlignment = CenterHorizontally) {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                    horizontalAlignment = CenterHorizontally
+                ) {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
                         text = game.name,
@@ -133,5 +138,19 @@ fun GameListItem(
                 }
             }
         }
+        Box(
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp), contentAlignment = TopEnd
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.Top
+            ) {
+                ItemDropDownMenu(game, onDeleteClicked)
+            }
+        }
+
     }
 }

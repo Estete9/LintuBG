@@ -16,7 +16,7 @@ class AddGameToListUseCase @Inject constructor(
     operator fun invoke(listId: String, gameId: String): Flow<Resource<SuccessDto>> = flow {
         try {
             emit(Resource.Loading<SuccessDto>())
-            val addGameResponse = repository.addGameToList(
+            val addGameResponse = repository.addGameToListInApi(
                 "Bearer ${AuthData.authToken.value?.access_token.toString()}",
                 listId,
                 gameId

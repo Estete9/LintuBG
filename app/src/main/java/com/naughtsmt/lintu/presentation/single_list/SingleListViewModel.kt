@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.common.Resource
 import com.naughtsmt.lintu.domain.use_case.get_game_by_name.GetGameByNameUseCase
+import com.naughtsmt.lintu.domain.use_case.get_game_list.GetTopGamesListUseCase
 import com.naughtsmt.lintu.domain.use_case.get_single_list.GetSingleListUseCase
 import com.naughtsmt.lintu.presentation.game_list.GameListState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,10 +20,12 @@ import javax.inject.Inject
 class SingleListViewModel @Inject constructor(
     val getSingleListUseCase: GetSingleListUseCase,
     val getGameByNameUseCase: GetGameByNameUseCase,
+    val getTopGamesListUseCase: GetTopGamesListUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _state = mutableStateOf(GameListState())
     val state: State<GameListState> = _state
+
 
     //    TODO find a way to pass the list id
     init {
@@ -54,7 +57,7 @@ class SingleListViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun getGameByName(name: String) {
+    private fun getGameByName(name: String) {
         getGameByNameUseCase(name).onEach { result ->
             when (result) {
                 is Resource.Success -> {
@@ -73,4 +76,42 @@ class SingleListViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+    fun getGamesFromMainList(listId: String) {
+        getSingleListUseCase(listId).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _state.value = GameListState(games = result.data ?: emptyList())
+                }
+                is Resource.Loading -> {
+                    _state.value = GameListState(isLoading = true)
+                }
+                is Resource.Error -> {
+                    _state.value =
+                        GameListState(error = result.message ?: "An unexpected error occurred")
+                }
+            }
+
+        }.launchIn(viewModelScope)
+
+    }
+
+    fun getTopGamesList() {
+        getTopGamesListUseCase().onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _state.value = GameListState(games = result.data ?: emptyList())
+
+                }
+                is Resource.Loading -> {
+                    _state.value = GameListState(isLoading = true)
+                }
+                is Resource.Error -> {
+                    _state.value =
+                        GameListState(error = result.message ?: "An unexpected error occurred")
+                }
+
+            }
+
+        }.launchIn(viewModelScope)
+    }
 }

@@ -1,6 +1,6 @@
-package com.naughtsmt.lintu.domain.use_case.delete_list
+package com.naughtsmt.lintu.domain.use_case.delete_game_from_list
 
-import com.naughtsmt.lintu.common.AuthData.authToken
+import com.naughtsmt.lintu.common.AuthData
 import com.naughtsmt.lintu.common.Resource
 import com.naughtsmt.lintu.data.data_source.lists_dto.SuccessDto
 import com.naughtsmt.lintu.domain.repository.GameRepository
@@ -10,17 +10,18 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class DeleteListUseCase @Inject constructor(
-    private val repository: GameRepository
+class DeleteGameFromListUseCase @Inject constructor(
+    val repository: GameRepository
 ) {
-    operator fun invoke(listId: String): Flow<Resource<SuccessDto>> = flow {
+    operator fun invoke(listId: String, gameId: String): Flow<Resource<SuccessDto>> = flow {
         try {
             emit(Resource.Loading<SuccessDto>())
-            val deleteResponse = repository.deleteListFromApi(
-                "Bearer ${authToken.value?.access_token.toString()}",
-                listId = listId
+            val response = repository.deleteGameFromListApi(
+                "Bearer ${AuthData.authToken.value?.access_token.toString()}",
+                listId,
+                gameId
             )
-            emit(Resource.Success<SuccessDto>(deleteResponse))
+            emit(Resource.Success<SuccessDto>(response))
         } catch (e: HttpException) {
             emit(
                 Resource.Error<SuccessDto>(
@@ -30,6 +31,6 @@ class DeleteListUseCase @Inject constructor(
         } catch (e: IOException) {
             emit(Resource.Error<SuccessDto>("Couldn't reach server. Check your internet connection"))
         }
+
     }
 }
-

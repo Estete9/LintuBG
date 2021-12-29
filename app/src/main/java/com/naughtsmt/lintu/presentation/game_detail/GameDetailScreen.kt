@@ -34,7 +34,7 @@ fun GameDetailScreen(
     Box(modifier = modifier.fillMaxSize()) {
 
         state.game?.let { game ->
-            mainViewModel.currentGameId.value = game.id
+            mainViewModel.currentGameDetailId.value = game.id
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()

@@ -26,18 +26,24 @@ interface GameRepository {
 
     suspend fun deleteListFromApi(
         authToken: String,
-        list_id: String
+        listId: String
     ): SuccessDto
 
-    suspend fun addGameToList(
+    suspend fun addGameToListInApi(
         authToken: String,
         listId: String,
         gameId: String
     ): SuccessDto
 
-    suspend fun getGameByName(
+    suspend fun getGameByNameFromApi(
         name: String
     ): ResponseDto
+
+    suspend fun deleteGameFromListApi(
+        authToken: String,
+        listId: String,
+        gameId: String
+    ): SuccessDto
 //    fun getListsFromDB(): Flow<List<Game>>
 //
 //    suspend fun getGameByIdFromDB(idKey: Int): Game?

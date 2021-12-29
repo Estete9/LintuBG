@@ -17,19 +17,20 @@ import com.naughtsmt.lintu.common.Constants.ALL_GAMES_LIST_ID
 import com.naughtsmt.lintu.common.Constants.TOP_BAR_JUEGOS
 import com.naughtsmt.lintu.navigation.nav_graph.SetupNavGraph
 import com.naughtsmt.lintu.presentation.Screens
-import com.naughtsmt.lintu.presentation.game_list.GameListViewModel
-import com.naughtsmt.lintu.presentation.general_components.DropDownMenu
+import com.naughtsmt.lintu.presentation.general_components.ListsDropDownMenu
 import com.naughtsmt.lintu.presentation.lists.ListsViewModel
 import com.naughtsmt.lintu.presentation.scaffold.components.BottomBar
 import com.naughtsmt.lintu.presentation.scaffold.components.Fab
 import com.naughtsmt.lintu.presentation.scaffold.components.TopBar
 import com.naughtsmt.lintu.presentation.screensFromBottomNav
+import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
 
 //val tag = "APP_SCAFFOLD"
 
 @Composable
 fun AppScaffold(
-    viewModel: GameListViewModel = hiltViewModel(),
+//    viewModel: GameListViewModel = hiltViewModel(),
+    viewModel: SingleListViewModel = hiltViewModel(),
     listsViewModel: ListsViewModel = hiltViewModel(),
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
@@ -55,11 +56,8 @@ fun AppScaffold(
         currentDestination?.route?.let {
             TopBar(
                 navController = navController,
-                currentScreenRoute = it,
                 toTopGames = { viewModel.getTopGamesList() },
                 toAllGames = { viewModel.getGamesFromMainList(ALL_GAMES_LIST_ID) },
-//                getGameByName = { mainViewModel.searchGameByName() },
-//                mainViewModel = mainViewModel,
                 focusCleared = isFocusedCleared,
                 currentScreen = currentScreen
             )
@@ -117,17 +115,17 @@ fun AppScaffold(
         )
         if (isDropDownMenuShowed.value) {
 
-            DropDownMenu(
+            ListsDropDownMenu(
                 addGameToList = {
                     require(
-                        mainViewModel.currentListId.value.isNotBlank() &&
-                                mainViewModel.currentGameId.value.isNotBlank()
+                        mainViewModel.currentSelectedListId.value.isNotBlank() &&
+                                mainViewModel.currentGameDetailId.value.isNotBlank()
                     ) {
                         "list and game must be entered"
                     }
                     mainViewModel.addGameToList(
-                        mainViewModel.currentListId.value,
-                        mainViewModel.currentGameId.value
+                        mainViewModel.currentSelectedListId.value,
+                        mainViewModel.currentGameDetailId.value
                     )
                     isDropDownMenuShowed.value = false
                 },

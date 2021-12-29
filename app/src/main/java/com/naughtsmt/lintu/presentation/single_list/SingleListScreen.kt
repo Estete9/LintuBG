@@ -10,7 +10,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,21 +28,30 @@ import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_list.GameListViewModel
 import com.naughtsmt.lintu.presentation.game_list.components.GameListItem
+import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 
 @Composable
 fun SingleListScreen(
     navController: NavController,
-    viewModel: SingleListViewModel = hiltViewModel(),
-//    mainViewModel: MainViewModel,
-    modifier: Modifier
+    singleListViewModel: SingleListViewModel = hiltViewModel(),
+    topBarViewModel: GameListViewModel = hiltViewModel(),
+    mainViewModel: MainViewModel,
+    modifier: Modifier,
+    currentScreen: MutableState<String>,
 ) {
-    val state = viewModel.state.value
-    val rememberedState = rememberUpdatedState(newValue = state)
-//    mainViewModel.setCurrentScreen(Screens.SingleListScreen)
-//    LaunchedEffect(key1 = rememberedState) {
-//        viewModel.getGamesFromMainList(Constants.ALL_GAMES_LIST_ID)
-//    }
+    val singleListState = singleListViewModel.state.value
+    val games = remember { singleListState.games.map { it } }
+
+    LaunchedEffect(key1 = Unit) {
+        if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
+            singleListViewModel.getGamesFromMainList(Constants.ALL_GAMES_LIST_ID)
+        }
+        if (currentScreen.value == Constants.TOP_BAR_RANKING) {
+            singleListViewModel.getTopGamesList()
+        }
+    }
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -84,19 +94,21 @@ fun SingleListScreen(
                 Spacer(modifier = Modifier.height(20.dp))
             }
 
-            items(state.games) { game ->
+            items(singleListState.games) { game ->
                 GameListItem(
                     game = game,
                     onItemClicked = {
                         navController.navigate(Screens.GameDetailScreen.route + "&${game.id}")
-                    }
-                )
+                    },
+                    onDeleteClicked = { })
 
             }
+
         }
-        if (state.error.isNotBlank()) {
+
+        if (singleListState.error.isNotBlank()) {
             Text(
-                text = state.error,
+                text = singleListState.error,
                 color = MaterialTheme.colors.error,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
@@ -106,7 +118,7 @@ fun SingleListScreen(
             )
         }
 
-        if (state.isLoading) {
+        if (singleListState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }

@@ -97,4 +97,16 @@ interface BoardGameAtlasApi {
         client_id: String = CLIENT_ID
 
     ): SuccessDto
+
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "api/lists/item", hasBody = true)
+    suspend fun deleteGameFromList(
+        @Header("Authorization") auth_token: String,
+        @Field("list_id")
+        list_id: String,
+        @Field("game_id")
+        game_id: String,
+        @Query("client_id")
+        client_id: String = CLIENT_ID
+    ): SuccessDto
 }

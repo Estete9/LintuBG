@@ -25,42 +25,42 @@ class GameListViewModel @Inject constructor(
 //        getGamesFromMainList(ALL_GAMES_LIST_ID)
 //    }
 
-    fun getGamesFromMainList(listId: String) {
-        getSingleListUseCase(listId).onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-                    _state.value = GameListState(games = result.data ?: emptyList())
-                }
-                is Resource.Loading -> {
-                    _state.value = GameListState(isLoading = true)
-                }
-                is Resource.Error -> {
-                    _state.value =
-                        GameListState(error = result.message ?: "An unexpected error occurred")
-                }
-            }
-
-        }.launchIn(viewModelScope)
-
-    }
-
-    fun getTopGamesList() {
-        getTopGamesListUseCase().onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-                    _state.value = GameListState(games = result.data ?: emptyList())
-
-                }
-                is Resource.Loading -> {
-                    _state.value = GameListState(isLoading = true)
-                }
-                is Resource.Error -> {
-                    _state.value =
-                        GameListState(error = result.message ?: "An unexpected error occurred")
-                }
-
-            }
-
-        }.launchIn(viewModelScope)
-    }
+//    fun getGamesFromMainList(listId: String) {
+//        getSingleListUseCase(listId).onEach { result ->
+//            when (result) {
+//                is Resource.Success -> {
+//                    _state.value = GameListState(games = result.data ?: emptyList())
+//                }
+//                is Resource.Loading -> {
+//                    _state.value = GameListState(isLoading = true)
+//                }
+//                is Resource.Error -> {
+//                    _state.value =
+//                        GameListState(error = result.message ?: "An unexpected error occurred")
+//                }
+//            }
+//
+//        }.launchIn(viewModelScope)
+//
+//    }
+//
+//    fun getTopGamesList() {
+//        getTopGamesListUseCase().onEach { result ->
+//            when (result) {
+//                is Resource.Success -> {
+//                    _state.value = GameListState(games = result.data ?: emptyList())
+//
+//                }
+//                is Resource.Loading -> {
+//                    _state.value = GameListState(isLoading = true)
+//                }
+//                is Resource.Error -> {
+//                    _state.value =
+//                        GameListState(error = result.message ?: "An unexpected error occurred")
+//                }
+//
+//            }
+//
+//        }.launchIn(viewModelScope)
+//    }
 }
