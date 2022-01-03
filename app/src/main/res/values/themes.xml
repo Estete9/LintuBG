@@ -25,6 +25,6 @@
 
     <style name="splashScreenTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_image</item>
-        <item name="android:statusBarColor">@color/lintu_main</item>
+        <item name="android:statusBarColor">@color/lintu_primary</item>
     </style>
 </resources>

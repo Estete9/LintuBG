@@ -80,8 +80,8 @@ fun ListsDropDownMenu(
                             modifier = Modifier.width(with(LocalDensity.current) { textFieldSize.width.toDp() })
                         ) {
                             list.forEach { list ->
-                                mainViewModel.currentSelectedListId.value = list.id
                                 DropdownMenuItem(onClick = {
+                                mainViewModel.currentSelectedListId.value = list.id
                                     selectedItem = list.name
                                     expanded = false
                                 }) {

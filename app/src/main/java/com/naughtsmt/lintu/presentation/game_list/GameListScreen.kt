@@ -27,7 +27,7 @@ package com.naughtsmt.lintu.presentation.game_list
 //import com.naughtsmt.lintu.common.Constants.ALL_GAMES_LIST_ID
 //import com.naughtsmt.lintu.common.Constants.TOP_BAR_JUEGOS
 //import com.naughtsmt.lintu.presentation.Screens
-//import com.naughtsmt.lintu.presentation.game_list.components.GameListItem
+//import com.naughtsmt.lintu.presentation.single_list.GameListItem
 //import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 //
 //

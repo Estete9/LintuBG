@@ -25,7 +25,11 @@ fun ItemDropDownMenu(
         ) {
 
             IconButton(onClick = { expanded = !expanded }) {
-                Icon(imageVector = Icons.Filled.MoreHoriz, contentDescription = "Item options")
+                Icon(
+                    imageVector = Icons.Filled.MoreHoriz,
+                    contentDescription = "Item options",
+                    tint = MaterialTheme.colors.primary
+                )
             }
 
             DropdownMenu(

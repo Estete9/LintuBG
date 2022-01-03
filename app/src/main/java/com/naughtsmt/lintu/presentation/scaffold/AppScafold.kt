@@ -1,8 +1,11 @@
 package com.naughtsmt.lintu.presentation.scaffold
 
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -93,44 +96,47 @@ fun AppScaffold(
             if (isInGameDetail) {
                 floatingActionButton()
             }
-        },
+        }
 //        isFloatingActionButtonDocked = isInGameDetail,
 //        floatingActionButtonPosition = FabPosition.Center
 
     ) { innerPadding ->
-        SetupNavGraph(
-            navController = navController,
-            modifier = Modifier
-                .padding(innerPadding)
-                .pointerInput(Unit) {
-                    detectTapGestures(onTap = {
-                        localFocusManager.clearFocus()
-                        isFocusedCleared.value = true
-                    })
-                },
-            viewModel = viewModel,
-            listsViewModel = listsViewModel,
-            mainViewModel = mainViewModel,
-            currentScreen = currentScreen
-        )
-        if (isDropDownMenuShowed.value) {
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
 
-            ListsDropDownMenu(
-                addGameToList = {
-                    require(
-                        mainViewModel.currentSelectedListId.value.isNotBlank() &&
-                                mainViewModel.currentGameDetailId.value.isNotBlank()
-                    ) {
-                        "list and game must be entered"
-                    }
-                    mainViewModel.addGameToList(
-                        mainViewModel.currentSelectedListId.value,
-                        mainViewModel.currentGameDetailId.value
-                    )
-                    isDropDownMenuShowed.value = false
-                },
-                mainViewModel = mainViewModel
+            SetupNavGraph(
+                navController = navController,
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .pointerInput(Unit) {
+                        detectTapGestures(onTap = {
+                            localFocusManager.clearFocus()
+                            isFocusedCleared.value = true
+                        })
+                    },
+                viewModel = viewModel,
+                listsViewModel = listsViewModel,
+                mainViewModel = mainViewModel,
+                currentScreen = currentScreen
             )
+            if (isDropDownMenuShowed.value) {
+
+                ListsDropDownMenu(
+                    addGameToList = {
+                        require(
+                            mainViewModel.currentSelectedListId.value.isNotBlank() &&
+                                    mainViewModel.currentGameDetailId.value.isNotBlank()
+                        ) {
+                            "list and game must be entered"
+                        }
+                        mainViewModel.addGameToList(
+                            mainViewModel.currentSelectedListId.value,
+                            mainViewModel.currentGameDetailId.value
+                        )
+                        isDropDownMenuShowed.value = false
+                    },
+                    mainViewModel = mainViewModel
+                )
+            }
         }
     }
 }

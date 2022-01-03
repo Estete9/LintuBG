@@ -7,14 +7,21 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = LintuMainDark,
-    primaryVariant = LintuSecondaryLight,
-    secondary = Teal200
+    primary = LintuPrimary,
+    primaryVariant = LintuPrimaryVariant,
+    secondary = LintuSecondary,
+    onPrimary = LintuOnPrimary,
+    background = LintuBackground,
+    onBackground = LintuOnBackground,
+    onSecondary = LintuOnSecondary,
+    secondaryVariant = LintuSecondaryVariant,
+    surface = LintuSurfaceDark
+
 )
 
 private val LightColorPalette = lightColors(
-    primary = LintuMainDark,
-    primaryVariant = LintuSecondaryLight,
+    primary = LintuPrimary,
+    primaryVariant = LintuOnPrimary,
     secondary = Teal200
 
     /* Other default colors to override
@@ -29,14 +36,11 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun LintuTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+//    val colors =
 
     MaterialTheme(
-        colors = colors,
+//        colors = if (darkTheme) DarkColorPalette else LightColorPalette,
+        colors = DarkColorPalette,
         typography = Typography,
         shapes = Shapes,
         content = content

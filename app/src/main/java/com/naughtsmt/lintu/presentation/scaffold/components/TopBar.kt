@@ -36,7 +36,7 @@ fun TopBar(
     val focusRequester = remember { FocusRequester() }
     val icon = remember { mutableStateOf(Icons.Filled.Search) }
     Log.d(tag, "1focus cleared is: ${focusCleared.value}")
-    TopAppBar(backgroundColor = Color.Transparent) {
+    TopAppBar(backgroundColor = Color.Transparent, elevation = 0.dp) {
         Box(
             Modifier
                 .fillMaxWidth(), contentAlignment = Alignment.Center
@@ -188,6 +188,6 @@ fun TopBar(
                 )
             }
         }
-    }
 
+    }
 }
