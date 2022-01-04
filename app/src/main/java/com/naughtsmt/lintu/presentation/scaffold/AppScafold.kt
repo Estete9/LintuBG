@@ -22,10 +22,8 @@ import com.naughtsmt.lintu.navigation.nav_graph.SetupNavGraph
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.general_components.ListsDropDownMenu
 import com.naughtsmt.lintu.presentation.lists.ListsViewModel
-import com.naughtsmt.lintu.presentation.scaffold.components.BottomBar
 import com.naughtsmt.lintu.presentation.scaffold.components.Fab
 import com.naughtsmt.lintu.presentation.scaffold.components.TopBar
-import com.naughtsmt.lintu.presentation.screensFromBottomNav
 import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
 
 //val tag = "APP_SCAFFOLD"
@@ -48,13 +46,13 @@ fun AppScaffold(
         Fab(
             showDropDownMenu = { isDropDownMenuShowed.value = !isDropDownMenuShowed.value })
     }
-    val bottomBar: @Composable () -> Unit = {
-        BottomBar(
-            navController = navController,
-            screens = screensFromBottomNav,
-            isInTopBarScreen = currentScreen
-        )
-    }
+//    val bottomBar: @Composable () -> Unit = {
+//        BottomBar(
+//            navController = navController,
+//            screens = screensFromBottomNav,
+//            isInTopBarScreen = currentScreen
+//        )
+//    }
     val topBar: @Composable () -> Unit = {
         currentDestination?.route?.let {
             TopBar(
@@ -74,15 +72,15 @@ fun AppScaffold(
     val localFocusManager = LocalFocusManager.current
     Scaffold(
 
-        bottomBar = {
-            if (!isInLogin) {
-                if (!isInWebView) {
-                    if (!isInAuth) {
-                        bottomBar()
-                    }
-                }
-            }
-        },
+//        bottomBar = {
+//            if (!isInLogin) {
+//                if (!isInWebView) {
+//                    if (!isInAuth) {
+//                        bottomBar()
+//                    }
+//                }
+//            }
+//        },
         topBar = {
             if (!isInLogin) {
                 if (!isInWebView) {
@@ -101,7 +99,7 @@ fun AppScaffold(
 //        floatingActionButtonPosition = FabPosition.Center
 
     ) { innerPadding ->
-        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
 
             SetupNavGraph(
                 navController = navController,
@@ -110,6 +108,7 @@ fun AppScaffold(
                     .pointerInput(Unit) {
                         detectTapGestures(onTap = {
                             localFocusManager.clearFocus()
+                            isDropDownMenuShowed.value = false
                             isFocusedCleared.value = true
                         })
                     },

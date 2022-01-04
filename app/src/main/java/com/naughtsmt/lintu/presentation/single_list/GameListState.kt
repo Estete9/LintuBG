@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.presentation.game_list
+package com.naughtsmt.lintu.presentation.single_list
 
 import com.naughtsmt.lintu.data.repository.model.Game
 

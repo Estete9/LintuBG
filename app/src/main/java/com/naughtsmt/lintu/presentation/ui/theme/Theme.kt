@@ -15,7 +15,7 @@ private val DarkColorPalette = darkColors(
     onBackground = LintuOnBackground,
     onSecondary = LintuOnSecondary,
     secondaryVariant = LintuSecondaryVariant,
-    surface = LintuSurfaceDark
+    surface = LintuSurface
 
 )
 

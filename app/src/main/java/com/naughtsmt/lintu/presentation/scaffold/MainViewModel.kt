@@ -12,7 +12,7 @@ import com.naughtsmt.lintu.domain.use_case.delete_game_from_list.DeleteGameFromL
 import com.naughtsmt.lintu.domain.use_case.get_game_by_name.GetGameByNameUseCase
 import com.naughtsmt.lintu.presentation.game_detail.AddGameToListState
 import com.naughtsmt.lintu.presentation.game_detail.GameDetailState
-import com.naughtsmt.lintu.presentation.game_list.DeleteGameFromListState
+import com.naughtsmt.lintu.presentation.scaffold.states.DeleteGameFromListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

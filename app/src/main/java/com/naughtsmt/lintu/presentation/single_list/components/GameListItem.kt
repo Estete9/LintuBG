@@ -198,7 +198,7 @@ fun GameListItem(
                                                 game.average_learning_complexity > 4.9 -> {
                                                     Color.Red
                                                 }
-                                                game.average_learning_complexity > 3.9 -> {
+                                                game.average_learning_complexity > 2.9 -> {
                                                     Color.Yellow
                                                 }
                                                 else -> Color.Green
@@ -208,7 +208,7 @@ fun GameListItem(
                                             text = if (game.average_learning_complexity < 0.1) "1 / 5"
                                             else "${game.average_learning_complexity.toInt()} / 5",
                                             style = MaterialTheme.typography.subtitle2,
-                                            fontStyle = FontStyle.Italic,
+//                                            fontStyle = FontStyle.Italic,
                                             color = MaterialTheme.colors.primary
                                         )
                                     }
@@ -245,7 +245,7 @@ fun GameListItem(
                                         Text(
                                             text = if (game.min_playtime < 1.0 && game.min_playtime > -1.0) "1 min." else "${game.min_playtime.toInt()} min.",
                                             style = MaterialTheme.typography.subtitle2,
-                                            fontStyle = FontStyle.Italic,
+//                                            fontStyle = FontStyle.Italic,
                                             color = MaterialTheme.colors.primary
                                         )
                                     }

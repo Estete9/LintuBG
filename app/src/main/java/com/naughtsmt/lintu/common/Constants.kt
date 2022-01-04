@@ -7,6 +7,7 @@ object Constants {
     const val AUTH_ROUTE = "auth_route"
     const val TOP_BAR_JUEGOS = "Tus Juegos"
     const val TOP_BAR_RANKING = "Top Ranking"
+    const val TOP_BAR_LISTAS = "Listas"
     const val SEARCH_RESUlTS = "Search Results"
     const val HOME_ROUTE = "home_route"
     const val ROOT_ROUTE = "root_route"

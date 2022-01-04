@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.presentation.game_list
+package com.naughtsmt.lintu.presentation.scaffold.states
 
 data class DeleteGameFromListState(
     val isLoading: Boolean = false,

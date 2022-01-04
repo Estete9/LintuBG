@@ -22,7 +22,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.presentation.Screens
-import com.naughtsmt.lintu.presentation.game_list.GameListViewModel
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 import com.naughtsmt.lintu.presentation.single_list.components.GameListItem
 
@@ -31,7 +30,6 @@ import com.naughtsmt.lintu.presentation.single_list.components.GameListItem
 fun SingleListScreen(
     navController: NavController,
     singleListViewModel: SingleListViewModel = hiltViewModel(),
-    topBarViewModel: GameListViewModel = hiltViewModel(),
     mainViewModel: MainViewModel,
     modifier: Modifier,
     currentScreen: MutableState<String>,
@@ -70,10 +68,12 @@ fun SingleListScreen(
 //                            .align(Alignment.TopCenter),
 //                        contentScale = ContentScale.FillWidth
 //                    )
+                Spacer(modifier = Modifier.height(8.dp))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.TopCenter)
+                        .padding(horizontal = 14.dp)
                 ) {
                     Text(
                         text = "¿Qué vamos a jugar hoy?",
@@ -82,7 +82,7 @@ fun SingleListScreen(
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.h3,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 30.sp
+                        fontSize = 26.sp
                     )
                 }
 //                }

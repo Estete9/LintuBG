@@ -2,10 +2,7 @@ package com.naughtsmt.lintu.presentation.game_detail
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -29,36 +26,37 @@ fun GameDetailScreen(
 ) {
     val state = viewModel.state.value
 //    mainViewModel.setCurrentScreen(Screens.GameDetailScreen)
+    Surface(color = MaterialTheme.colors.background) {
+Spacer(modifier = Modifier.height(16.dp))
+        Box(modifier = modifier.fillMaxSize()) {
 
-    Box(modifier = modifier.fillMaxSize()) {
+            state.game?.let { game ->
+                mainViewModel.currentGameDetailId.value = game.id
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(20.dp)
+                ) {
+                    item {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize(),
+                            verticalArrangement = Arrangement.Top,
+                            horizontalAlignment = CenterHorizontally
+                        ) {
+                            GameDetails(
+                                game = game,
+                                contentDescription = "${game.name} image",
+                                title = game.name,
+                                modifier = Modifier,
+                                onItemClicked = {
+                                    navController.navigate(Screens.ImageScreen.route)
+                                }
+                            )
+                            Spacer(modifier = Modifier.height(10.dp))
 
-        state.game?.let { game ->
-            mainViewModel.currentGameDetailId.value = game.id
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(20.dp)
-            ) {
-                item {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        verticalArrangement = Arrangement.Top,
-                        horizontalAlignment = CenterHorizontally
-                    ) {
-                        GameDetails(
-                            game = game,
-                            contentDescription = "${game.name} image",
-                            title = game.name,
-                            modifier = Modifier,
-                            onItemClicked = {
-                                navController.navigate(Screens.ImageScreen.route)
-                            }
-                        )
-                        Spacer(modifier = Modifier.height(10.dp))
-
+                        }
                     }
-                }
 //                item {
 //                    Row(
 //                        modifier = Modifier
@@ -94,80 +92,81 @@ fun GameDetailScreen(
 ////                        style = MaterialTheme.typography.body1,
 ////                        textAlign = TextAlign.Justify
 //                    )
-                item {
+                    item {
 
-                    Spacer(modifier = Modifier.height(15.dp))
-                    Text(
-                        text = "Categorías",
-                        style = MaterialTheme.typography.h5
-                    )
-                    Spacer(modifier = Modifier.height(15.dp))
-                    FlowRow(
-                        mainAxisSpacing = 5.dp,
-                        crossAxisSpacing = 10.dp,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        if (game.categories.size > 4) {
-                            repeat(5) {
-                                Tag(tag = game.categories[it])
-                            }
-                        } else game.categories.forEach { Tag(tag = it) }
+                        Spacer(modifier = Modifier.height(15.dp))
+                        Text(
+                            text = "Categorías",
+                            style = MaterialTheme.typography.h5
+                        )
+                        Spacer(modifier = Modifier.height(15.dp))
+                        FlowRow(
+                            mainAxisSpacing = 5.dp,
+                            crossAxisSpacing = 10.dp,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            if (game.categories.size > 4) {
+                                repeat(5) {
+                                    Tag(tag = game.categories[it])
+                                }
+                            } else game.categories.forEach { Tag(tag = it) }
 
 //                        game.categories.forEach { tag -> Tag(tag = tag) }
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Divider(
-                        color = MaterialTheme.colors.secondaryVariant,
-                        modifier = Modifier
-                            .height(1.dp)
-                            .fillMaxWidth(0.9f)
-                    )
-                    Spacer(modifier = Modifier.height(18.dp))
-                    Text(
-                        text = "Mecánicas",
-                        style = MaterialTheme.typography.h5
-                    )
-                    Spacer(modifier = Modifier.height(15.dp))
-                    FlowRow(
-                        mainAxisSpacing = 10.dp,
-                        crossAxisSpacing = 10.dp,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        if (game.mechanics.size > 4) {
-                            repeat(5) {
-                                Tag(tag = game.mechanics[it])
-                            }
-                        } else game.mechanics.forEach { Tag(tag = it) }
+                        }
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Divider(
+                            color = MaterialTheme.colors.secondaryVariant,
+                            modifier = Modifier
+                                .height(1.dp)
+                                .fillMaxWidth(0.9f)
+                        )
+                        Spacer(modifier = Modifier.height(18.dp))
+                        Text(
+                            text = "Mecánicas",
+                            style = MaterialTheme.typography.h5
+                        )
+                        Spacer(modifier = Modifier.height(15.dp))
+                        FlowRow(
+                            mainAxisSpacing = 10.dp,
+                            crossAxisSpacing = 10.dp,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            if (game.mechanics.size > 4) {
+                                repeat(5) {
+                                    Tag(tag = game.mechanics[it])
+                                }
+                            } else game.mechanics.forEach { Tag(tag = it) }
 //                        game.mechanics.forEach { tag -> Tag(tag = tag) }
+                        }
+                        Spacer(modifier = Modifier.height(15.dp))
+                        Divider(
+                            color = MaterialTheme.colors.secondaryVariant,
+                            modifier = Modifier
+                                .height(1.dp)
+                                .fillMaxWidth(0.9f)
+                        )
                     }
-                    Spacer(modifier = Modifier.height(15.dp))
-                    Divider(
-                        color = MaterialTheme.colors.secondaryVariant,
-                        modifier = Modifier
-                            .height(1.dp)
-                            .fillMaxWidth(0.9f)
-                    )
                 }
             }
-        }
 
 
 
 
-        if (state.error.isNotBlank()) {
-            Text(
-                text = state.error,
-                color = MaterialTheme.colors.error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
-                    .align(Alignment.Center)
-            )
-        }
+            if (state.error.isNotBlank()) {
+                Text(
+                    text = state.error,
+                    color = MaterialTheme.colors.error,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp)
+                        .align(Alignment.Center)
+                )
+            }
 
-        if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            if (state.isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            }
         }
     }
 

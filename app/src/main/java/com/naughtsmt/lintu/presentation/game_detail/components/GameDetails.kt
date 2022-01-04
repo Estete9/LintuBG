@@ -157,7 +157,7 @@ fun GameDetails(
                                         game.average_learning_complexity > 4.9 -> {
                                             Color.Red
                                         }
-                                        game.average_learning_complexity > 3.9 -> {
+                                        game.average_learning_complexity > 2.9 -> {
                                             Color.Yellow
                                         }
                                         else -> Color.Green

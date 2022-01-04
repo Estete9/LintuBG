@@ -45,7 +45,7 @@ fun ListsDropDownMenu(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth(4 / 5f)
-                    .background(MaterialTheme.colors.background)
+                    .background(MaterialTheme.colors.surface)
             ) {
                 if (selectedItem.isNotBlank()) {
                     Text(
