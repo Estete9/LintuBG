@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.common.Resource
 import com.naughtsmt.lintu.domain.use_case.add_game_to_list.AddGameToListUseCase
 import com.naughtsmt.lintu.domain.use_case.delete_game_from_list.DeleteGameFromListUseCase
@@ -37,8 +36,9 @@ class MainViewModel @Inject constructor(
     val currentGameDetailId = mutableStateOf("")
     val currentSelectedListId = mutableStateOf("")
 
-    val currentGameId = mutableStateOf("")
-    val currentListId = mutableStateOf("")
+
+//    val currentGameId = mutableStateOf("")
+//    val currentListId = mutableStateOf("")
 
     fun addGameToList(listId: String, gameId: String) {
         addGameToListUseCase(listId, gameId).onEach { result ->
@@ -59,6 +59,7 @@ class MainViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+
     fun searchGameByName(name: String) {
         searchGameByNameUseCase(name).onEach { result ->
             when (result) {
@@ -77,26 +78,27 @@ class MainViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    val listIdSH = savedStateHandle.get<String>(Constants.PARAM_SINGLE_LIST_ID)
+//    val listIdSH = savedStateHandle.get<String>(Constants.PARAM_SINGLE_LIST_ID)
 
     fun deleteGameFromList(listId: String, gameId: String) {
-        if (listIdSH != null) {
-            deleteGameFromListUseCase(listIdSH, gameId).onEach { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        _deleteGameFromListState.value = DeleteGameFromListState(operationResult = true)
-                    }
-                    is Resource.Loading -> {
-                        _deleteGameFromListState.value = DeleteGameFromListState(isLoading = true)
-                    }
-                    is Resource.Error -> {
-                        _deleteGameFromListState.value = DeleteGameFromListState(
-                            error = result.message ?: "An unexpected error occurred"
-                        )
-                    }
+//        if (listIdSH != null) {
+        deleteGameFromListUseCase(listId, gameId).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+                    _deleteGameFromListState.value =
+                        result.data?.let { DeleteGameFromListState(operationResult = it.success) }!!
                 }
-            }.launchIn(viewModelScope)
-        }
+                is Resource.Loading -> {
+                    _deleteGameFromListState.value = DeleteGameFromListState(isLoading = true)
+                }
+                is Resource.Error -> {
+                    _deleteGameFromListState.value = DeleteGameFromListState(
+                        error = result.message ?: "An unexpected error occurred"
+                    )
+                }
+            }
+        }.launchIn(viewModelScope)
+//        }
     }
 
 }

@@ -64,6 +64,7 @@ fun ListsDropDownMenu(
                             value = selectedItem,
                             onValueChange = { selectedItem = it },
                             modifier = Modifier
+                                .clickable { expanded = !expanded }
                                 .fillMaxWidth()
                                 .onGloballyPositioned { coordinates ->
                                     textFieldSize = coordinates.size.toSize()

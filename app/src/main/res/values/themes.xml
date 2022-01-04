@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/lintu_primary</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -23,8 +23,8 @@
 
     <style name="Theme.Lintu.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="splashScreenTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_image</item>
-        <item name="android:statusBarColor">@color/lintu_primary</item>
-    </style>
+    <!--    <style name="splashScreenTheme" parent="Theme.MaterialComponents.NoActionBar">-->
+    <!--        <item name="android:windowBackground">@drawable/splash_image</item>-->
+    <!--        <item name="android:statusBarColor">@color/lintu_primary</item>-->
+    <!--    </style>-->
 </resources>

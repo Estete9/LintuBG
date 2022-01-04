@@ -105,7 +105,7 @@ fun TopBar(
 //                        } else {
 //                            FontWeight.Normal
 //                        },
-                        fontSize = 15.sp, /*if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
+                        fontSize = 14.sp, /*if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
                             12.sp
                         } else {
                             10.sp
@@ -143,7 +143,7 @@ fun TopBar(
 //                        } else {
 //                            FontWeight.Normal
 //                        },
-                        fontSize = 15.sp, /*if (currentScreen.value == Constants.TOP_BAR_RANKING) {
+                        fontSize = 14.sp, /*if (currentScreen.value == Constants.TOP_BAR_RANKING) {
                             12.sp
                         } else {
                             10.sp
@@ -178,7 +178,7 @@ fun TopBar(
 //                        } else {
 //                            FontWeight.Normal
 //                        },
-                        fontSize = 15.sp, /*if (currentScreen.value == TOP_BAR_LISTAS) {
+                        fontSize = 14.sp, /*if (currentScreen.value == TOP_BAR_LISTAS) {
                             12.sp
                         } else {
                             10.sp

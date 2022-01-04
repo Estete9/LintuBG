@@ -35,6 +35,7 @@ fun ListsScreen(
     modifier: Modifier,
     navController: NavController,
     listsViewModel: ListsViewModel,
+    isEditTextShown: MutableState<Boolean>,
     singleListViewModel: SingleListViewModel = hiltViewModel()
 ) {
 
@@ -44,7 +45,7 @@ fun ListsScreen(
 //    val singleListSate = singleListViewModel.state.value
 
     val scope = rememberCoroutineScope()
-    val isEditTextShown = remember { mutableStateOf(false) }
+//    val isEditTextShown = remember { mutableStateOf(false) }
     val newListName = remember { mutableStateOf("") }
 
     val focusRequester = remember { FocusRequester() }
@@ -82,7 +83,7 @@ fun ListsScreen(
 
 //                    { navController.navigate(Screens.GameListScreen.route) }
                     ) {
-                        Text(text = "create new list")
+                        Text(text = "nueva lista")
                     }
                 }
 //            if (listsState.lists.isNullOrEmpty()) {

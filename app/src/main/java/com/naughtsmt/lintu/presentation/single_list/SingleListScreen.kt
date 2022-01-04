@@ -8,10 +8,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -34,18 +31,19 @@ fun SingleListScreen(
     modifier: Modifier,
     currentScreen: MutableState<String>,
 ) {
-    val singleListState = singleListViewModel.state.value
-    val games = remember { singleListState.games.map { it } }
+    val singleListState = singleListViewModel.singleListState.value
+
+    mainViewModel.currentSelectedListId.value = singleListViewModel.currentListId.value
+    val rememberedCurrentScreen by rememberUpdatedState(newValue = currentScreen)
 
     LaunchedEffect(key1 = Unit) {
-        if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
+        if (rememberedCurrentScreen.value == Constants.TOP_BAR_JUEGOS) {
             singleListViewModel.getGamesFromMainList(Constants.ALL_GAMES_LIST_ID)
         }
-        if (currentScreen.value == Constants.TOP_BAR_RANKING) {
+        if (rememberedCurrentScreen.value == Constants.TOP_BAR_RANKING) {
             singleListViewModel.getTopGamesList()
         }
     }
-
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -103,8 +101,11 @@ fun SingleListScreen(
                         onItemClicked = {
                             navController.navigate(Screens.GameDetailScreen.route + "&${game.id}")
                         },
-                        onDeleteClicked = { })
-                    if (singleListState.games.size > 1) {
+                        mainViewModel = mainViewModel,
+                        currentScreen = currentScreen,
+//                        refreshList = { navController.navigate(Screens.GameDetailScreen.route + "&${mainViewModel.currentSelectedListId.value}") }
+                    )
+                    if (game != singleListState.games.last()) {
                         Divider(
                             color = MaterialTheme.colors.secondaryVariant,
                             modifier = Modifier

@@ -39,7 +39,7 @@ data class Game(
     val min_age: Int,
     val min_players: Int,
     val min_playtime: Double,
-    val msrp: Double,
+    val msrp: String,
     val msrp_text: String,
     val msrps: List<Msrp>,
     val name: String,

@@ -22,11 +22,13 @@ class SingleListViewModel @Inject constructor(
     val getTopGamesListUseCase: GetTopGamesListUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    private val _state = mutableStateOf(GameListState())
-    val state: State<GameListState> = _state
+    private val _singleListState = mutableStateOf(GameListState())
+    val singleListState: State<GameListState> = _singleListState
 
+    val currentListId = mutableStateOf(
+        savedStateHandle.get<String>(Constants.PARAM_SINGLE_LIST_ID) ?: Constants.ALL_GAMES_LIST_ID
+    )
 
-    //    TODO find a way to pass the list id
     init {
         savedStateHandle.get<String>(Constants.PARAM_SINGLE_LIST_ID)?.let { singleListId ->
             getSingleList(singleListId)
@@ -40,15 +42,15 @@ class SingleListViewModel @Inject constructor(
         getSingleListUseCase(list_id).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _state.value = GameListState(games = result.data ?: emptyList())
+                    _singleListState.value = GameListState(games = result.data ?: emptyList())
 
                 }
                 is Resource.Error -> {
-                    _state.value =
+                    _singleListState.value =
                         GameListState(error = result.message ?: "An unexpected error occurred")
                 }
                 is Resource.Loading -> {
-                    _state.value = GameListState(isLoading = true)
+                    _singleListState.value = GameListState(isLoading = true)
                 }
 
             }
@@ -60,15 +62,15 @@ class SingleListViewModel @Inject constructor(
         getGameByNameUseCase(name).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _state.value = GameListState(games = result.data ?: emptyList())
+                    _singleListState.value = GameListState(games = result.data ?: emptyList())
 
                 }
                 is Resource.Error -> {
-                    _state.value =
+                    _singleListState.value =
                         GameListState(error = result.message ?: "An unexpected error occurred")
                 }
                 is Resource.Loading -> {
-                    _state.value = GameListState(isLoading = true)
+                    _singleListState.value = GameListState(isLoading = true)
                 }
 
             }
@@ -79,13 +81,13 @@ class SingleListViewModel @Inject constructor(
         getSingleListUseCase(listId).onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _state.value = GameListState(games = result.data ?: emptyList())
+                    _singleListState.value = GameListState(games = result.data ?: emptyList())
                 }
                 is Resource.Loading -> {
-                    _state.value = GameListState(isLoading = true)
+                    _singleListState.value = GameListState(isLoading = true)
                 }
                 is Resource.Error -> {
-                    _state.value =
+                    _singleListState.value =
                         GameListState(error = result.message ?: "An unexpected error occurred")
                 }
             }
@@ -98,14 +100,14 @@ class SingleListViewModel @Inject constructor(
         getTopGamesListUseCase().onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    _state.value = GameListState(games = result.data ?: emptyList())
+                    _singleListState.value = GameListState(games = result.data ?: emptyList())
 
                 }
                 is Resource.Loading -> {
-                    _state.value = GameListState(isLoading = true)
+                    _singleListState.value = GameListState(isLoading = true)
                 }
                 is Resource.Error -> {
-                    _state.value =
+                    _singleListState.value =
                         GameListState(error = result.message ?: "An unexpected error occurred")
                 }
 

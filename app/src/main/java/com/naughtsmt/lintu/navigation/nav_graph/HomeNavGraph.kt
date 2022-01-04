@@ -21,6 +21,7 @@ fun NavGraphBuilder.homeNavGraph(
     viewModel: SingleListViewModel,
     listsViewModel: ListsViewModel,
     mainViewModel: MainViewModel,
+    isEditTextShown: MutableState<Boolean>,
     currentScreen: MutableState<String>
 ) {
     navigation(
@@ -34,6 +35,7 @@ fun NavGraphBuilder.homeNavGraph(
             ListsScreen(
                 navController = navController,
                 modifier = modifier,
+                isEditTextShown = isEditTextShown,
                 listsViewModel = listsViewModel
 //                mainViewModel = mainViewModel
             )

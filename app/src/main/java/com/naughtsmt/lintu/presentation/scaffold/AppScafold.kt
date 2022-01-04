@@ -70,6 +70,7 @@ fun AppScaffold(
     val isInAuth = currentDestination?.route == Screens.AuthScreen.route + "/{code}"
     val isInGameDetail = currentDestination?.route == Screens.GameDetailScreen.route + "&{gameId}"
     val localFocusManager = LocalFocusManager.current
+
     Scaffold(
 
 //        bottomBar = {
@@ -99,7 +100,7 @@ fun AppScaffold(
 //        floatingActionButtonPosition = FabPosition.Center
 
     ) { innerPadding ->
-        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colors.surface) {
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
 
             SetupNavGraph(
                 navController = navController,
@@ -115,6 +116,7 @@ fun AppScaffold(
                 viewModel = viewModel,
                 listsViewModel = listsViewModel,
                 mainViewModel = mainViewModel,
+                isEditTextShown = isDropDownMenuShowed,
                 currentScreen = currentScreen
             )
             if (isDropDownMenuShowed.value) {

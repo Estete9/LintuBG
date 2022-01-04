@@ -113,5 +113,6 @@ dependencies {
     implementation 'androidx.browser:browser:1.4.0'
 //    Insets
     implementation "com.google.accompanist:accompanist-insets:0.20.3"
-
+//    splash screen
+implementation "androidx.core:core-splashscreen:1.0.0-alpha02"
 }

@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.BarChart
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.TopCenter
@@ -22,21 +23,24 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowRow
+import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.naughtsmt.lintu.common.Constants.DEFAULT_IMAGE
 import com.naughtsmt.lintu.data.repository.model.Game
+import com.naughtsmt.lintu.presentation.general_components.ItemDropDownMenu
+import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 import com.naughtsmt.lintu.presentation.util.loadPicture
 
 @Composable
 fun GameListItem(
     game: Game,
-    onItemClicked: (Game) -> Unit,
-    onDeleteClicked: (Game) -> Unit
+    onItemClicked: () -> Unit,
+    currentScreen: MutableState<String>,
+    mainViewModel: MainViewModel,
 ) {
     Box(
         Modifier
@@ -66,7 +70,7 @@ fun GameListItem(
                 Row(
                     Modifier
                         .fillMaxWidth()
-                        .clickable { onItemClicked(game) },
+                        .clickable { onItemClicked() },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Box(
@@ -95,59 +99,74 @@ fun GameListItem(
                             .padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(6.dp),
                     ) {
-                        FlowRow(
-                            mainAxisSpacing = 5.dp,
-                            crossAxisSpacing = 10.dp,
-                            modifier = Modifier.fillMaxWidth()
-                        ){
+                        Row {
 
-                            Text(
-//                                modifier = Modifier.fillMaxWidth(),
-                                text = game.name,
-                                style = MaterialTheme.typography.h5,
-                                textAlign = TextAlign.Start,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colors.primary
-                            )
-                            Spacer(modifier = Modifier.width(3.dp))
-                            Row(
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                modifier = Modifier
-                                    .padding(
-                                        horizontal = 6.dp,
-                                        vertical = 1.dp
-                                    )
+                            FlowRow(
+                                mainAxisSpacing = 5.dp,
+                                crossAxisSpacing = 10.dp,
+                                mainAxisAlignment = MainAxisAlignment.Start,
+                                modifier = Modifier.fillMaxWidth(0.8f)
                             ) {
-                                Surface(
-//                                        modifier = Modifier.padding(5.dp),
-                                    color = MaterialTheme.colors.secondary,
-                                    shape = RoundedCornerShape(15.dp)
-                                ) {
-                                    Row(
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        modifier = Modifier
-                                            .padding(
-                                                horizontal = 8.dp,
-                                                vertical = 1.dp
-                                            )
-                                    ) {
 
-                                        Text(
-                                            "${game.max_players}",
-                                            color = MaterialTheme.colors.onSecondary,
-                                            style = MaterialTheme.typography.subtitle2
+                                Text(
+//                                modifier = Modifier.fillMaxWidth(),
+                                    text = game.name,
+                                    style = MaterialTheme.typography.h5,
+                                    textAlign = TextAlign.Start,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colors.primary
+                                )
+                                Spacer(modifier = Modifier.width(3.dp))
+                                Row(
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    modifier = Modifier
+                                        .padding(
+                                            horizontal = 6.dp,
+                                            vertical = 1.dp
                                         )
-                                        Spacer(modifier = Modifier.width(2.dp))
-                                        Icon(
-                                            modifier = Modifier.size(18.dp),
-                                            imageVector = Icons.Filled.Person,
-                                            contentDescription = "number of players icon",
-                                            tint = MaterialTheme.colors.onBackground
-                                        )
+                                ) {
+                                    Surface(
+//                                        modifier = Modifier.padding(5.dp),
+                                        color = MaterialTheme.colors.secondary,
+                                        shape = RoundedCornerShape(15.dp)
+                                    ) {
+                                        Row(
+                                            horizontalArrangement = Arrangement.SpaceBetween,
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            modifier = Modifier
+                                                .padding(
+                                                    horizontal = 8.dp,
+                                                    vertical = 1.dp
+                                                )
+                                        ) {
+
+                                            Text(
+                                                "${game.max_players}",
+                                                color = MaterialTheme.colors.onSecondary,
+                                                style = MaterialTheme.typography.subtitle2
+                                            )
+                                            Spacer(modifier = Modifier.width(2.dp))
+                                            Icon(
+                                                modifier = Modifier.size(18.dp),
+                                                imageVector = Icons.Filled.Person,
+                                                contentDescription = "number of players icon",
+                                                tint = MaterialTheme.colors.onBackground
+                                            )
+                                        }
                                     }
                                 }
                             }
+                            ItemDropDownMenu(
+//                                game = game,
+                                onDeleteClicked = {
+                                    mainViewModel.deleteGameFromList(
+                                        mainViewModel.currentSelectedListId.value,
+                                        game.id
+                                    )
+//                                    refreshList()
+                                },
+                                currentScreen = currentScreen,
+                            )
                         }
                         Text(
                             modifier = Modifier.align(CenterHorizontally),
