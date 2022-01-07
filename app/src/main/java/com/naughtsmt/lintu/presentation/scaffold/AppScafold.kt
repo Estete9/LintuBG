@@ -1,5 +1,6 @@
 package com.naughtsmt.lintu.presentation.scaffold
 
+import android.widget.Toast
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -22,8 +24,8 @@ import com.naughtsmt.lintu.navigation.nav_graph.SetupNavGraph
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.general_components.ListsDropDownMenu
 import com.naughtsmt.lintu.presentation.lists.ListsViewModel
-import com.naughtsmt.lintu.presentation.scaffold.components.Fab
-import com.naughtsmt.lintu.presentation.scaffold.components.TopBar
+import com.naughtsmt.lintu.presentation.scaffold.components.CustomFab
+import com.naughtsmt.lintu.presentation.scaffold.components.CustomTopBar
 import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
 
 //val tag = "APP_SCAFFOLD"
@@ -38,13 +40,13 @@ fun AppScaffold(
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    val isDropDownMenuShowed = remember { mutableStateOf(false) }
+
     val isFocusedCleared = remember { mutableStateOf(true) }
     val currentScreen = remember { mutableStateOf(TOP_BAR_JUEGOS) }
 
     val floatingActionButton: @Composable () -> Unit = {
-        Fab(
-            showDropDownMenu = { isDropDownMenuShowed.value = !isDropDownMenuShowed.value })
+        CustomFab(
+            showAddGameDropDownMenu = { mainViewModel.isDropDownMenuShowed.value = !mainViewModel.isDropDownMenuShowed.value })
     }
 //    val bottomBar: @Composable () -> Unit = {
 //        BottomBar(
@@ -55,7 +57,7 @@ fun AppScaffold(
 //    }
     val topBar: @Composable () -> Unit = {
         currentDestination?.route?.let {
-            TopBar(
+            CustomTopBar(
                 navController = navController,
                 toTopGames = { viewModel.getTopGamesList() },
                 toAllGames = { viewModel.getGamesFromMainList(ALL_GAMES_LIST_ID) },
@@ -100,8 +102,10 @@ fun AppScaffold(
 //        floatingActionButtonPosition = FabPosition.Center
 
     ) { innerPadding ->
-        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
 
+        val context = LocalContext.current
+
+        Surface(Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
             SetupNavGraph(
                 navController = navController,
                 modifier = Modifier
@@ -109,31 +113,35 @@ fun AppScaffold(
                     .pointerInput(Unit) {
                         detectTapGestures(onTap = {
                             localFocusManager.clearFocus()
-                            isDropDownMenuShowed.value = false
+                            mainViewModel.isDropDownMenuShowed.value = false
                             isFocusedCleared.value = true
                         })
                     },
                 viewModel = viewModel,
                 listsViewModel = listsViewModel,
                 mainViewModel = mainViewModel,
-                isEditTextShown = isDropDownMenuShowed,
+                isEditTextShown = mainViewModel.isDropDownMenuShowed,
                 currentScreen = currentScreen
             )
-            if (isDropDownMenuShowed.value) {
+            if (mainViewModel.isDropDownMenuShowed.value) {
 
                 ListsDropDownMenu(
                     addGameToList = {
-                        require(
-                            mainViewModel.currentSelectedListId.value.isNotBlank() &&
-                                    mainViewModel.currentGameDetailId.value.isNotBlank()
-                        ) {
-                            "list and game must be entered"
-                        }
+//                        require(
+//                            mainViewModel.currentSelectedListId.value.isNotBlank()
+//
+//                        ) {
+//                            "list must be entered"
+//                        }
+//                        require(mainViewModel.currentGameDetailId.value.isNotBlank()){
+//                            "game must be entered"
+//                        }
                         mainViewModel.addGameToList(
                             mainViewModel.currentSelectedListId.value,
                             mainViewModel.currentGameDetailId.value
                         )
-                        isDropDownMenuShowed.value = false
+                        mainViewModel.isDropDownMenuShowed.value = false
+                        Toast.makeText(context, "Juego añadido", Toast.LENGTH_SHORT).show()
                     },
                     mainViewModel = mainViewModel
                 )

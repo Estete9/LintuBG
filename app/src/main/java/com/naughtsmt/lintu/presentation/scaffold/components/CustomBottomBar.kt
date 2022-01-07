@@ -13,7 +13,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.naughtsmt.lintu.presentation.Screens
 
 @Composable
-fun BottomBar(
+fun CustomBottomBar(
     navController: NavController,
     screens: List<Screens.NavBarScreens>,
     isInTopBarScreen: MutableState<String>

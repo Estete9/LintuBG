@@ -1,11 +1,11 @@
 package com.naughtsmt.lintu.presentation.general_components
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
@@ -17,8 +17,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun ExpandableText(
@@ -65,7 +65,12 @@ fun ExpandableText(
             onTextLayout = { textLayoutResultState.value = it },
             style = style,
             textAlign = TextAlign.Justify,
-            color = color
+            color = color,
+            modifier = Modifier.clickable {
+                if (expanded) {
+                    expanded = false
+                }
+            }
         )
         if (!expanded) {
             val density = LocalDensity.current
@@ -92,6 +97,23 @@ fun ExpandableText(
                     .alpha(if (seeMoreOffset != null) 1f else 0f)
             )
         }
+    }
+    Box(
+        Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.CenterEnd
+    ) {
+        if (expanded) {
+            Spacer(Modifier.padding(8.dp))
+            Text(
+                "ver menos",
+                modifier = Modifier.clickable { expanded = false },
+                style = style,
+                color = MaterialTheme.colors.secondary,
+                textAlign = TextAlign.Justify
+            )
+
+        }
+
     }
 }
 

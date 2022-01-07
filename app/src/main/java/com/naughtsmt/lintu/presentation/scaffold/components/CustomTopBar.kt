@@ -14,9 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -25,7 +23,7 @@ import com.naughtsmt.lintu.common.Constants.TOP_BAR_LISTAS
 import com.naughtsmt.lintu.presentation.Screens
 
 @Composable
-fun TopBar(
+fun CustomTopBar(
     navController: NavController,
     toTopGames: () -> Unit,
     toAllGames: () -> Unit,
@@ -96,102 +94,99 @@ fun TopBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 if (!searchBarShown.value) {
-                    Text(text = Constants.TOP_BAR_JUEGOS,
-                        color = if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
-                            MaterialTheme.colors.secondary
-                        } else MaterialTheme.colors.primary,
-//                        fontWeight = if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
-//                            FontWeight.Bold
-//                        } else {
-//                            FontWeight.Normal
-//                        },
-                        fontSize = 14.sp, /*if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
-                            12.sp
-                        } else {
-                            10.sp
-                        },*/
-                        style = TextStyle(
-                            textDecoration = if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
-                                TextDecoration.Underline
-                            } else TextDecoration.None
-                        ),
-                        modifier = Modifier.clickable {
-                            currentScreen.value = Constants.TOP_BAR_JUEGOS
-                            toAllGames()
-                            navController.navigate(Screens.SingleListScreen.route) /*{
-                            launchSingleTop = true
-                        }*/
-                        })
+                    Column(Modifier.width(IntrinsicSize.Max)) {
 
-                    Spacer(modifier = Modifier.padding(horizontal = 5.dp))
+                        Text(text = Constants.TOP_BAR_JUEGOS,
+                            color = if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
+                                MaterialTheme.colors.secondary
+                            } else MaterialTheme.colors.primary,
+                            fontSize = 14.sp,
+//                            style = TextStyle(
+//                                textDecoration = if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
+//                                    TextDecoration.Underline
+//                                } else TextDecoration.None
+//                            ),
+                            modifier = Modifier
+                                .wrapContentWidth(Alignment.Start)
+                                .clickable {
+                                    currentScreen.value = Constants.TOP_BAR_JUEGOS
+                                    toAllGames()
+                                    navController.navigate(Screens.SingleListScreen.route)
+                                })
+                        if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
+                            Spacer(Modifier.padding(vertical = 3.dp))
+                            Divider(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(1.dp),
+                                color = MaterialTheme.colors.secondary
+                            )
+                        }
+                    }
 
-//                    Divider(
-//                        color = MaterialTheme.colors.secondary,
-//                        modifier = Modifier
-//                            .height(15.dp)
-//                            .width(1.dp)
-//                    )
+                    Spacer(modifier = Modifier.padding(horizontal = 8.dp))
 
-                    Spacer(modifier = Modifier.padding(horizontal = 5.dp))
 
-                    Text(text = Constants.TOP_BAR_RANKING,
-                        color = if (currentScreen.value == Constants.TOP_BAR_RANKING) {
-                            MaterialTheme.colors.secondary
-                        } else MaterialTheme.colors.primary,
-//                        fontWeight = if (currentScreen.value == Constants.TOP_BAR_RANKING) {
-//                            FontWeight.Bold
-//                        } else {
-//                            FontWeight.Normal
-//                        },
-                        fontSize = 14.sp, /*if (currentScreen.value == Constants.TOP_BAR_RANKING) {
-                            12.sp
-                        } else {
-                            10.sp
-                        },*/
-                        style = TextStyle(
-                            textDecoration = if (currentScreen.value == Constants.TOP_BAR_RANKING) {
-                                TextDecoration.Underline
-                            } else TextDecoration.None
-                        ),
-                        modifier = Modifier.clickable {
-                            currentScreen.value = Constants.TOP_BAR_RANKING
-                            toTopGames()
-                            navController.navigate(Screens.SingleListScreen.route)
-                        })
-                    Spacer(modifier = Modifier.padding(horizontal = 5.dp))
+                    Column(Modifier.width(IntrinsicSize.Max)) {
 
-//                    Divider(
-//                        color = MaterialTheme.colors.secondary,
-//                        modifier = Modifier
-//                            .height(15.dp)
-//                            .width(1.dp)
-//                    )
+                        Text(text = Constants.TOP_BAR_RANKING,
+                            color = if (currentScreen.value == Constants.TOP_BAR_RANKING) {
+                                MaterialTheme.colors.secondary
+                            } else MaterialTheme.colors.primary,
+                            fontSize = 14.sp,
+//                            style = TextStyle(
+//                                textDecoration = if (currentScreen.value == Constants.TOP_BAR_RANKING) {
+//                                    TextDecoration.Underline
+//                                } else TextDecoration.None
+//                            ),
+                            modifier = Modifier
+                                .wrapContentWidth(Alignment.Start)
+                                .clickable {
+                                    currentScreen.value = Constants.TOP_BAR_RANKING
+                                    toTopGames()
+                                    navController.navigate(Screens.SingleListScreen.route)
+                                })
+                        if (currentScreen.value == Constants.TOP_BAR_RANKING) {
+                            Spacer(Modifier.padding(vertical = 3.dp))
+                            Divider(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(1.dp),
+                                color = MaterialTheme.colors.secondary
+                            )
+                        }
+                    }
 
-                    Spacer(modifier = Modifier.padding(horizontal = 5.dp))
+                    Spacer(modifier = Modifier.padding(horizontal = 8.dp))
+                    Column(Modifier.width(IntrinsicSize.Max)) {
 
-                    Text(text = TOP_BAR_LISTAS,
-                        color = if (currentScreen.value == Constants.TOP_BAR_LISTAS) {
-                            MaterialTheme.colors.secondary
-                        } else MaterialTheme.colors.primary,
-//                        fontWeight = if (currentScreen.value == TOP_BAR_LISTAS) {
-//                            FontWeight.Bold
-//                        } else {
-//                            FontWeight.Normal
-//                        },
-                        fontSize = 14.sp, /*if (currentScreen.value == TOP_BAR_LISTAS) {
-                            12.sp
-                        } else {
-                            10.sp
-                        },*/
-                        style = TextStyle(
-                            textDecoration = if (currentScreen.value == TOP_BAR_LISTAS) {
-                                TextDecoration.Underline
-                            } else TextDecoration.None
-                        ),
-                        modifier = Modifier.clickable {
-                            currentScreen.value = TOP_BAR_LISTAS
-                            navController.navigate(Screens.NavBarScreens.ListsScreen.route)
-                        })
+                        Text(text = TOP_BAR_LISTAS,
+                            color = if (currentScreen.value == TOP_BAR_LISTAS) {
+                                MaterialTheme.colors.secondary
+                            } else MaterialTheme.colors.primary,
+                            fontSize = 14.sp,
+//                            style = TextStyle(
+//                                textDecoration = if (currentScreen.value == TOP_BAR_LISTAS) {
+//                                    TextDecoration.Underline
+//                                } else TextDecoration.None
+//                            ),
+                            modifier = Modifier
+                                .wrapContentWidth(Alignment.Start)
+                                .clickable {
+                                    currentScreen.value = TOP_BAR_LISTAS
+                                    navController.navigate(Screens.NavBarScreens.ListsScreen.route)
+                                })
+                        if (currentScreen.value == Constants.TOP_BAR_LISTAS) {
+                            Spacer(Modifier.padding(vertical = 3.dp))
+                            Divider(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(1.dp),
+                                color = MaterialTheme.colors.secondary
+                            )
+                        }
+                    }
+
                 }
 
             }
@@ -231,6 +226,7 @@ fun TopBar(
                                 .navigate(Screens.SingleListScreen.route + "?&name=${searchGameText.value}")
                             searchGameText.value = ""
                             icon.value = Icons.Filled.Search
+                            currentScreen.value = Constants.SEARCH_RESUlTS
                         }
                     },
                     contentDescription = "Search or Send Icon"

@@ -2,21 +2,17 @@ package com.naughtsmt.lintu.presentation.single_list.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.BarChart
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Timer
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.ui.Alignment
+import androidx.compose.material.icons.filled.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,11 +23,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
+import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.common.Constants.DEFAULT_IMAGE
 import com.naughtsmt.lintu.data.repository.model.Game
-import com.naughtsmt.lintu.presentation.general_components.ItemDropDownMenu
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 import com.naughtsmt.lintu.presentation.util.loadPicture
 
@@ -40,8 +37,20 @@ fun GameListItem(
     game: Game,
     onItemClicked: () -> Unit,
     currentScreen: MutableState<String>,
-    mainViewModel: MainViewModel,
+    onDeleteClicked: () -> Unit,
+    ShowAddGameDropDownMenu: () -> Unit,
+    isEditing: Boolean,
+    finishedEditing: () -> Unit,
+    refresh: () -> Unit,
+    mainViewModel: MainViewModel
 ) {
+    val needsRefresh = remember { mutableStateOf(false) }
+
+    LaunchedEffect(key1 = Unit) {
+        if(needsRefresh.value)
+        refresh()
+        needsRefresh.value = false
+    }
     Box(
         Modifier
             .fillMaxSize()
@@ -50,13 +59,6 @@ fun GameListItem(
 
     ) {
 
-//        Card(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .clickable { onItemClicked(game) },
-//            shape = RoundedCornerShape(10.dp),
-//            elevation = 5.dp
-//        ) {
         Box(
             Modifier
                 .fillMaxSize()
@@ -71,12 +73,11 @@ fun GameListItem(
                     Modifier
                         .fillMaxWidth()
                         .clickable { onItemClicked() },
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = CenterVertically
                 ) {
                     Box(
                         Modifier
                             .height(80.dp)
-//                            .height(100.dp)
                             .fillMaxWidth(0.25f),
                     ) {
 
@@ -105,11 +106,11 @@ fun GameListItem(
                                 mainAxisSpacing = 5.dp,
                                 crossAxisSpacing = 10.dp,
                                 mainAxisAlignment = MainAxisAlignment.Start,
+                                crossAxisAlignment = FlowCrossAxisAlignment.Center,
                                 modifier = Modifier.fillMaxWidth(0.8f)
                             ) {
 
                                 Text(
-//                                modifier = Modifier.fillMaxWidth(),
                                     text = game.name,
                                     style = MaterialTheme.typography.h5,
                                     textAlign = TextAlign.Start,
@@ -126,13 +127,12 @@ fun GameListItem(
                                         )
                                 ) {
                                     Surface(
-//                                        modifier = Modifier.padding(5.dp),
                                         color = MaterialTheme.colors.secondary,
                                         shape = RoundedCornerShape(15.dp)
                                     ) {
                                         Row(
                                             horizontalArrangement = Arrangement.SpaceBetween,
-                                            verticalAlignment = Alignment.CenterVertically,
+                                            verticalAlignment = CenterVertically,
                                             modifier = Modifier
                                                 .padding(
                                                     horizontal = 8.dp,
@@ -141,7 +141,7 @@ fun GameListItem(
                                         ) {
 
                                             Text(
-                                                "${game.max_players}",
+                                                "${game.min_players}-${game.max_players}",
                                                 color = MaterialTheme.colors.onSecondary,
                                                 style = MaterialTheme.typography.subtitle2
                                             )
@@ -156,17 +156,65 @@ fun GameListItem(
                                     }
                                 }
                             }
-                            ItemDropDownMenu(
-//                                game = game,
-                                onDeleteClicked = {
-                                    mainViewModel.deleteGameFromList(
-                                        mainViewModel.currentSelectedListId.value,
-                                        game.id
-                                    )
-//                                    refreshList()
-                                },
-                                currentScreen = currentScreen,
-                            )
+                            if (isEditing) {
+                                IconButton(
+                                    onClick = {
+                                        if (currentScreen.value == Constants.SEARCH_RESUlTS) {
+                                            mainViewModel.currentGameDetailId.value = game.id
+                                            ShowAddGameDropDownMenu()
+//                                            finishedEditing()
+                                        } else {
+//                                            needsRefresh.value = true
+                                            onDeleteClicked()
+//                                            finishedEditing()
+                                            refresh()
+                                        }
+                                    },
+//                                    shape = CircleShape,
+                                    modifier = Modifier
+                                        .size(20.dp)
+                                        .offset(x = 5.dp, y = 7.dp)
+                                        .border(
+                                            width = 1.dp,
+                                            color = if (currentScreen.value == Constants.SEARCH_RESUlTS) {
+                                                Color.Green
+                                            } else {
+                                                Color.Red
+                                            },
+                                            shape = CircleShape
+                                        ),
+//                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent)
+                                ) {
+                                    if (currentScreen.value == Constants.SEARCH_RESUlTS) {
+                                        Icon(
+                                            imageVector = Icons.Filled.Add,
+                                            tint = Color.Green,
+//                                        modifier = Modifier.size(4.dp),
+                                            contentDescription = "add game to list icon"
+                                        )
+                                    } else {
+
+                                        Icon(
+                                            imageVector = Icons.Filled.Close,
+                                            tint = Color.Red,
+//                                        modifier = Modifier.size(4.dp),
+                                            contentDescription = "delete game from list icon"
+                                        )
+                                    }
+//                                    Text(text = "X", color = MaterialTheme.colors.onSurface)
+                                }
+                            }
+//                            ItemDropDownMenu(
+////                                game = game,
+//                                onDeleteClicked = {
+//                                    mainViewModel.deleteGameFromList(
+//                                        mainViewModel.currentSelectedListId.value,
+//                                        game.id
+//                                    )
+////                                    refreshList()
+//                                },
+//                                currentScreen = currentScreen,
+//                            )
                         }
                         Text(
                             modifier = Modifier.align(CenterHorizontally),
@@ -205,7 +253,7 @@ fun GameListItem(
                                         ),
                                 ) {
                                     Row(
-                                        verticalAlignment = Alignment.CenterVertically,
+                                        verticalAlignment = CenterVertically,
                                         horizontalArrangement = Arrangement.Center,
                                         modifier = Modifier.padding(vertical = 2.dp)
                                     ) {
@@ -250,7 +298,7 @@ fun GameListItem(
                                         ),
                                 ) {
                                     Row(
-                                        verticalAlignment = Alignment.CenterVertically,
+                                        verticalAlignment = CenterVertically,
                                         horizontalArrangement = Arrangement.Center,
                                         modifier = Modifier.padding(vertical = 2.dp)
                                     ) {
@@ -262,7 +310,8 @@ fun GameListItem(
 
                                             )
                                         Text(
-                                            text = if (game.min_playtime < 1.0 && game.min_playtime > -1.0) "1 min." else "${game.min_playtime.toInt()} min.",
+                                            text = if (game.min_playtime < 1.0 && game.min_playtime.toInt() > -1.0) "1-${game.max_playtime.toInt()} min."
+                                            else "${game.min_playtime.toInt()}-${game.max_playtime.toInt()} min.",
                                             style = MaterialTheme.typography.subtitle2,
 //                                            fontStyle = FontStyle.Italic,
                                             color = MaterialTheme.colors.primary
@@ -279,3 +328,5 @@ fun GameListItem(
         }
     }
 }
+
+

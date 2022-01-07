@@ -2,6 +2,7 @@ package com.naughtsmt.lintu.presentation.scaffold
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -36,7 +37,9 @@ class MainViewModel @Inject constructor(
     val currentGameDetailId = mutableStateOf("")
     val currentSelectedListId = mutableStateOf("")
 
+    val isDropDownMenuShowed =  mutableStateOf(false)
 
+    val refreshState = mutableStateOf(false)
 //    val currentGameId = mutableStateOf("")
 //    val currentListId = mutableStateOf("")
 
@@ -87,6 +90,7 @@ class MainViewModel @Inject constructor(
                 is Resource.Success -> {
                     _deleteGameFromListState.value =
                         result.data?.let { DeleteGameFromListState(operationResult = it.success) }!!
+                    refreshState.value = true
                 }
                 is Resource.Loading -> {
                     _deleteGameFromListState.value = DeleteGameFromListState(isLoading = true)
@@ -99,6 +103,7 @@ class MainViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
 //        }
+
     }
 
 }

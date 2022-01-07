@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,7 +24,9 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
+import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.naughtsmt.lintu.common.Constants.DEFAULT_IMAGE
 import com.naughtsmt.lintu.data.repository.model.Game
 import com.naughtsmt.lintu.presentation.general_components.ExpandableText
@@ -49,7 +52,8 @@ fun GameDetails(
             Box(
                 Modifier
                     .fillMaxWidth(0.25f)
-                    .height(80.dp)) {
+                    .height(80.dp)
+            ) {
 
                 game.image_url.let { url ->
                     val image = loadPicture(url = url, defaultImage = DEFAULT_IMAGE).value
@@ -66,6 +70,8 @@ fun GameDetails(
             Spacer(modifier = Modifier.width(16.dp))
             Column {
                 FlowRow(
+                    mainAxisAlignment = MainAxisAlignment.Start,
+                    crossAxisAlignment = FlowCrossAxisAlignment.Center,
                     mainAxisSpacing = 5.dp,
                     crossAxisSpacing = 10.dp,
                     modifier = Modifier.fillMaxWidth()
@@ -79,33 +85,43 @@ fun GameDetails(
                         textAlign = TextAlign.Start
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Surface(
-//                                        modifier = Modifier.padding(5.dp),
-                        color = MaterialTheme.colors.secondary,
-                        shape = RoundedCornerShape(15.dp)
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .padding(
+                                horizontal = 6.dp,
+                                vertical = 1.dp
+                            )
                     ) {
-                        Row(
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier
-                                .padding(
-                                    horizontal = 8.dp,
-                                    vertical = 1.dp
-                                )
-                        ) {
 
-                            Text(
-                                "${game.max_players}",
-                                color = MaterialTheme.colors.onSecondary,
-                                style = MaterialTheme.typography.subtitle2
-                            )
-                            Spacer(modifier = Modifier.width(2.dp))
-                            Icon(
-                                modifier = Modifier.size(18.dp),
-                                imageVector = Icons.Filled.Person,
-                                contentDescription = "number of players icon",
-                                tint = MaterialTheme.colors.onBackground
-                            )
+                        Surface(
+//                            modifier = Modifier.align(CenterVertically),
+                            color = MaterialTheme.colors.secondary,
+                            shape = RoundedCornerShape(15.dp)
+                        ) {
+                            Row(
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier
+                                    .padding(
+                                        horizontal = 8.dp,
+                                        vertical = 1.dp
+                                    )
+                            ) {
+
+                                Text(
+                                    "${game.min_players}-${game.max_players}",
+                                    color = MaterialTheme.colors.onSecondary,
+                                    style = MaterialTheme.typography.subtitle2
+                                )
+                                Spacer(modifier = Modifier.width(2.dp))
+                                Icon(
+                                    modifier = Modifier.size(18.dp),
+                                    imageVector = Icons.Filled.Person,
+                                    contentDescription = "number of players icon",
+                                    tint = MaterialTheme.colors.onBackground
+                                )
+                            }
                         }
                     }
 
