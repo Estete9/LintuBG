@@ -9,7 +9,6 @@ import com.naughtsmt.lintu.common.Constants.AUTH_ROUTE
 import com.naughtsmt.lintu.common.Constants.ROOT_ROUTE
 import com.naughtsmt.lintu.presentation.lists.ListsViewModel
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
-import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
 
 /*   if want to use a bouncy splash screen (with animations)
 
@@ -31,7 +30,6 @@ import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
 fun SetupNavGraph(
     navController: NavHostController,
     modifier: Modifier,
-    viewModel: SingleListViewModel,
     listsViewModel: ListsViewModel,
     isEditTextShown: MutableState<Boolean>,
     mainViewModel: MainViewModel,
@@ -45,12 +43,11 @@ fun SetupNavGraph(
     ) {
         authNavGraph(
             navController = navController,
-            modifier = modifier/*, mainViewModel = mainViewModel*/
+            modifier = modifier
         )
         homeNavGraph(
             navController = navController,
             modifier = modifier,
-            viewModel = viewModel,
             listsViewModel = listsViewModel,
             mainViewModel = mainViewModel,
             isEditTextShown = isEditTextShown,

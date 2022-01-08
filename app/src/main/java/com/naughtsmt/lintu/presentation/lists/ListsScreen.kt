@@ -42,27 +42,18 @@ fun ListsScreen(
     val listsState = listsViewModel.state.value
     val newListState = listsViewModel.listChangeState.value
     val deleteListState = listsViewModel.deleteListState.value
-//    val singleListSate = singleListViewModel.state.value
 
     val scope = rememberCoroutineScope()
-//    val isEditTextShown = remember { mutableStateOf(false) }
     val newListName = remember { mutableStateOf("") }
 
     val focusRequester = remember { FocusRequester() }
 
-//    val rememberedNewListState by rememberUpdatedState(newValue = newListState)
-//    val rememberedDeleteListState by rememberUpdatedState(newValue = deleteListState)
-//    DisposableEffect(key1 = rememberedNewListState.newList) {
-//        getListsViewModel.getLists()
-//        onDispose { }
-//    }
     Box(
         modifier.fillMaxSize(),
         contentAlignment = Center,
     ) {
 
         LaunchedEffect(key1 = newListState, key2 = deleteListState) {
-//    LaunchedEffect(key1 = rememberedNewListState) {
             listsViewModel.getLists()
         }
         Column(modifier = Modifier.fillMaxSize()) {
@@ -81,16 +72,10 @@ fun ListsScreen(
                             }
                         }
 
-//                    { navController.navigate(Screens.GameListScreen.route) }
                     ) {
                         Text(text = "nueva lista")
                     }
                 }
-//            if (listsState.lists.isNullOrEmpty()) {
-//                item {
-//                    Text(text = "there are no lists")
-//                }
-//            } else {
                 items(listsState.lists) { list ->
                     ListItemRow(
                         list = list,
@@ -112,18 +97,12 @@ fun ListsScreen(
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                 }
-//                item {
-//                    Text(text = newListState.newList?.name.toString())
-//                    Text(text = listsState.lists.toString())
-//                }
-//            }
             }
         }
         if (isEditTextShown.value) {
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
-//                .background(color = MaterialTheme.colors.background),
                 contentAlignment = Center
             ) {
                 Column(
@@ -191,13 +170,6 @@ fun ListsScreen(
                     }
                 }
             }
-//                Column(
-//                    Modifier.fillMaxSize(),
-//                    verticalArrangement = Arrangement.Center,
-//                    horizontalAlignment = Alignment.CenterHorizontally,
-//                ) {
-//
-//                }
         }
         if (listsState.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Center))
@@ -213,55 +185,5 @@ fun ListsScreen(
                     .align(Center)
             )
         }
-//        when {
-//            newListState.error.isNotBlank() -> {
-//                Text(
-//                    text = newListState.error,
-//                    color = MaterialTheme.colors.error,
-//                    textAlign = TextAlign.Center,
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(horizontal = 20.dp)
-//                        .align(Center)
-//                )
-//
-//            }
-//            deleteListState.error.isNotBlank() -> {
-//                Text(
-//                    text = deleteListState.error,
-//                    color = MaterialTheme.colors.error,
-//                    textAlign = TextAlign.Center,
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(horizontal = 20.dp)
-//                        .align(Center)
-//                )
-//
-//            }
-//            newListState.isLoading -> {
-//                CircularProgressIndicator(modifier = Modifier.align(Center))
-//            }
-//            deleteListState.isLoading -> {
-//                CircularProgressIndicator(modifier = Modifier.align(Center))
-//            }
-//
-//        }
-//        if (newListState.error.isNotBlank()) {
-//            Text(
-//                text = if (newListState.error.isNotBlank()) newListState.error else deleteListState.error,
-//                color = MaterialTheme.colors.error,
-//                textAlign = TextAlign.Center,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 20.dp)
-//                    .align(Alignment.Center)
-//            )
-//        }
-//
-//        if (newListState.isLoading) {
-//            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-//        }
     }
-
-
 }

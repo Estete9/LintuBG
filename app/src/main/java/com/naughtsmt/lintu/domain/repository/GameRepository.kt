@@ -11,7 +11,6 @@ interface GameRepository {
 
     suspend fun getGameById(gameId: String): ResponseDto
 
-    suspend fun getUserGameList(): ResponseDto
 
     suspend fun getAccessToken(params: HashMap<String, String>): AccessTokenDto
 

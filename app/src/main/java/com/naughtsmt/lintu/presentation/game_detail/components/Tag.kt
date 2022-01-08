@@ -31,9 +31,9 @@ fun Tag(tag: String) {
                     color = MaterialTheme.colors.primary
                 )
                 .padding(
-                horizontal = 15.dp,
-                vertical = 2.dp
-            )
+                    horizontal = 15.dp,
+                    vertical = 2.dp
+                )
 
         ) {
             Text(

@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
-val thisTag = "GetListsViewModel"
 
 @HiltViewModel
 class ListsViewModel @Inject constructor(
@@ -36,7 +35,6 @@ class ListsViewModel @Inject constructor(
 
     init {
         getLists()
-//        Log.d(thisTag, "getLists fun from GetListsViewModel called")
     }
 
     fun getLists() {
@@ -45,7 +43,6 @@ class ListsViewModel @Inject constructor(
                 is Resource.Success -> {
                     _state.value = ListsState(lists = result.data ?: emptyList())
                     Lists.lists.value = _state.value.lists
-//                    Log.d(thisTag, "getLists in viewmodel success")
                 }
 
                 is Resource.Loading -> {

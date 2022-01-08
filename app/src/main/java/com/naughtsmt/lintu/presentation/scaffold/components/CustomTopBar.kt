@@ -101,11 +101,6 @@ fun CustomTopBar(
                                 MaterialTheme.colors.secondary
                             } else MaterialTheme.colors.primary,
                             fontSize = 14.sp,
-//                            style = TextStyle(
-//                                textDecoration = if (currentScreen.value == Constants.TOP_BAR_JUEGOS) {
-//                                    TextDecoration.Underline
-//                                } else TextDecoration.None
-//                            ),
                             modifier = Modifier
                                 .wrapContentWidth(Alignment.Start)
                                 .clickable {
@@ -134,11 +129,6 @@ fun CustomTopBar(
                                 MaterialTheme.colors.secondary
                             } else MaterialTheme.colors.primary,
                             fontSize = 14.sp,
-//                            style = TextStyle(
-//                                textDecoration = if (currentScreen.value == Constants.TOP_BAR_RANKING) {
-//                                    TextDecoration.Underline
-//                                } else TextDecoration.None
-//                            ),
                             modifier = Modifier
                                 .wrapContentWidth(Alignment.Start)
                                 .clickable {
@@ -165,11 +155,6 @@ fun CustomTopBar(
                                 MaterialTheme.colors.secondary
                             } else MaterialTheme.colors.primary,
                             fontSize = 14.sp,
-//                            style = TextStyle(
-//                                textDecoration = if (currentScreen.value == TOP_BAR_LISTAS) {
-//                                    TextDecoration.Underline
-//                                } else TextDecoration.None
-//                            ),
                             modifier = Modifier
                                 .wrapContentWidth(Alignment.Start)
                                 .clickable {

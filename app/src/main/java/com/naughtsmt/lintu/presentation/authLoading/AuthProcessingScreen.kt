@@ -1,6 +1,5 @@
 package com.naughtsmt.lintu.presentation.authLoading
 
-import android.util.Log
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -23,10 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.naughtsmt.lintu.R
-import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.presentation.Screens
-
-val tag = "AuthScreen"
 
 @Composable
 fun AuthProcessingScreen(
@@ -41,7 +37,6 @@ fun AuthProcessingScreen(
     val textScale = remember {
         Animatable(0f)
     }
-//    Log.d(tag, "the auth token issss: ${state.accessToken}")
 
     LaunchedEffect(key1 = true) {
         scale.animateTo(
@@ -53,10 +48,8 @@ fun AuthProcessingScreen(
                         .getInterpolation(it)
                 })
         )
-//        delay(700L)
-        navController.navigate(Screens.SingleListScreen.route /*+ "?&singleListId=${Constants.ALL_GAMES_LIST_ID}"*/) {
+        navController.navigate(Screens.SingleListScreen.route) {
             navController.popBackStack()
-//            launchSingleTop = true
         }
 
     }
@@ -107,7 +100,6 @@ fun AuthProcessingScreen(
             }
         }
         if (state.error.isNotBlank()) {
-            Log.d(tag, "auth state error in error checking: $state")
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,

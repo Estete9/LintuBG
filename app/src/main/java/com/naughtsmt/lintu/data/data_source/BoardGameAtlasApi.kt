@@ -10,11 +10,6 @@ import com.naughtsmt.lintu.data.data_source.new_list_dto.NewListDto
 import retrofit2.http.*
 
 interface BoardGameAtlasApi {
-    //TODO for future this returns the registered user's game list (must change the returning type)
-    @GET("api/search")
-    suspend fun getUsersGameList(
-//        TODO
-    ): ResponseDto
 
     @GET("api/search")
     suspend fun getGameById(
@@ -59,11 +54,6 @@ interface BoardGameAtlasApi {
     @FormUrlEncoded
     @POST("oauth/token")
     suspend fun getAccessToken(
-//        @Field("client_id") client_id: String = CLIENT_ID,
-//        @Field("client_secret") client_secret: String = Constants.CLIENT_SECRET,
-//        @Field("code") code: String,
-//        @Field("redirect_uri") redirect_uri: String = Constants.REDIRECT_URI,
-//        @Field("grant_type") grant_type: String = "authorization_code",
         @FieldMap params: HashMap<String, String>
     ): AccessTokenDto
 

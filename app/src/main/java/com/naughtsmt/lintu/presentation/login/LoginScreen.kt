@@ -18,10 +18,7 @@ import com.naughtsmt.lintu.presentation.Screens
 @Composable
 fun LoginScreen(
     navController: NavController,
-    modifier: Modifier,
-//    mainViewModel: MainViewModel
 ) {
-//    mainViewModel.setCurrentScreen(Screens.LoginScreen)
     Column() {
 
         Spacer(modifier = Modifier.fillMaxHeight(0.4f))
@@ -39,14 +36,6 @@ fun LoginScreen(
                     painter = painterResource(id = R.drawable.ic_lintu_logo_light_horiz),
                     contentDescription = "Logo Lintu", modifier = Modifier.fillMaxWidth(0.42f)
                 )
-//                Image(
-//                    painter = painterResource(id = R.drawable.ic_lintu_logo_white),
-//                    contentDescription = "Logo Lintu",
-//                    modifier = Modifier
-//                        .height(250.dp)
-//                        .width(250.dp),
-//                    contentScale = ContentScale.Fit
-//                )
                 Spacer(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -55,7 +44,6 @@ fun LoginScreen(
                 Text(
                     text = "Conecta con la librería más grande de juegos de mesa",
                     style = MaterialTheme.typography.h6,
-//                    fontStyle = MaterialTheme.typography.h1,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth(2 / 3f)
                 )
@@ -72,7 +60,6 @@ fun LoginScreen(
                     },
                     modifier = Modifier
                         .fillMaxWidth(0.52f)
-//                        .clip(androidx.compose.foundation.shape.CircleShape)
                         .padding(8.dp),
                     shape = RoundedCornerShape(50),
                     colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
@@ -95,10 +82,3 @@ fun LoginScreen(
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun LoginScreenPreview() {
-//    val navController = NavController(LocalContext.current)
-//    LoginScreen(navController = navController, modifier = Modifier)
-//}

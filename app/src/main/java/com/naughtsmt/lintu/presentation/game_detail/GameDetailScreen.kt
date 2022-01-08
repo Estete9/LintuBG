@@ -10,24 +10,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.google.accompanist.flowlayout.FlowRow
-import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_detail.components.GameDetails
 import com.naughtsmt.lintu.presentation.game_detail.components.Tag
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 
 @Composable
 fun GameDetailScreen(
-    navController: NavController,
     viewModel: GameDetailViewModel = hiltViewModel(),
     modifier: Modifier,
     mainViewModel: MainViewModel
 ) {
     val state = viewModel.state.value
-//    mainViewModel.setCurrentScreen(Screens.GameDetailScreen)
     Surface(color = MaterialTheme.colors.background) {
-Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Box(modifier = modifier.fillMaxSize()) {
 
             state.game?.let { game ->
@@ -49,49 +45,11 @@ Spacer(modifier = Modifier.height(16.dp))
                                 contentDescription = "${game.name} image",
                                 title = game.name,
                                 modifier = Modifier,
-                                onItemClicked = {
-                                    navController.navigate(Screens.ImageScreen.route)
-                                }
                             )
                             Spacer(modifier = Modifier.height(10.dp))
 
                         }
                     }
-//                item {
-//                    Row(
-//                        modifier = Modifier
-//                            .fillMaxSize()
-//                            .padding(horizontal = 8.dp),
-//                        horizontalArrangement = Arrangement.SpaceBetween,
-//                    ) {
-//
-//                        Text(
-//                            text = "Dificultad: ${game.average_learning_complexity.toInt()} / 5",
-//                            style = MaterialTheme.typography.subtitle1,
-//                            fontStyle = FontStyle.Italic,
-//                        )
-//                        Text(
-//                            text = "Duración: ${game.min_playtime.toInt()}",
-//                            style = MaterialTheme.typography.subtitle1,
-//                            fontStyle = FontStyle.Italic,
-//                            textAlign = TextAlign.End
-//                        )
-//                    }
-//                    Text(
-//                        text = "Max. jugadores: ${game.max_players}",
-//                        style = MaterialTheme.typography.subtitle1,
-//                        fontStyle = FontStyle.Italic
-//                    )
-//                }
-//                item {
-//                    Spacer(modifier = Modifier.height(20.dp))
-//                    ExpandableText(
-//                        text = game.description_preview,
-//                        modifier = Modifier,
-//                        minimizedMaxLines = 4
-////                        style = MaterialTheme.typography.body1,
-////                        textAlign = TextAlign.Justify
-//                    )
                     item {
 
                         Spacer(modifier = Modifier.height(15.dp))
@@ -111,7 +69,6 @@ Spacer(modifier = Modifier.height(16.dp))
                                 }
                             } else game.categories.forEach { Tag(tag = it) }
 
-//                        game.categories.forEach { tag -> Tag(tag = tag) }
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                         Divider(
@@ -136,7 +93,6 @@ Spacer(modifier = Modifier.height(16.dp))
                                     Tag(tag = game.mechanics[it])
                                 }
                             } else game.mechanics.forEach { Tag(tag = it) }
-//                        game.mechanics.forEach { tag -> Tag(tag = tag) }
                         }
                         Spacer(modifier = Modifier.height(15.dp))
                         Divider(
@@ -148,9 +104,6 @@ Spacer(modifier = Modifier.height(16.dp))
                     }
                 }
             }
-
-
-
 
             if (state.error.isNotBlank()) {
                 Text(

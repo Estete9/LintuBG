@@ -23,10 +23,6 @@ class GameRepositoryImpl @Inject constructor(
         return api.getGameById(gameId)
     }
 
-    override suspend fun getUserGameList(): ResponseDto {
-        return api.getUsersGameList()
-    }
-
     override suspend fun getAccessToken(params: HashMap<String, String>): AccessTokenDto {
         return api.getAccessToken(params)
     }

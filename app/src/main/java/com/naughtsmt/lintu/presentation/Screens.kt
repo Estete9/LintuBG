@@ -11,7 +11,7 @@ sealed class Screens(val route: String) {
     //    object SplashScreen : Screen("splash_screen")
     object GameListScreen : Screens("game_list_screen")
     object GameDetailScreen : Screens("game_detail_screen")
-    object ImageScreen : Screens("image_screen")
+//    object ImageScreen : Screens("image_screen")
     object LoginScreen : Screens("login_screen")
     object WebViewScreen : Screens("web_view")
 
@@ -21,16 +21,16 @@ sealed class Screens(val route: String) {
     sealed class NavBarScreens(
         route: String, val title: String, val icon: ImageVector
     ) : Screens(route) {
-        object RandomGameListScreen :
-            NavBarScreens("random_game_list_screen", "Random", Icons.Filled.Shuffle)
+//        object RandomGameListScreen :
+//            NavBarScreens("random_game_list_screen", "Random", Icons.Filled.Shuffle)
 
         object ProfileScreen : NavBarScreens("profile_screen", "Perfil", Icons.Filled.Person)
         object ListsScreen : NavBarScreens("list_of_lists", "Listas", Icons.Filled.List)
     }
 }
 
-val screensFromBottomNav = listOf(
-//    Screens.HomeScreens.RandomGameListScreen,
-    Screens.NavBarScreens.ListsScreen,
-    Screens.NavBarScreens.ProfileScreen
-)
+//val screensFromBottomNav = listOf(
+////    Screens.HomeScreens.RandomGameListScreen,
+//    Screens.NavBarScreens.ListsScreen,
+//    Screens.NavBarScreens.ProfileScreen
+//)

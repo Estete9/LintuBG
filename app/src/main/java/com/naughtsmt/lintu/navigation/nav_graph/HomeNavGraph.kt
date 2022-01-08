@@ -1,5 +1,6 @@
 package com.naughtsmt.lintu.navigation.nav_graph
 
+//import com.naughtsmt.lintu.presentation.game_list.GameListScreen
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.navigation.*
@@ -7,18 +8,15 @@ import androidx.navigation.compose.composable
 import com.naughtsmt.lintu.common.Constants
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.game_detail.GameDetailScreen
-//import com.naughtsmt.lintu.presentation.game_list.GameListScreen
 import com.naughtsmt.lintu.presentation.lists.ListsScreen
 import com.naughtsmt.lintu.presentation.lists.ListsViewModel
 import com.naughtsmt.lintu.presentation.profile.ProfileScreen
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 import com.naughtsmt.lintu.presentation.single_list.SingleListScreen
-import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController,
     modifier: Modifier,
-    viewModel: SingleListViewModel,
     listsViewModel: ListsViewModel,
     mainViewModel: MainViewModel,
     isEditTextShown: MutableState<Boolean>,

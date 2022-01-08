@@ -1,6 +1,5 @@
 package com.naughtsmt.lintu.presentation.single_list
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,8 +28,6 @@ import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 import com.naughtsmt.lintu.presentation.single_list.components.GameListItem
 
-
-val tag = "SingleScreenTag"
 
 @Composable
 fun SingleListScreen(
@@ -61,12 +58,9 @@ fun SingleListScreen(
         }
     }
     LaunchedEffect(key1 = mainViewModel.refreshState.value) {
-        Log.d(tag, "second effect running")
         if (mainViewModel.refreshState.value) {
-            Log.d(tag, "need refresh: ${needsRefresh.value}")
             singleListViewModel.getGamesFromMainList(mainViewModel.currentSelectedListId.value)
             mainViewModel.refreshState.value = false
-//            needsRefresh.value = false
         }
     }
     Box(
@@ -112,7 +106,6 @@ fun SingleListScreen(
                             fontSize = 26.sp
                         )
                     }
-//                }
                 }
 
                 item {
@@ -130,7 +123,6 @@ fun SingleListScreen(
                             onItemClicked = {
                                 navController.navigate(Screens.GameDetailScreen.route + "&${game.id}")
                             },
-//                            mainViewModel = mainViewModel,
                             currentScreen = currentScreen,
                             onDeleteClicked = {
                                 mainViewModel.deleteGameFromList(

@@ -2,8 +2,6 @@ package com.naughtsmt.lintu.presentation.scaffold
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.naughtsmt.lintu.common.Resource
@@ -23,7 +21,6 @@ class MainViewModel @Inject constructor(
     private val addGameToListUseCase: AddGameToListUseCase,
     private val searchGameByNameUseCase: GetGameByNameUseCase,
     val deleteGameFromListUseCase: DeleteGameFromListUseCase,
-    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _addedGameState = mutableStateOf(AddGameToListState())
     val addGameState: State<AddGameToListState> = _addedGameState
@@ -37,11 +34,9 @@ class MainViewModel @Inject constructor(
     val currentGameDetailId = mutableStateOf("")
     val currentSelectedListId = mutableStateOf("")
 
-    val isDropDownMenuShowed =  mutableStateOf(false)
+    val isDropDownMenuShowed = mutableStateOf(false)
 
     val refreshState = mutableStateOf(false)
-//    val currentGameId = mutableStateOf("")
-//    val currentListId = mutableStateOf("")
 
     fun addGameToList(listId: String, gameId: String) {
         addGameToListUseCase(listId, gameId).onEach { result ->
@@ -81,10 +76,7 @@ class MainViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-//    val listIdSH = savedStateHandle.get<String>(Constants.PARAM_SINGLE_LIST_ID)
-
     fun deleteGameFromList(listId: String, gameId: String) {
-//        if (listIdSH != null) {
         deleteGameFromListUseCase(listId, gameId).onEach { result ->
             when (result) {
                 is Resource.Success -> {
@@ -102,8 +94,5 @@ class MainViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
-//        }
-
     }
-
 }

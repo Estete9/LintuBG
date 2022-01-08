@@ -5,5 +5,4 @@ import com.naughtsmt.lintu.data.data_source.dto_access_token.AccessTokenDto
 
 object AuthData {
     val authToken = mutableStateOf<AccessTokenDto?>(null)
-//    val authData = mutableStateOf(AccessTokenDto())
 }

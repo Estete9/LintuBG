@@ -32,7 +32,7 @@ class AuthPostViewModel @Inject constructor(
         }
     }
 
-    fun getAuthToken(code: String) {
+    private fun getAuthToken(code: String) {
         authPostUseCase(code = code).onEach { result ->
             when (result) {
                 is Resource.Success -> {

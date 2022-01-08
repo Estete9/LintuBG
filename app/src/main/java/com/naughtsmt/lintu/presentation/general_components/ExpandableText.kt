@@ -117,11 +117,3 @@ fun ExpandableText(
     }
 }
 
-
-//@Preview(showBackground = true)
-//@Composable
-//fun ExpandableTextPreview() {
-//    val testText =
-//        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis velit a nulla elementum semper quis a tortor. Sed ultrices enim sit amet elit auctor, a tempor sapien consequat. Donec non imperdiet felis. Etiam sodales vestibulum volutpat. Phasellus eget risus molestie, dictum purus sit amet, placerat sapien. Nunc mollis odio in lacus dignissim, vitae sodales massa hendrerit. Donec convallis ligula vel volutpat mattis. In congue mattis porta. Donec feugiat iaculis risus quis feugiat. Aliquam eleifend odio vel enim varius sollicitudin. Fusce fermentum dui ut augue tincidunt ornare. Curabitur dapibus commodo ante, ac semper risus consequat eget. Nulla egestas, leo ac dictum fermentum, est nunc scelerisque nulla, et egestas dolor sem eget lectus. Nunc sollicitudin, dolor quis varius fermentum, diam augue viverra urna, eu volutpat augue felis at ante. Nullam ac risus semper, eleifend odio ut, congue dui. Nulla pretium magna orci, eu consectetur mi feugiat auctor."
-//    ExpandableText(text = testText, modifier = Modifier, minimizedMaxLines = 2)
-//}

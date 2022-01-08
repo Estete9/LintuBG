@@ -21,18 +21,10 @@ class MainActivity : ComponentActivity() {
         setContent {
 
             LintuTheme() {
-                // A surface container using the 'background' color from the theme
                 MaterialTheme(typography = Typography) {
 
-                    val backgroundGradient = Brush.verticalGradient(
-                        colors = listOf(
-                            MaterialTheme.colors.primary,
-
-                            )
-                    )
                     Surface(color = MaterialTheme.colors.background) {
                         AppScaffold()
-
                     }
                 }
             }

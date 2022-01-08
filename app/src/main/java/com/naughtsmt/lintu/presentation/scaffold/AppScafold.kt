@@ -28,11 +28,8 @@ import com.naughtsmt.lintu.presentation.scaffold.components.CustomFab
 import com.naughtsmt.lintu.presentation.scaffold.components.CustomTopBar
 import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
 
-//val tag = "APP_SCAFFOLD"
-
 @Composable
 fun AppScaffold(
-//    viewModel: GameListViewModel = hiltViewModel(),
     viewModel: SingleListViewModel = hiltViewModel(),
     listsViewModel: ListsViewModel = hiltViewModel(),
     mainViewModel: MainViewModel = hiltViewModel()
@@ -46,15 +43,11 @@ fun AppScaffold(
 
     val floatingActionButton: @Composable () -> Unit = {
         CustomFab(
-            showAddGameDropDownMenu = { mainViewModel.isDropDownMenuShowed.value = !mainViewModel.isDropDownMenuShowed.value })
+            showAddGameDropDownMenu = {
+                mainViewModel.isDropDownMenuShowed.value = !mainViewModel.isDropDownMenuShowed.value
+            })
     }
-//    val bottomBar: @Composable () -> Unit = {
-//        BottomBar(
-//            navController = navController,
-//            screens = screensFromBottomNav,
-//            isInTopBarScreen = currentScreen
-//        )
-//    }
+
     val topBar: @Composable () -> Unit = {
         currentDestination?.route?.let {
             CustomTopBar(
@@ -75,15 +68,6 @@ fun AppScaffold(
 
     Scaffold(
 
-//        bottomBar = {
-//            if (!isInLogin) {
-//                if (!isInWebView) {
-//                    if (!isInAuth) {
-//                        bottomBar()
-//                    }
-//                }
-//            }
-//        },
         topBar = {
             if (!isInLogin) {
                 if (!isInWebView) {
@@ -98,8 +82,6 @@ fun AppScaffold(
                 floatingActionButton()
             }
         }
-//        isFloatingActionButtonDocked = isInGameDetail,
-//        floatingActionButtonPosition = FabPosition.Center
 
     ) { innerPadding ->
 
@@ -117,7 +99,6 @@ fun AppScaffold(
                             isFocusedCleared.value = true
                         })
                     },
-                viewModel = viewModel,
                 listsViewModel = listsViewModel,
                 mainViewModel = mainViewModel,
                 isEditTextShown = mainViewModel.isDropDownMenuShowed,
@@ -127,15 +108,6 @@ fun AppScaffold(
 
                 ListsDropDownMenu(
                     addGameToList = {
-//                        require(
-//                            mainViewModel.currentSelectedListId.value.isNotBlank()
-//
-//                        ) {
-//                            "list must be entered"
-//                        }
-//                        require(mainViewModel.currentGameDetailId.value.isNotBlank()){
-//                            "game must be entered"
-//                        }
                         mainViewModel.addGameToList(
                             mainViewModel.currentSelectedListId.value,
                             mainViewModel.currentGameDetailId.value

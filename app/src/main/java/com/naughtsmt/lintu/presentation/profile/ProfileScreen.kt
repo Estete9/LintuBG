@@ -10,14 +10,12 @@ import androidx.compose.ui.Modifier
 @Composable
 fun ProfileScreen(
     modifier: Modifier,
-//    mainViewModel: MainViewModel
-//viewModel: ListsViewModel = hiltViewModel()
 ) {
-//val state = viewModel.state.value
-//    mainViewModel.setCurrentScreen(Screens.NavBarScreens.ProfileScreen)
 
-    Box(contentAlignment = Alignment.Center,
-    modifier = modifier.fillMaxSize()) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier.fillMaxSize()
+    ) {
         Text(text = "Profile Screen")
     }
 }

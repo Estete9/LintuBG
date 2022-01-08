@@ -13,18 +13,10 @@ import androidx.navigation.NavController
 import com.naughtsmt.lintu.common.Constants.URL_TEXT
 import com.naughtsmt.lintu.presentation.Screens
 
-val tag: String = "WEB_VIEW_SCREEN"
-
-//var code = ""
 @Composable
 fun WebViewScreen(
     navController: NavController,
-    modifier: Modifier,
-//    mainViewModel: MainViewModel
 ) {
-    val scope = rememberCoroutineScope()
-//    mainViewModel.setCurrentScreen(Screens.WebViewScreen)
-
     Column(Modifier.fillMaxSize()) {
         val isLoading = remember {
             mutableStateOf(true)

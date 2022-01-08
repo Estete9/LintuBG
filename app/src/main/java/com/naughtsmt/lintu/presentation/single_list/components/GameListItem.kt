@@ -47,8 +47,8 @@ fun GameListItem(
     val needsRefresh = remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = Unit) {
-        if(needsRefresh.value)
-        refresh()
+        if (needsRefresh.value)
+            refresh()
         needsRefresh.value = false
     }
     Box(
@@ -162,15 +162,11 @@ fun GameListItem(
                                         if (currentScreen.value == Constants.SEARCH_RESUlTS) {
                                             mainViewModel.currentGameDetailId.value = game.id
                                             ShowAddGameDropDownMenu()
-//                                            finishedEditing()
                                         } else {
-//                                            needsRefresh.value = true
                                             onDeleteClicked()
-//                                            finishedEditing()
                                             refresh()
                                         }
                                     },
-//                                    shape = CircleShape,
                                     modifier = Modifier
                                         .size(20.dp)
                                         .offset(x = 5.dp, y = 7.dp)
@@ -183,13 +179,11 @@ fun GameListItem(
                                             },
                                             shape = CircleShape
                                         ),
-//                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent)
                                 ) {
                                     if (currentScreen.value == Constants.SEARCH_RESUlTS) {
                                         Icon(
                                             imageVector = Icons.Filled.Add,
                                             tint = Color.Green,
-//                                        modifier = Modifier.size(4.dp),
                                             contentDescription = "add game to list icon"
                                         )
                                     } else {
@@ -197,24 +191,11 @@ fun GameListItem(
                                         Icon(
                                             imageVector = Icons.Filled.Close,
                                             tint = Color.Red,
-//                                        modifier = Modifier.size(4.dp),
                                             contentDescription = "delete game from list icon"
                                         )
                                     }
-//                                    Text(text = "X", color = MaterialTheme.colors.onSurface)
                                 }
                             }
-//                            ItemDropDownMenu(
-////                                game = game,
-//                                onDeleteClicked = {
-//                                    mainViewModel.deleteGameFromList(
-//                                        mainViewModel.currentSelectedListId.value,
-//                                        game.id
-//                                    )
-////                                    refreshList()
-//                                },
-//                                currentScreen = currentScreen,
-//                            )
                         }
                         Text(
                             modifier = Modifier.align(CenterHorizontally),
@@ -275,7 +256,6 @@ fun GameListItem(
                                             text = if (game.average_learning_complexity < 0.1) "1 / 5"
                                             else "${game.average_learning_complexity.toInt()} / 5",
                                             style = MaterialTheme.typography.subtitle2,
-//                                            fontStyle = FontStyle.Italic,
                                             color = MaterialTheme.colors.primary
                                         )
                                     }
@@ -313,7 +293,6 @@ fun GameListItem(
                                             text = if (game.min_playtime < 1.0 && game.min_playtime.toInt() > -1.0) "1-${game.max_playtime.toInt()} min."
                                             else "${game.min_playtime.toInt()}-${game.max_playtime.toInt()} min.",
                                             style = MaterialTheme.typography.subtitle2,
-//                                            fontStyle = FontStyle.Italic,
                                             color = MaterialTheme.colors.primary
                                         )
                                     }

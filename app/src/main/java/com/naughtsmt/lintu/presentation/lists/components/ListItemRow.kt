@@ -37,7 +37,6 @@ fun ListItemRow(
                 style = MaterialTheme.typography.h2,
                 fontSize = 21.sp
             )
-//            Text(text = "Juegos: ${list.gameCount}", style = MaterialTheme.typography.body2)
         }
         if (list.id != ALL_GAMES_LIST_ID) {
             Button(onClick = { onDeleteClicked(list.id) }) {

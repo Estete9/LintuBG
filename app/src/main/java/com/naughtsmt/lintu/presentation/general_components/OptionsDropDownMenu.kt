@@ -15,7 +15,6 @@ fun ItemDropDownMenu(
     currentScreen: MutableState<String>,
     onDeleteClicked: () -> Unit,
 ) {
-//    val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
 
 
@@ -36,13 +35,8 @@ fun ItemDropDownMenu(
                 DropdownMenu(
                     expanded = expanded,
                     onDismissRequest = { expanded = false },
-//                modifier = Modifier.fillMaxWidth()
                 ) {
                     DropdownMenuItem(onClick = {
-//                        Log.d(
-//                            tag,
-//                            "inside of dropdown menu refresh state: ${refreshScreen.value}"
-//                        )
                         onDeleteClicked()
                         expanded = false
                     }) {
@@ -50,16 +44,6 @@ fun ItemDropDownMenu(
                     }
                 }
             }
-
-
         }
     }
-
-
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GamListDropDownMenuPreview() {
-//    ItemDropDownMenu()
-//}

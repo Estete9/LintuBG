@@ -19,7 +19,6 @@ fun CustomBottomBar(
     isInTopBarScreen: MutableState<String>
 ) {
     BottomAppBar(
-//        cutoutShape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50))
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
@@ -38,7 +37,6 @@ fun CustomBottomBar(
                     isInTopBarScreen.value = ""
                     navController.navigate(screen.route) {
                         popUpTo(navController.graph.findStartDestination().id)
-//                        launchSingleTop = true
                     }
                 })
         }

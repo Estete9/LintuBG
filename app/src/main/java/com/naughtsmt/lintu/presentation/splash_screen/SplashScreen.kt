@@ -50,10 +50,3 @@ fun SplashScreen(navController: NavController) {
         )
     }
 }
-
-//@Preview(showSystemUi = true)
-//@Composable
-//fun SplashScreenPreview() {
-//    val navController = rememberNavController()
-//    SplashScreen(navController = navController)
-//}

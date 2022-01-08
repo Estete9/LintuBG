@@ -1,7 +1,6 @@
 package com.naughtsmt.lintu.navigation.nav_graph
 
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -12,7 +11,7 @@ import com.naughtsmt.lintu.presentation.authLoading.AuthProcessingScreen
 import com.naughtsmt.lintu.presentation.login.LoginScreen
 import com.naughtsmt.lintu.presentation.web_view.WebViewScreen
 
-fun NavGraphBuilder.authNavGraph(navController: NavHostController, modifier: Modifier/*, mainViewModel: MainViewModel*/) {
+fun NavGraphBuilder.authNavGraph(navController: NavHostController, modifier: Modifier) {
 
     navigation(
         startDestination = Screens.LoginScreen.route,
@@ -22,12 +21,12 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController, modifier: Mod
         composable(
             route = Screens.LoginScreen.route
         ) {
-            LoginScreen(navController = navController, modifier = modifier/*, mainViewModel = mainViewModel*/)
+            LoginScreen(navController = navController, modifier = modifier)
         }
         composable(
             route = Screens.WebViewScreen.route
         ) {
-            WebViewScreen(navController = navController, modifier = modifier/*, mainViewModel = mainViewModel*/)
+            WebViewScreen(navController = navController, modifier = modifier)
         }
 
         composable(
@@ -36,7 +35,6 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController, modifier: Mod
             AuthProcessingScreen(
                 navController = navController,
                 modifier = modifier,
-//                mainViewModel = mainViewModel
             )
         }
     }

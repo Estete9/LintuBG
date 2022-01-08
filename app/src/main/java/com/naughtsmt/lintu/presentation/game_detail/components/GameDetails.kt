@@ -14,7 +14,6 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -38,11 +37,9 @@ fun GameDetails(
     contentDescription: String,
     title: String,
     modifier: Modifier,
-    onItemClicked: (Game) -> Unit
 ) {
     Box(
         modifier = Modifier
-//            .height(200.dp),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -77,7 +74,6 @@ fun GameDetails(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-//                        modifier = modifier.fillMaxWidth(),
                         text = title,
                         style = MaterialTheme.typography.h5,
                         color = Color.White,
@@ -95,7 +91,6 @@ fun GameDetails(
                     ) {
 
                         Surface(
-//                            modifier = Modifier.align(CenterVertically),
                             color = MaterialTheme.colors.secondary,
                             shape = RoundedCornerShape(15.dp)
                         ) {
