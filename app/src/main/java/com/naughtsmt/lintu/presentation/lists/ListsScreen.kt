@@ -26,7 +26,6 @@ import androidx.navigation.NavController
 import com.naughtsmt.lintu.presentation.Screens
 import com.naughtsmt.lintu.presentation.lists.components.ListItemRow
 import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
-import kotlinx.coroutines.launch
 
 const val tag = "tokenAndCode"
 
@@ -35,13 +34,14 @@ fun ListsScreen(
     modifier: Modifier,
     navController: NavController,
     listsViewModel: ListsViewModel,
-    isEditTextShown: MutableState<Boolean>,
     singleListViewModel: SingleListViewModel = hiltViewModel()
 ) {
 
     val listsState = listsViewModel.state.value
     val newListState = listsViewModel.listChangeState.value
     val deleteListState = listsViewModel.deleteListState.value
+
+    val isEditTextShownState = remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
     val newListName = remember { mutableStateOf("") }
@@ -61,14 +61,10 @@ fun ListsScreen(
                 item {
                     Button(
                         onClick = {
-                            scope.launch {
-                                isEditTextShown.value = true
+                            isEditTextShownState.value = true
 
-                                if (newListName.value.isNotEmpty()) {
-                                    run {
-                                        listsViewModel.makeNewList(newListName.value)
-                                    }
-                                }
+                            if (newListName.value.isNotEmpty()) {
+                                listsViewModel.makeNewList(newListName.value)
                             }
                         }
 
@@ -80,7 +76,7 @@ fun ListsScreen(
                     ListItemRow(
                         list = list,
                         listNumber = listsState.lists.indexOf(list) + 1,
-                        onItemClicked = if (!isEditTextShown.value) {
+                        onItemClicked = if (!isEditTextShownState.value) {
                             {
                                 singleListViewModel.getSingleList(list_id = list.id)
                                 navController.navigate(Screens.SingleListScreen.route + "?&singleListId=${list.id}")
@@ -89,7 +85,7 @@ fun ListsScreen(
                         } else {
                             {}
                         },
-                        onDeleteClicked = if (!isEditTextShown.value) {
+                        onDeleteClicked = if (!isEditTextShownState.value) {
                             { listsViewModel.deleteList(list.id) }
                         } else {
                             {}
@@ -99,7 +95,7 @@ fun ListsScreen(
                 }
             }
         }
-        if (isEditTextShown.value) {
+        if (isEditTextShownState.value) {
             Box(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -139,7 +135,7 @@ fun ListsScreen(
                             keyboardActions = KeyboardActions(
                                 onDone = {
                                     listsViewModel.makeNewList(newListName.value)
-                                    isEditTextShown.value = false
+                                    isEditTextShownState.value = false
                                     newListName.value = ""
                                 }
                             )
@@ -152,7 +148,7 @@ fun ListsScreen(
                             onClick = {
                                 if (newListName.value.isNotEmpty()) {
                                     run { listsViewModel.makeNewList(newListName.value) }
-                                    isEditTextShown.value = false
+                                    isEditTextShownState.value = false
                                     newListName.value = ""
                                 }
                             },

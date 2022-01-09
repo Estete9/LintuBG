@@ -31,7 +31,6 @@ fun SetupNavGraph(
     navController: NavHostController,
     modifier: Modifier,
     listsViewModel: ListsViewModel,
-    isEditTextShown: MutableState<Boolean>,
     mainViewModel: MainViewModel,
     currentScreen: MutableState<String>
 ) {
@@ -50,7 +49,6 @@ fun SetupNavGraph(
             modifier = modifier,
             listsViewModel = listsViewModel,
             mainViewModel = mainViewModel,
-            isEditTextShown = isEditTextShown,
             currentScreen = currentScreen
         )
     }

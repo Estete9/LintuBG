@@ -19,7 +19,6 @@ fun NavGraphBuilder.homeNavGraph(
     modifier: Modifier,
     listsViewModel: ListsViewModel,
     mainViewModel: MainViewModel,
-    isEditTextShown: MutableState<Boolean>,
     currentScreen: MutableState<String>
 ) {
     navigation(
@@ -33,23 +32,9 @@ fun NavGraphBuilder.homeNavGraph(
             ListsScreen(
                 navController = navController,
                 modifier = modifier,
-                isEditTextShown = isEditTextShown,
                 listsViewModel = listsViewModel
-//                mainViewModel = mainViewModel
             )
         }
-//        composable(
-//            route = Screens.GameListScreen.route + "?&listId={listId}",
-//            arguments = listOf(navArgument("listId") { defaultValue = ALL_GAMES_LIST_ID })
-//        ) { /*backStackEntry ->*/
-//            GameListScreen(
-//                navController = navController,
-//                modifier = modifier,
-//                currentScreen = currentScreen,
-//                viewModel = viewModel,
-//                mainViewModel = mainViewModel
-//            )
-//        }
         composable(
             route = Screens.SingleListScreen.route + "?&singleListId={singleListId}&name={name}",
             arguments = listOf(navArgument("singleListId") {
@@ -68,17 +53,16 @@ fun NavGraphBuilder.homeNavGraph(
                 modifier = modifier,
                 mainViewModel = mainViewModel,
                 currentScreen = currentScreen
-//                viewModel = viewModel/*, */
             )
         }
 
         composable(
             route = Screens.GameDetailScreen.route + "&{gameId}"
         ) {
-            GameDetailScreen(navController, modifier = modifier, mainViewModel = mainViewModel)
+            GameDetailScreen(modifier = modifier, mainViewModel = mainViewModel)
         }
         composable(route = Screens.NavBarScreens.ProfileScreen.route) {
-            ProfileScreen(modifier = modifier/*mainViewModel = mainViewModel*/)
+            ProfileScreen(modifier = modifier)
         }
     }
 

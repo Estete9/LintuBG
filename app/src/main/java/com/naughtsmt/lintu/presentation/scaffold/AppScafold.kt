@@ -101,7 +101,6 @@ fun AppScaffold(
                     },
                 listsViewModel = listsViewModel,
                 mainViewModel = mainViewModel,
-                isEditTextShown = mainViewModel.isDropDownMenuShowed,
                 currentScreen = currentScreen
             )
             if (mainViewModel.isDropDownMenuShowed.value) {

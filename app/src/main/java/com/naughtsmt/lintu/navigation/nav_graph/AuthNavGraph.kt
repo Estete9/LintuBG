@@ -21,12 +21,12 @@ fun NavGraphBuilder.authNavGraph(navController: NavHostController, modifier: Mod
         composable(
             route = Screens.LoginScreen.route
         ) {
-            LoginScreen(navController = navController, modifier = modifier)
+            LoginScreen(navController = navController)
         }
         composable(
             route = Screens.WebViewScreen.route
         ) {
-            WebViewScreen(navController = navController, modifier = modifier)
+            WebViewScreen(navController = navController)
         }
 
         composable(

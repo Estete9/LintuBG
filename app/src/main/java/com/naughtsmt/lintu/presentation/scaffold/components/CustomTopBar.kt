@@ -34,16 +34,13 @@ fun CustomTopBar(
     val searchGameText = remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
     val icon = remember { mutableStateOf(Icons.Filled.Search) }
-    Log.d(tag, "1focus cleared is: ${focusCleared.value}")
     TopAppBar(backgroundColor = MaterialTheme.colors.surface, elevation = 0.dp) {
         Box(
             Modifier
                 .fillMaxWidth(), contentAlignment = Alignment.Center
         ) {
             DisposableEffect(key1 = focusCleared.value) {
-                Log.d(tag, "2focus cleared is: ${focusCleared.value}")
                 if (focusCleared.value) {
-                    Log.d(tag, "3focus cleared is: ${focusCleared.value}")
                     searchBarShown.value = false
                 }
                 onDispose { }
@@ -55,11 +52,8 @@ fun CustomTopBar(
                     TextField(
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                         keyboardActions = KeyboardActions(onSearch = {
-                            Log.d(tag, "4focus cleared is: ${focusCleared.value}")
                             searchBarShown.value = !searchBarShown.value
                             focusCleared.value = !focusCleared.value
-                            Log.d(tag, "5focus cleared is: ${focusCleared.value}")
-                            Log.d(tag, "-------------------------")
                             if (searchGameText.value.isNotBlank()) {
                                 navController
                                     .navigate(Screens.SingleListScreen.route + "?&name=${searchGameText.value}")
@@ -161,7 +155,7 @@ fun CustomTopBar(
                                     currentScreen.value = TOP_BAR_LISTAS
                                     navController.navigate(Screens.NavBarScreens.ListsScreen.route)
                                 })
-                        if (currentScreen.value == Constants.TOP_BAR_LISTAS) {
+                        if (currentScreen.value == TOP_BAR_LISTAS) {
                             Spacer(Modifier.padding(vertical = 3.dp))
                             Divider(
                                 modifier = Modifier
@@ -201,11 +195,8 @@ fun CustomTopBar(
                     imageVector = icon.value,
                     tint = MaterialTheme.colors.secondary,
                     modifier = Modifier.clickable {
-                        Log.d(tag, "4focus cleared is: ${focusCleared.value}")
                         searchBarShown.value = !searchBarShown.value
                         focusCleared.value = !focusCleared.value
-                        Log.d(tag, "5focus cleared is: ${focusCleared.value}")
-                        Log.d(tag, "-------------------------")
                         if (searchGameText.value.isNotBlank()) {
                             navController
                                 .navigate(Screens.SingleListScreen.route + "?&name=${searchGameText.value}")
