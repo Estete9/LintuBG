@@ -4,7 +4,7 @@ import com.naughtsmt.lintu.data.repository.model.Game
 
 data class Game(
     val active: Boolean,
-    val amazon_rank: Int,
+//    val amazon_rank: Int,
     val artists: List<String>,
     val availability_status: String,
     val average_learning_complexity: Double,
@@ -20,7 +20,7 @@ data class Game(
     val developers: List<Any>,
     val discount: String,
     val edit_url: String,
-    val faq: String,
+//    val faq: String,
     val handle: String,
     val historical_low_prices: List<HistoricalLowPrice>,
     val id: String,
@@ -60,7 +60,7 @@ data class Game(
     val rank: Int,
     val related_to: List<Any>,
     val rules_url: String?,
-    val sell_sheet_url: Any,
+//    val sell_sheet_url: Any,
     val size_depth: Double,
     val size_height: Double,
     val size_units: String,
