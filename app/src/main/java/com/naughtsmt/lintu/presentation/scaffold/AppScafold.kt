@@ -30,7 +30,7 @@ import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
 
 @Composable
 fun AppScaffold(
-    viewModel: SingleListViewModel = hiltViewModel(),
+    singleListViewModel: SingleListViewModel = hiltViewModel(),
     listsViewModel: ListsViewModel = hiltViewModel(),
     mainViewModel: MainViewModel = hiltViewModel()
 ) {
@@ -52,8 +52,8 @@ fun AppScaffold(
         currentDestination?.route?.let {
             CustomTopBar(
                 navController = navController,
-                toTopGames = { viewModel.getTopGamesList() },
-                toAllGames = { viewModel.getGamesFromMainList(ALL_GAMES_LIST_ID) },
+                toTopGames = { singleListViewModel.getTopGamesList() },
+                toAllGames = { singleListViewModel.getGamesFromMainList(ALL_GAMES_LIST_ID) },
                 focusCleared = isFocusedCleared,
                 currentScreen = currentScreen
             )
@@ -101,7 +101,8 @@ fun AppScaffold(
                     },
                 listsViewModel = listsViewModel,
                 mainViewModel = mainViewModel,
-                currentScreen = currentScreen
+                currentScreen = currentScreen,
+                singleListViewModel = singleListViewModel,
             )
             if (mainViewModel.isDropDownMenuShowed.value) {
 

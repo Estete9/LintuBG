@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.data.data_source.dto
+package com.naughtsmt.lintu.data.data_source.remote.dto
 
 data class Images(
     val large: Any,

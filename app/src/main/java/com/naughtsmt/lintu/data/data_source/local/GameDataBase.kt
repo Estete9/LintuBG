@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.data.data_source
+package com.naughtsmt.lintu.data.data_source.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

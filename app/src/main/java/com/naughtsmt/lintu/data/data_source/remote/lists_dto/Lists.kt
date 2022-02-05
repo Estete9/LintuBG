@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.data.data_source.lists_dto
+package com.naughtsmt.lintu.data.data_source.remote.lists_dto
 
 data class Lists(
     val gameCount: Int,

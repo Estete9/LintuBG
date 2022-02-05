@@ -34,7 +34,7 @@ fun ListsScreen(
     modifier: Modifier,
     navController: NavController,
     listsViewModel: ListsViewModel,
-    singleListViewModel: SingleListViewModel = hiltViewModel()
+    singleListViewModel: SingleListViewModel
 ) {
 
     val listsState = listsViewModel.state.value

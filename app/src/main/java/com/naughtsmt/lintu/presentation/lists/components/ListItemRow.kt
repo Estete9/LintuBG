@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.naughtsmt.lintu.common.Constants.ALL_GAMES_LIST_ID
-import com.naughtsmt.lintu.data.data_source.lists_dto.Lists
+import com.naughtsmt.lintu.data.data_source.remote.lists_dto.Lists
 
 @Composable
 fun ListItemRow(

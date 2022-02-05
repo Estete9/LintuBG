@@ -4,6 +4,8 @@ import com.naughtsmt.lintu.BuildConfig
 import com.naughtsmt.lintu.R
 
 object Constants {
+    const val BGA_TABLE = "bga_table"
+    const val BGA_REMOTE_KEYS_TABLE = "bga_remote_keys_table"
     const val AUTH_ROUTE = "auth_route"
     const val TOP_BAR_JUEGOS = "Tus Juegos"
     const val TOP_BAR_RANKING = "Top Ranking"

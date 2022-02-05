@@ -5,7 +5,7 @@ import com.naughtsmt.lintu.common.Constants.CLIENT_ID
 import com.naughtsmt.lintu.common.Constants.CLIENT_SECRET
 import com.naughtsmt.lintu.common.Constants.REDIRECT_URI
 import com.naughtsmt.lintu.common.Resource
-import com.naughtsmt.lintu.data.data_source.dto_access_token.AccessTokenDto
+import com.naughtsmt.lintu.data.data_source.remote.dto_access_token.AccessTokenDto
 import com.naughtsmt.lintu.domain.repository.GameRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

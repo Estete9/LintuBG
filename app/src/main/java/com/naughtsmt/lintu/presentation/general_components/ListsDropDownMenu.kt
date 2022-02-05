@@ -16,7 +16,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
-import com.naughtsmt.lintu.data.data_source.lists_dto.Lists
+import com.naughtsmt.lintu.data.data_source.remote.lists_dto.Lists
 import com.naughtsmt.lintu.presentation.lists.components.Lists.lists
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 

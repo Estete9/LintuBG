@@ -2,7 +2,7 @@ package com.naughtsmt.lintu.domain.use_case.create_list
 
 import com.naughtsmt.lintu.common.AuthData.authToken
 import com.naughtsmt.lintu.common.Resource
-import com.naughtsmt.lintu.data.data_source.new_list_dto.NewListDto
+import com.naughtsmt.lintu.data.data_source.remote.new_list_dto.NewListDto
 import com.naughtsmt.lintu.domain.repository.GameRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

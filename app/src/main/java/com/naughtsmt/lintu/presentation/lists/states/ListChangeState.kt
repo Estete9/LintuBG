@@ -1,6 +1,6 @@
 package com.naughtsmt.lintu.presentation.lists.states
 
-import com.naughtsmt.lintu.data.data_source.new_list_dto.List
+import com.naughtsmt.lintu.data.data_source.remote.new_list_dto.List
 
 data class ListChangeState(
     val isLoading: Boolean = false,

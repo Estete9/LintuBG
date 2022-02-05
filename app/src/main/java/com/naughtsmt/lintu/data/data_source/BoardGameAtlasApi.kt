@@ -2,11 +2,11 @@ package com.naughtsmt.lintu.data.data_source
 
 import com.naughtsmt.lintu.common.Constants.CLIENT_ID
 import com.naughtsmt.lintu.common.Constants.USERNAME
-import com.naughtsmt.lintu.data.data_source.dto.ResponseDto
-import com.naughtsmt.lintu.data.data_source.dto_access_token.AccessTokenDto
-import com.naughtsmt.lintu.data.data_source.lists_dto.ListsDto
-import com.naughtsmt.lintu.data.data_source.lists_dto.SuccessDto
-import com.naughtsmt.lintu.data.data_source.new_list_dto.NewListDto
+import com.naughtsmt.lintu.data.data_source.remote.dto.ResponseDto
+import com.naughtsmt.lintu.data.data_source.remote.dto_access_token.AccessTokenDto
+import com.naughtsmt.lintu.data.data_source.remote.lists_dto.ListsDto
+import com.naughtsmt.lintu.data.data_source.remote.lists_dto.SuccessDto
+import com.naughtsmt.lintu.data.data_source.remote.new_list_dto.NewListDto
 import retrofit2.http.*
 
 interface BoardGameAtlasApi {
@@ -21,6 +21,18 @@ interface BoardGameAtlasApi {
 
     @GET("api/search")
     suspend fun getTopGamesList(
+        @Query("limit")
+        limit: Int = 10,
+//        @Query("skip")
+//        skip: Int,
+        @Query("client_id")
+        client_id: String = CLIENT_ID
+    ): ResponseDto
+
+    @GET("api/search")
+    suspend fun getSingleList(
+        @Query("list_id")
+        list_id: String,
         @Query("client_id")
         client_id: String = CLIENT_ID
     ): ResponseDto
@@ -34,15 +46,9 @@ interface BoardGameAtlasApi {
     ): ListsDto
 
     @GET("api/search")
-    suspend fun getSingleList(
-        @Query("list_id")
-        list_id: String,
-        @Query("client_id")
-        client_id: String = CLIENT_ID
-    ): ResponseDto
-
-    @GET("api/search")
     suspend fun getGameByName(
+        @Query("limit")
+        limit: Int = 10,
         @Query("name")
         name: String,
         @Query("fuzzy_match")

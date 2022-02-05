@@ -2,7 +2,7 @@ package com.naughtsmt.lintu.domain.use_case.get_lists
 
 import android.util.Log
 import com.naughtsmt.lintu.common.Resource
-import com.naughtsmt.lintu.data.data_source.lists_dto.Lists
+import com.naughtsmt.lintu.data.data_source.remote.lists_dto.Lists
 import com.naughtsmt.lintu.domain.repository.GameRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.data.data_source.dto_access_token
+package com.naughtsmt.lintu.data.data_source.remote.dto_access_token
 
 data class AccessTokenDto(
     val access_token: String,

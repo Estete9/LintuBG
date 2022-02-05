@@ -1,6 +1,6 @@
-package com.naughtsmt.lintu.data.data_source.lists_dto
+package com.naughtsmt.lintu.data.data_source.remote.dto
 
-data class Images(
+data class ImagesX(
     val large: String,
     val medium: String,
     val original: String,

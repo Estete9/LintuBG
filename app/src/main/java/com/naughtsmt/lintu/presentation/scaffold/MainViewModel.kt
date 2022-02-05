@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val addGameToListUseCase: AddGameToListUseCase,
-    private val searchGameByNameUseCase: GetGameByNameUseCase,
+//    private val searchGameByNameUseCase: GetGameByNameUseCase,
     val deleteGameFromListUseCase: DeleteGameFromListUseCase,
 ) : ViewModel() {
     private val _addedGameState = mutableStateOf(AddGameToListState())
@@ -58,23 +58,23 @@ class MainViewModel @Inject constructor(
     }
 
 
-    fun searchGameByName(name: String) {
-        searchGameByNameUseCase(name).onEach { result ->
-            when (result) {
-                is Resource.Success -> {
-                    _searchedGameState.value = GameDetailState(game = result.data?.get(0))
-                }
-
-                is Resource.Loading -> {
-                    _searchedGameState.value = GameDetailState(isLoading = true)
-                }
-                is Resource.Error -> {
-                    _searchedGameState.value =
-                        GameDetailState(error = result.message ?: "An unexpected error occurred")
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
+//    fun searchGameByName(name: String) {
+//        searchGameByNameUseCase(name).onEach { result ->
+//            when (result) {
+//                is Resource.Success -> {
+//                    _searchedGameState.value = GameDetailState(game = result.data?.get(0))
+//                }
+//
+//                is Resource.Loading -> {
+//                    _searchedGameState.value = GameDetailState(isLoading = true)
+//                }
+//                is Resource.Error -> {
+//                    _searchedGameState.value =
+//                        GameDetailState(error = result.message ?: "An unexpected error occurred")
+//                }
+//            }
+//        }.launchIn(viewModelScope)
+//    }
 
     fun deleteGameFromList(listId: String, gameId: String) {
         deleteGameFromListUseCase(listId, gameId).onEach { result ->

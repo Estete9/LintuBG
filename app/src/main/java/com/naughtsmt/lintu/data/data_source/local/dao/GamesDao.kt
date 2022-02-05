@@ -1,4 +1,4 @@
-package com.naughtsmt.lintu.data.data_source
+package com.naughtsmt.lintu.data.data_source.local.dao
 
 import androidx.room.*
 import com.naughtsmt.lintu.data.repository.model.Game
@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 //@Dao
 //interface GamesDao {
-//    @Query("SELECT * FROM game")
+//    @Query("SELECT * FROM BGA_TABLE")
 //    fun getList(): Flow<List<Game>>
 //
 //    @Query("SELECT * FROM game WHERE idKey=:idKey")

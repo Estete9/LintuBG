@@ -290,8 +290,8 @@ fun GameListItem(
 
                                             )
                                         Text(
-                                            text = if (game.min_playtime < 1.0 && game.min_playtime.toInt() > -1.0) "1-${game.max_playtime.toInt()} min."
-                                            else "${game.min_playtime.toInt()}-${game.max_playtime.toInt()} min.",
+                                            text = if (game.min_playtime < 1.0 && game.min_playtime.toInt() > -1.0) "1 - ${game.max_playtime.toInt()} min."
+                                            else "${game.min_playtime.toInt()} - ${game.max_playtime.toInt()} min.",
                                             style = MaterialTheme.typography.subtitle2,
                                             color = MaterialTheme.colors.primary
                                         )

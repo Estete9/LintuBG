@@ -2,11 +2,11 @@ package com.naughtsmt.lintu.data.repository
 
 //import com.naughtsmt.lintu.data.data_source.GamesDao
 import com.naughtsmt.lintu.data.data_source.BoardGameAtlasApi
-import com.naughtsmt.lintu.data.data_source.dto.ResponseDto
-import com.naughtsmt.lintu.data.data_source.dto_access_token.AccessTokenDto
-import com.naughtsmt.lintu.data.data_source.lists_dto.ListsDto
-import com.naughtsmt.lintu.data.data_source.lists_dto.SuccessDto
-import com.naughtsmt.lintu.data.data_source.new_list_dto.NewListDto
+import com.naughtsmt.lintu.data.data_source.remote.dto.ResponseDto
+import com.naughtsmt.lintu.data.data_source.remote.dto_access_token.AccessTokenDto
+import com.naughtsmt.lintu.data.data_source.remote.lists_dto.ListsDto
+import com.naughtsmt.lintu.data.data_source.remote.lists_dto.SuccessDto
+import com.naughtsmt.lintu.data.data_source.remote.new_list_dto.NewListDto
 import com.naughtsmt.lintu.domain.repository.GameRepository
 import javax.inject.Inject
 

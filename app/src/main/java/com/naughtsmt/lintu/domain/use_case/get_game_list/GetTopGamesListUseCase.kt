@@ -1,7 +1,7 @@
 package com.naughtsmt.lintu.domain.use_case.get_game_list
 
 import com.naughtsmt.lintu.common.Resource
-import com.naughtsmt.lintu.data.data_source.dto.toGame
+import com.naughtsmt.lintu.data.data_source.remote.dto.toGame
 import com.naughtsmt.lintu.data.repository.model.Game
 import com.naughtsmt.lintu.domain.repository.GameRepository
 import kotlinx.coroutines.flow.Flow

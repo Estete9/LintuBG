@@ -13,11 +13,13 @@ import com.naughtsmt.lintu.presentation.lists.ListsViewModel
 import com.naughtsmt.lintu.presentation.profile.ProfileScreen
 import com.naughtsmt.lintu.presentation.scaffold.MainViewModel
 import com.naughtsmt.lintu.presentation.single_list.SingleListScreen
+import com.naughtsmt.lintu.presentation.single_list.SingleListViewModel
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController,
     modifier: Modifier,
     listsViewModel: ListsViewModel,
+    singleListViewModel: SingleListViewModel,
     mainViewModel: MainViewModel,
     currentScreen: MutableState<String>
 ) {
@@ -32,16 +34,18 @@ fun NavGraphBuilder.homeNavGraph(
             ListsScreen(
                 navController = navController,
                 modifier = modifier,
-                listsViewModel = listsViewModel
+                listsViewModel = listsViewModel,
+                singleListViewModel = singleListViewModel
             )
         }
         composable(
             route = Screens.SingleListScreen.route + "?&singleListId={singleListId}&name={name}",
-            arguments = listOf(navArgument("singleListId") {
-                nullable = true
-                defaultValue = null
-                type = NavType.StringType
-            },
+            arguments = listOf(
+                navArgument("singleListId") {
+                    nullable = true
+                    defaultValue = null
+                    type = NavType.StringType
+                },
                 navArgument("name") {
                     nullable = true
                     defaultValue = null
