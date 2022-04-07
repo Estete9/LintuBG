@@ -21,10 +21,10 @@ interface BoardGameAtlasApi {
 
     @GET("api/search")
     suspend fun getTopGamesList(
-        @Query("limit")
-        limit: Int = 10,
 //        @Query("skip")
 //        skip: Int,
+        @Query("limit")
+        limit: Int = 10,
         @Query("client_id")
         client_id: String = CLIENT_ID
     ): ResponseDto
@@ -47,12 +47,12 @@ interface BoardGameAtlasApi {
 
     @GET("api/search")
     suspend fun getGameByName(
-        @Query("limit")
-        limit: Int = 10,
         @Query("name")
         name: String,
         @Query("fuzzy_match")
         fuzzy_match: Boolean = true,
+        @Query("limit")
+        limit: Int = 10,
         @Query("client_id")
         client_id: String = CLIENT_ID
     ): ResponseDto
