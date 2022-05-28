@@ -67,7 +67,6 @@ fun AppScaffold(
     val localFocusManager = LocalFocusManager.current
 
     Scaffold(
-
         topBar = {
             if (!isInLogin) {
                 if (!isInWebView) {
